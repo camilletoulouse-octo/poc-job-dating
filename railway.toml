@@ -1,16 +1,11 @@
 [build]
-builder = "railpack"
-# Force la détection .NET (le projet n'est pas à la racine, seul un .slnx y est).
-# Sans ça Railpack n'installe pas le SDK et `dotnet` est introuvable au build.
-providers = ["dotnet"]
-# Publish depuis la racine du repo pour que le `ProjectReference` du client Blazor
-# (chemin relatif `../ParcoursCandidatClient/`) soit accessible et que ses fichiers
-# WebAssembly soient bien copiés dans `out/wwwroot/_framework/`.
-buildCommand = "dotnet publish ParcoursCandidatApi/ParcoursCandidatApi.csproj -c Release -o out"
+# On utilise notre Dockerfile à la racine plutôt que la détection automatique
+# de Railpack, qui ne sait pas embarquer correctement le projet Blazor
+# WebAssembly référencé en `ProjectReference` (et donc ne génère pas le `wwwroot`).
+builder = "dockerfile"
+dockerfilePath = "Dockerfile"
 
 [deploy]
-# Un seul service Railway sert à la fois l'API (`/api/*`) et l'UI Blazor (`/` + fallback SPA).
-# Le service Railway est configuré avec un "Custom port" = 8080 (Settings → Networking).
-# Le proxy Railway route le trafic public vers le port 8080 du conteneur : on force donc
-# Kestrel à écouter sur ce port en dur, indépendamment de la variable `$PORT`.
-startCommand = "ASPNETCORE_URLS=http://0.0.0.0:8080 ./out/ParcoursCandidatApi"
+# Un seul service Railway sert à la fois l'API (`/api/*`) et l'UI Blazor (`/`
+# + fallback SPA). Le port d'écoute (`8080`) est défini dans le Dockerfile via
+# `ASPNETCORE_URLS` pour correspondre au "Custom port" configuré côté Railway.
