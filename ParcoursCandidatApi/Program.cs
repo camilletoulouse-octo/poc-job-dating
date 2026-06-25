@@ -33,6 +33,10 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.UseCors();
 
+// Redirige la racine vers la liste des événements (pratique pour la santé du déploiement).
+app.MapGet("/", () => Results.Redirect("/api/evenements"))
+   .WithName("RedirectToEvenements");
+
 var summaries = new[]
 {
     "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
