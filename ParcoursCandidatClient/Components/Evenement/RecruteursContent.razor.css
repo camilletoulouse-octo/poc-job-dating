@@ -1,0 +1,343 @@
+/* === Liste des recruteurs (US-3.01 + US-3.02 + US-3.04) ============ */
+.rec-content {
+    padding: 0 25px;
+}
+
+.rec-header {
+    margin-bottom: 12px;
+}
+
+.rec-title {
+    margin: 0 0 8px;
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: #20202C;
+}
+
+.rec-counter {
+    color: #4833E3;
+}
+
+.rec-total {
+    color: #5b6b80;
+}
+
+.rec-progress {
+    height: 8px;
+    background: #E6E7EC;
+    border-radius: 999px;
+    overflow: hidden;
+}
+
+.rec-progress-bar {
+    height: 100%;
+    background: #4833E3;
+    border-radius: 999px;
+    transition: width 0.3s ease;
+}
+
+/* Barre verte quand tous les recruteurs sont présents (US-3.01) */
+.rec-progress--complet .rec-progress-bar {
+    background: #229149;
+}
+
+.rec-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.rec-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    background: #FFFFFF;
+    border-radius: 10px;
+    padding: 12px 14px;
+    box-shadow: 0 2px 6px rgba(15, 23, 42, 0.06);
+}
+
+.rec-row-main {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    flex: 1;
+    min-width: 0;
+}
+
+.rec-raison-sociale {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: #20202C;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.rec-contact {
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: #5b6b80;
+}
+
+.rec-offres {
+    font-size: 0.75rem;
+    color: #4833E3;
+    font-weight: 600;
+}
+
+.rec-row-right {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
+}
+
+.rec-badge {
+    display: inline-flex;
+    align-items: center;
+    border-radius: 999px;
+    padding: 3px 10px;
+    font-size: 0.75rem;
+    font-weight: 700;
+}
+
+.rec-badge--present {
+    background: rgba(34, 145, 73, 0.12);
+    color: #229149;
+}
+
+.rec-badge--absent {
+    background: rgba(212, 51, 51, 0.12);
+    color: #C92F2F;
+}
+
+.rec-badge--inconnu {
+    background: #EFEFF5;
+    color: #5b6b80;
+}
+
+.rec-chevron {
+    font-size: 1.2rem;
+    color: #C7C9D9;
+    line-height: 1;
+}
+
+/* --- Segmented control de filtre (US-3.02) -------------------- */
+.rec-segmented {
+    display: flex;
+    align-items: center;
+    background: #FFFFFF;
+    border-radius: 8px;
+    padding: 3px;
+    margin-bottom: 12px;
+    box-shadow: 0 1px 3px rgba(15, 23, 42, 0.06);
+}
+
+.rec-segmented-tab {
+    flex: 1;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 7px;
+    padding: 5px 8px;
+    font-size: 0.78rem;
+    font-weight: 600;
+    cursor: pointer;
+    border: none;
+    background: transparent;
+    color: #343643;
+    transition: background 0.15s ease, color 0.15s ease;
+    white-space: nowrap;
+}
+
+.rec-segmented-tab--actif {
+    background: #4833E3;
+    color: #FFFFFF;
+}
+
+.rec-segmented-sep {
+    color: #C7C9D9;
+    font-size: 0.75rem;
+    user-select: none;
+    flex-shrink: 0;
+}
+
+/* --- Empty / erreur ------------------------------------------- */
+.rec-empty,
+.rec-error {
+    margin-top: 8px;
+    padding: 24px 16px;
+    text-align: center;
+    color: #5b6b80;
+    background: #FFFFFF;
+    border-radius: 12px;
+    box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
+}
+
+.rec-empty-text {
+    margin: 0;
+    font-weight: 500;
+}
+
+.rec-btn {
+    margin-top: 12px;
+    background: #4833E3;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 8px;
+    padding: 8px 16px;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+/* --- Skeletons ------------------------------------------------ */
+.rec-row--skeleton {
+    pointer-events: none;
+}
+
+.rec-skeleton {
+    background: linear-gradient(90deg, #eef0f4 0%, #f7f8fb 50%, #eef0f4 100%);
+    background-size: 200% 100%;
+    animation: rec-shimmer 1.2s ease-in-out infinite;
+    border-radius: 6px;
+    height: 0.85rem;
+}
+
+.rec-skeleton--title {
+    height: 1rem;
+    width: 60%;
+    margin-bottom: 8px;
+}
+
+.rec-skeleton--bar {
+    height: 8px;
+    width: 100%;
+    border-radius: 999px;
+}
+
+.rec-skeleton--text {
+    width: 55%;
+    height: 0.85rem;
+}
+
+.rec-skeleton--badge {
+    width: 4.5rem;
+    height: 1.2rem;
+    border-radius: 999px;
+}
+
+.rec-skeleton--chip {
+    width: 4rem;
+    height: 1.8rem;
+    border-radius: 999px;
+}
+
+@keyframes rec-shimmer {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+}
+
+/* --- Ligne cliquable (US-3.04) --------------------------------- */
+.rec-row--cliquable {
+    cursor: pointer;
+    transition: background 0.15s ease;
+}
+
+.rec-row--cliquable:hover,
+.rec-row--cliquable:focus-visible {
+    background: #F5F5FB;
+    outline: none;
+}
+
+/* --- Overlay + action sheet (US-3.04) -------------------------- */
+.rec-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.45);
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    z-index: 100;
+    animation: rec-overlay-in 0.2s ease;
+}
+
+@keyframes rec-overlay-in {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+.rec-action-sheet {
+    width: 100%;
+    max-width: 390px;
+    background: #FFFFFF;
+    border-radius: 16px 16px 0 0;
+    padding: 20px 16px 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    animation: rec-sheet-in 0.25s ease;
+}
+
+@keyframes rec-sheet-in {
+    from { transform: translateY(100%); }
+    to   { transform: translateY(0); }
+}
+
+.rec-action-sheet-title {
+    margin: 0 0 2px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #5b6b80;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+.rec-action-sheet-nom {
+    margin: 0 0 6px;
+    font-size: 1rem;
+    font-weight: 700;
+    color: #20202C;
+    text-align: center;
+}
+
+.rec-action-btn {
+    width: 100%;
+    padding: 14px 16px;
+    border: none;
+    border-radius: 12px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: opacity 0.15s ease;
+}
+
+.rec-action-btn:active {
+    opacity: 0.75;
+}
+
+.rec-action-btn--present {
+    background: rgba(34, 145, 73, 0.12);
+    color: #229149;
+}
+
+.rec-action-btn--absent {
+    background: rgba(212, 51, 51, 0.12);
+    color: #C92F2F;
+}
+
+.rec-action-btn--inconnu {
+    background: #EFEFF5;
+    color: #5b6b80;
+}
+
+.rec-action-btn--annuler {
+    background: #F5F5FB;
+    color: #343643;
+    margin-top: 4px;
+}

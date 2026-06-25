@@ -1,0 +1,128 @@
+@page "/evenements/{EvenementId}/inscrits"
+@inject EvenementService EvenementService
+@inject IInscritService InscritService
+@inject HttpClient HttpClient
+
+<PageTitle>@(_evenement?.Titre ?? "Événement") — Les inscrits</PageTitle>
+
+<div class="evt-page">
+
+    @if (_evenement is not null)
+    {
+        <EvenementHeader Titre="@_evenement.Titre"
+                         Organisme="@_evenement.Organisme"
+                         Ville="@_evenement.Ville"
+                         Departement="@_evenement.Departement"
+                         HeureDebut="@_evenement.HeureDebut"
+                         HeureFin="@_evenement.HeureFin"
+                         EvenementId="@EvenementId"
+                         AfficherBoutonPlanning="true"
+                         OnGenererPlanning="GenererPlanning" />
+    }
+    else if (_chargementEvenement)
+    {
+        <EvenementHeader Titre=" "
+                         Organisme=" "
+                         Ville=" "
+                         Departement=" "
+                         HeureDebut=" "
+                         HeureFin=" " />
+    }
+    else
+    {
+        <div class="evt-not-found" role="alert">
+            <p>Événement introuvable.</p>
+            <a class="evt-back-link" href="/mes-evenements">Retour à mes événements</a>
+        </div>
+    }
+
+    <InscritsContent Chargement="@_chargementInscrits"
+                     Erreur="@_erreurInscrits"
+                     Inscrits="@_inscrits"
+                     Reessayer="ChargerInscrits"
+                     StatutModifie="ModifierStatutInscrit"
+                     EvenementId="@EvenementId" />
+
+    <EvenementBottomNav OngletActif="OngletEvenement.LesInscrits" EvenementId="@EvenementId" />
+</div>
+
+@code {
+    [Parameter] public string EvenementId { get; set; } = "";
+
+    private Models.Evenement? _evenement;
+    private bool _chargementEvenement = true;
+
+    private IReadOnlyList<Inscrit> _inscrits = Array.Empty<Inscrit>();
+    private bool _chargementInscrits = true;
+    private string? _erreurInscrits;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await Task.WhenAll(ChargerEvenement(), ChargerInscrits());
+    }
+
+    private async Task ChargerEvenement()
+    {
+        _chargementEvenement = true;
+        try
+        {
+            _evenement = await EvenementService.GetEvenementByIdAsync(EvenementId);
+        }
+        catch
+        {
+            _evenement = null;
+        }
+        finally
+        {
+            _chargementEvenement = false;
+        }
+    }
+
+    private async Task ChargerInscrits()
+    {
+        _chargementInscrits = true;
+        _erreurInscrits = null;
+        StateHasChanged();
+
+        try
+        {
+            _inscrits = await InscritService.GetInscritsAsync(EvenementId);
+        }
+        catch (Exception ex)
+        {
+            _erreurInscrits = "Impossible de charger les inscrits. " + ex.Message;
+            _inscrits = Array.Empty<Inscrit>();
+        }
+        finally
+        {
+            _chargementInscrits = false;
+        }
+    }
+
+    private async Task GenererPlanning()
+    {
+        try
+        {
+            var url = $"api/evenements/{Uri.EscapeDataString(EvenementId)}/planning";
+            await HttpClient.PostAsync(url, null);
+        }
+        catch
+        {
+            // La redirection vers le tableau de bord est gérée par EvenementHeader
+        }
+    }
+
+    /// <summary>
+    /// Appelé par l'action sheet quand l'utilisateur choisit un nouveau statut (US-2.04).
+    /// Met à jour le statut via l'API puis rafraîchit la liste localement.
+    /// </summary>
+    private async Task ModifierStatutInscrit((string InscritId, StatutInscrit NouveauStatut) args)
+    {
+        var inscritMisAJour = await InscritService.UpdateStatutAsync(args.InscritId, args.NouveauStatut);
+        if (inscritMisAJour is null) return;
+
+        _inscrits = _inscrits
+            .Select(i => i.Id == inscritMisAJour.Id ? inscritMisAJour : i)
+            .ToArray();
+    }
+}

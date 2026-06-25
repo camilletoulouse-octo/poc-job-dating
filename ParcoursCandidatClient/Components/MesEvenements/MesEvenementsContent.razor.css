@@ -1,0 +1,177 @@
+/* === Contenu / liste / cartes ================================== */
+.me-content {
+    padding: 0 25px;
+}
+
+.me-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.me-card {
+    display: flex;
+    align-items: stretch;
+    gap: 12px;
+    background: #FFFFFF;
+    border-radius: 12px;
+    padding: 16px;
+    box-shadow: 0 2px 6px rgba(15, 23, 42, 0.06);
+}
+
+.me-card-body {
+    flex: 1;
+    min-width: 0;
+}
+
+.me-card-title {
+    margin: 0 0 2px;
+    font-size: 1rem;
+    font-weight: 700;
+    color: #20202C;
+    line-height: 1.25;
+}
+
+.me-card-org {
+    margin: 0;
+    color: #343643;
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+
+.me-card-lieu {
+    margin: 2px 0 12px;
+    color: #5b6b80;
+    font-size: 0.8rem;
+}
+
+.me-card-meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+}
+
+.me-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    background: #EFEFF5;
+    color: #343643;
+    border-radius: 4px;
+    padding: 4px 8px;
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+.me-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    background: rgba(72, 51, 227, 0.10);
+    color: #4833E3;
+    border-radius: 4px;
+    padding: 4px 8px;
+    font-size: 0.75rem;
+    font-weight: 700;
+}
+
+.me-card-arrow {
+    align-self: center;
+    background: transparent;
+    border: none;
+    color: #4833E3;
+    cursor: pointer;
+    padding: 2px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+}
+
+.me-card-arrow:disabled {
+    opacity: 0.55;
+    cursor: not-allowed;
+}
+
+/* --- Empty / placeholder / error ------------------------------- */
+.me-empty,
+.me-placeholder,
+.me-error {
+    margin-top: 8px;
+    padding: 24px 16px;
+    text-align: center;
+    color: #5b6b80;
+    background: #FFFFFF;
+    border-radius: 12px;
+    box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
+}
+
+.me-empty-text {
+    margin: 0;
+    font-weight: 500;
+}
+
+.me-btn {
+    margin-top: 12px;
+    background: #4833E3;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 8px 16px;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+/* --- Skeleton loaders ------------------------------------------ */
+.me-card--skeleton {
+    pointer-events: none;
+}
+
+.me-skeleton {
+    background: linear-gradient(90deg, #eef0f4 0%, #f7f8fb 50%, #eef0f4 100%);
+    background-size: 200% 100%;
+    animation: me-skeleton-shimmer 1.2s ease-in-out infinite;
+    border-radius: 6px;
+    height: 0.85rem;
+    margin: 0.35rem 0;
+}
+
+.me-skeleton--title {
+    height: 1rem;
+    width: 70%;
+}
+
+.me-skeleton--text {
+    width: 55%;
+}
+
+.me-skeleton--short {
+    width: 35%;
+}
+
+.me-skeleton-row {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 0.75rem;
+}
+
+.me-skeleton--chip {
+    height: 1.4rem;
+    width: 6rem;
+    border-radius: 4px;
+}
+
+.me-skeleton--badge {
+    height: 1.4rem;
+    width: 4.5rem;
+    border-radius: 4px;
+}
+
+@keyframes me-skeleton-shimmer {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+}

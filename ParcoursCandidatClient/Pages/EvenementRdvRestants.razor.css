@@ -1,0 +1,279 @@
+/* === Page "RDV restants" (US-5.06) ====================================
+   Liste des recruteurs avec accordéon affichant les créneaux RDV restants.
+   Réutilise la palette France Travail (fond #EBEDF8, primaire #4833E3).
+   ===================================================================== */
+
+.rdv-page {
+    position: relative;
+    min-height: 100vh;
+    max-width: 480px;
+    margin: 0 auto;
+    background: #EBEDF8;
+    color: #20202C;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    box-shadow: 0 0 0 1px rgba(15, 23, 42, 0.04);
+}
+
+/* === En-tête ========================================================= */
+.rdv-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 20px 20px 16px;
+    background: #FFFFFF;
+}
+
+.rdv-header-back {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #20202C;
+    text-decoration: none;
+    flex-shrink: 0;
+}
+
+.rdv-header-back:hover {
+    color: #4833E3;
+}
+
+.rdv-header-titre {
+    margin: 0;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #20202C;
+    line-height: 1.3;
+}
+
+/* === Contenu ========================================================= */
+.rdv-contenu {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 16px;
+}
+
+/* === Barre de recherche ============================================== */
+.rdv-recherche-bloc {
+    position: relative;
+    background: #FFFFFF;
+    border-radius: 12px;
+    box-shadow: 0 1px 3px rgba(15, 23, 42, 0.06);
+}
+
+.rdv-recherche-input {
+    width: 100%;
+    padding: 14px 44px 14px 16px;
+    border: none;
+    border-radius: 12px;
+    font-size: 0.95rem;
+    color: #4833E3;
+    background: transparent;
+    outline: none;
+    box-sizing: border-box;
+}
+
+.rdv-recherche-input::placeholder {
+    color: #4833E3;
+    opacity: 1;
+}
+
+.rdv-recherche-icone {
+    position: absolute;
+    right: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #5b6b80;
+    pointer-events: none;
+}
+
+/* === Liste des recruteurs ============================================ */
+.rdv-liste {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    background: #FFFFFF;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 1px 3px rgba(15, 23, 42, 0.06);
+}
+
+/* === Bloc recruteur ================================================== */
+.rdv-recruteur-bloc {
+    border-bottom: 1px solid #EFEFF5;
+}
+
+.rdv-recruteur-bloc:last-child {
+    border-bottom: none;
+}
+
+/* === En-tête recruteur (bouton accordéon) ============================ */
+.rdv-recruteur-entete {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    padding: 16px;
+    background: #FFFFFF;
+    border: none;
+    cursor: pointer;
+    text-align: left;
+}
+
+.rdv-recruteur-entete:hover {
+    background: #F8F8FC;
+}
+
+.rdv-recruteur-icone {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    background: #F3F3F5;
+    border-radius: 12px;
+    color: #343643;
+    flex-shrink: 0;
+}
+
+.rdv-recruteur-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    min-width: 0;
+}
+
+.rdv-recruteur-nom {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: #20202C;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.rdv-recruteur-societe {
+    font-size: 0.8rem;
+    font-weight: 400;
+    color: #5b6b80;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.rdv-recruteur-chevron {
+    color: #20202C;
+    flex-shrink: 0;
+    transition: transform 0.2s ease;
+}
+
+.rdv-recruteur-chevron--ouvert {
+    transform: rotate(180deg);
+}
+
+/* === Liste des créneaux (accordéon ouvert) =========================== */
+.rdv-creneaux-liste {
+    background: #F8F8FC;
+    border-top: 1px solid #EFEFF5;
+}
+
+/* === Créneau individuel ============================================== */
+.rdv-creneau {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    border-bottom: 1px solid #EFEFF5;
+}
+
+.rdv-creneau:last-child {
+    border-bottom: none;
+}
+
+.rdv-creneau-heure {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 14px 16px;
+    min-width: 100px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: #5b6b80;
+    background: #EBEDF8;
+    border-right: 1px solid #EFEFF5;
+    flex-shrink: 0;
+}
+
+.rdv-creneau-candidat {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    padding: 14px 16px;
+    flex: 1;
+    background: #FFFFFF;
+}
+
+.rdv-creneau-candidat-nom {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: #20202C;
+}
+
+.rdv-creneau-candidat-prenom {
+    font-size: 0.85rem;
+    font-weight: 400;
+    color: #20202C;
+}
+
+/* === État de chargement ============================================== */
+.rdv-chargement {
+    display: flex;
+    justify-content: center;
+    padding: 48px 20px;
+    color: #5b6b80;
+    font-size: 0.9rem;
+}
+
+/* === État vide ======================================================= */
+.rdv-vide {
+    display: flex;
+    justify-content: center;
+    padding: 32px 20px;
+    text-align: center;
+}
+
+.rdv-vide-message {
+    margin: 0;
+    font-size: 0.9rem;
+    color: #5b6b80;
+}
+
+/* === État d'erreur =================================================== */
+.rdv-erreur {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    padding: 32px 20px;
+    text-align: center;
+}
+
+.rdv-erreur-message {
+    margin: 0;
+    font-size: 0.9rem;
+    color: #5b6b80;
+}
+
+.rdv-erreur-reessayer {
+    padding: 10px 20px;
+    background: #4833E3;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 8px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.rdv-erreur-reessayer:hover {
+    background: #3a28c0;
+}

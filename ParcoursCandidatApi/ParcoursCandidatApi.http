@@ -1,0 +1,6 @@
+@ParcoursCandidatApi_HostAddress = http://localhost:5197
+
+GET {{ParcoursCandidatApi_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

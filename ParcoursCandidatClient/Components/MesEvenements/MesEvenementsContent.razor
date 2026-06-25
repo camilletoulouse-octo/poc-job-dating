@@ -1,0 +1,112 @@
+@* === Contenu principal de la page "Mes événements" ==============
+   Selon l'onglet actif :
+   - Onglet "Mes événements du jour" : skeletons / erreur / vide / liste de cartes
+   - Onglet "Rechercher"             : placeholder
+   ================================================================ *@
+<section class="me-content" aria-live="polite">
+    @if (OngletActif == OngletMesEvenements.MesEvenementsDuJour)
+    {
+        @if (Chargement)
+        {
+            <div class="me-list" aria-busy="true" aria-label="Chargement des événements">
+                @for (var i = 0; i < 3; i++)
+                {
+                    <div class="me-card me-card--skeleton">
+                        <div class="me-card-body">
+                            <div class="me-skeleton me-skeleton--title"></div>
+                            <div class="me-skeleton me-skeleton--text"></div>
+                            <div class="me-skeleton me-skeleton--text me-skeleton--short"></div>
+                            <div class="me-skeleton-row">
+                                <div class="me-skeleton me-skeleton--chip"></div>
+                                <div class="me-skeleton me-skeleton--badge"></div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        }
+        else if (Erreur is not null)
+        {
+            <div class="me-error" role="alert">
+                <p>@Erreur</p>
+                <button type="button" class="me-btn" @onclick="OnReessayer">Réessayer</button>
+            </div>
+        }
+        else if (Evenements.Count == 0)
+        {
+            <div class="me-empty">
+                <p class="me-empty-text">Aucun événement prévu aujourd'hui.</p>
+            </div>
+        }
+        else
+        {
+            <ul class="me-list" role="list">
+                @foreach (var evt in Evenements)
+                {
+                    <li class="me-card" role="listitem">
+                        <div class="me-card-body">
+                            <h2 class="me-card-title">@evt.Titre</h2>
+                            <p class="me-card-org">@evt.Organisme</p>
+                            <p class="me-card-lieu">@evt.Ville (@evt.Departement)</p>
+
+                            <div class="me-card-meta">
+                                <span class="me-chip">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
+                                         stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                        <circle cx="12" cy="12" r="10"></circle>
+                                        <polyline points="12 6 12 12 16 14"></polyline>
+                                    </svg>
+                                    @evt.HeureDebut – @evt.HeureFin
+                                </span>
+                                <span class="me-badge">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
+                                         stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                                        <circle cx="9" cy="7" r="4"></circle>
+                                        <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                                        <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                                    </svg>
+                                    @evt.NombreInscrits inscrits
+                                </span>
+                            </div>
+                        </div>
+
+                        <a class="me-card-arrow"
+                           href="/evenements/@evt.Id/inscrits"
+                           aria-label="Ouvrir l'événement @evt.Titre"
+                           title="Ouvrir l'événement">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                                <path d="M12 0a12 12 0 1 0 0 24 12 12 0 0 0 0-24Zm-1.16 16.84a1 1 0 0 1-1.41-1.41L13.17 12 9.43 8.57a1 1 0 0 1 1.41-1.41l4.45 4.13a1 1 0 0 1 0 1.42l-4.45 4.13Z"/>
+                            </svg>
+                        </a>
+                    </li>
+                }
+            </ul>
+        }
+    }
+    else
+    {
+        <div class="me-placeholder">
+            <p>Recherche d'événement — bientôt disponible.</p>
+        </div>
+    }
+</section>
+
+@code {
+    [Parameter, EditorRequired]
+    public OngletMesEvenements OngletActif { get; set; }
+
+    [Parameter]
+    public bool Chargement { get; set; }
+
+    [Parameter]
+    public string? Erreur { get; set; }
+
+    [Parameter]
+    public IReadOnlyList<Evenement> Evenements { get; set; } = Array.Empty<Evenement>();
+
+    [Parameter]
+    public EventCallback Reessayer { get; set; }
+
+    private Task OnReessayer() => Reessayer.InvokeAsync();
+}

@@ -1,0 +1,62 @@
+[
+  {
+    "id": "evt-001",
+    "titre": "Job dating restauration",
+    "organisme": "France Travail",
+    "ville": "Lyon",
+    "departement": "69",
+    "heureDebut": "09:00",
+    "heureFin": "12:00",
+    "nombreInscrits": 24,
+    "agenceId": "lyon-part-dieu",
+    "date": "TODAY"
+  },
+  {
+    "id": "evt-002",
+    "titre": "Forum métiers du numérique / Casting sur site de Lourdes | Venez vous inscrire pour participer au tournage",
+    "organisme": "France Travail",
+    "ville": "Villeurbanne",
+    "departement": "69",
+    "heureDebut": "10:30",
+    "heureFin": "13:00",
+    "nombreInscrits": 42,
+    "agenceId": "lyon-part-dieu",
+    "date": "TODAY"
+  },
+  {
+    "id": "evt-003",
+    "titre": "Rencontre employeurs BTP",
+    "organisme": "France Travail",
+    "ville": "Lyon",
+    "departement": "69",
+    "heureDebut": "14:00",
+    "heureFin": "17:00",
+    "nombreInscrits": 18,
+    "agenceId": "lyon-part-dieu",
+    "date": "TODAY"
+  },
+  {
+    "id": "evt-004",
+    "titre": "Atelier CV et lettre de motivation",
+    "organisme": "France Travail",
+    "ville": "Lyon",
+    "departement": "69",
+    "heureDebut": "15:30",
+    "heureFin": "17:30",
+    "nombreInscrits": 12,
+    "agenceId": "lyon-part-dieu",
+    "date": "TODAY"
+  },
+  {
+    "id": "evt-005",
+    "titre": "Job dating logistique",
+    "organisme": "France Travail",
+    "ville": "Paris",
+    "departement": "75",
+    "heureDebut": "10:00",
+    "heureFin": "13:00",
+    "nombreInscrits": 30,
+    "agenceId": "paris-republique",
+    "date": "TOMORROW"
+  }
+]

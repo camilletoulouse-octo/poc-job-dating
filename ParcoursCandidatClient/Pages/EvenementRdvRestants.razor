@@ -1,0 +1,184 @@
+@page "/evenements/{EvenementId}/rdv-restants"
+@inject EvenementService EvenementService
+@inject IRdvRestantsService RdvRestantsService
+
+<PageTitle>@(_evenement?.Titre ?? "Événement") — RDV restants</PageTitle>
+
+<div class="rdv-page">
+
+    <header class="rdv-header">
+        <a class="rdv-header-back"
+           href="/evenements/@EvenementId/tableau-de-bord"
+           aria-label="Retour au tableau de bord">
+            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none"
+                 stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <polyline points="15 18 9 12 15 6"></polyline>
+            </svg>
+        </a>
+        <h1 class="rdv-header-titre">RDV restants</h1>
+    </header>
+
+    @if (_chargement)
+    {
+        <div class="rdv-chargement" role="status" aria-label="Chargement en cours">
+            <p>Chargement…</p>
+        </div>
+    }
+    else if (_erreur is not null)
+    {
+        <div class="rdv-erreur" role="alert">
+            <p class="rdv-erreur-message">Impossible de charger les RDV restants.</p>
+            <button class="rdv-erreur-reessayer" @onclick="ChargerRdvRestants">Réessayer</button>
+        </div>
+    }
+    else if (_rdvRestants is not null && _rdvRestants.Recruteurs.Count > 0)
+    {
+        <div class="rdv-contenu">
+            <div class="rdv-recherche-bloc">
+                <input class="rdv-recherche-input"
+                       type="search"
+                       placeholder="Rechercher"
+                       @bind="_recherche"
+                       @bind:event="oninput"
+                       aria-label="Rechercher un recruteur" />
+                <svg class="rdv-recherche-icone" xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                     viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                     stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                </svg>
+            </div>
+
+            <div class="rdv-liste" role="list">
+                @foreach (var recruteur in RecruteursFiltres)
+                {
+                    var estOuvert = _recruteurOuvert == recruteur.RecruteurId;
+                    <div class="rdv-recruteur-bloc" role="listitem">
+                        <button class="rdv-recruteur-entete"
+                                aria-expanded="@estOuvert.ToString().ToLower()"
+                                @onclick="() => BasculerAccordeon(recruteur.RecruteurId)">
+                            <div class="rdv-recruteur-icone" aria-hidden="true">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24"
+                                     fill="none" stroke="currentColor" stroke-width="1.5"
+                                     stroke-linecap="round" stroke-linejoin="round">
+                                    <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+                                    <line x1="8" y1="21" x2="16" y2="21"></line>
+                                    <line x1="12" y1="17" x2="12" y2="21"></line>
+                                </svg>
+                            </div>
+                            <div class="rdv-recruteur-info">
+                                <span class="rdv-recruteur-nom">@recruteur.Prenom @recruteur.Nom.ToUpper()</span>
+                                <span class="rdv-recruteur-societe">@recruteur.RaisonSociale.ToUpper()</span>
+                            </div>
+                            <svg class="rdv-recruteur-chevron @(estOuvert ? "rdv-recruteur-chevron--ouvert" : "")"
+                                 xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                 viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                 stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <polyline points="6 9 12 15 18 9"></polyline>
+                            </svg>
+                        </button>
+
+                        @if (estOuvert)
+                        {
+                            <div class="rdv-creneaux-liste">
+                                @foreach (var creneau in recruteur.Creneaux)
+                                {
+                                    <div class="rdv-creneau">
+                                        <div class="rdv-creneau-heure">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                 viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                 stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                                 aria-hidden="true">
+                                                <circle cx="12" cy="12" r="10"></circle>
+                                                <polyline points="12 6 12 12 16 14"></polyline>
+                                            </svg>
+                                            <span>@creneau.Heure</span>
+                                        </div>
+                                        <div class="rdv-creneau-candidat">
+                                            <span class="rdv-creneau-candidat-nom">@creneau.CandidatNom</span>
+                                            <span class="rdv-creneau-candidat-prenom">@creneau.CandidatPrenom</span>
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                        }
+                    </div>
+                }
+
+                @if (!RecruteursFiltres.Any())
+                {
+                    <div class="rdv-vide" role="status">
+                        <p class="rdv-vide-message">Aucun résultat.</p>
+                    </div>
+                }
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="rdv-vide" role="status">
+            <p class="rdv-vide-message">Aucun RDV restant.</p>
+        </div>
+    }
+
+</div>
+
+@code {
+    [Parameter] public string EvenementId { get; set; } = "";
+
+    private Models.Evenement? _evenement;
+    private Models.RdvRestants? _rdvRestants;
+    private bool _chargement = true;
+    private string? _erreur;
+    private string _recherche = "";
+    private string? _recruteurOuvert;
+
+    private IEnumerable<Models.RecruteurRdvRestant> RecruteursFiltres =>
+        _rdvRestants?.Recruteurs
+            .Where(r => string.IsNullOrWhiteSpace(_recherche)
+                || r.Nom.Contains(_recherche, StringComparison.OrdinalIgnoreCase)
+                || r.Prenom.Contains(_recherche, StringComparison.OrdinalIgnoreCase)
+                || r.RaisonSociale.Contains(_recherche, StringComparison.OrdinalIgnoreCase))
+        ?? Enumerable.Empty<Models.RecruteurRdvRestant>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        await Task.WhenAll(ChargerEvenement(), ChargerRdvRestants());
+    }
+
+    private async Task ChargerEvenement()
+    {
+        try
+        {
+            _evenement = await EvenementService.GetEvenementByIdAsync(EvenementId);
+        }
+        catch
+        {
+            _evenement = null;
+        }
+    }
+
+    private async Task ChargerRdvRestants()
+    {
+        _chargement = true;
+        _erreur = null;
+        try
+        {
+            _rdvRestants = await RdvRestantsService.GetRdvRestantsAsync(EvenementId);
+        }
+        catch
+        {
+            _rdvRestants = null;
+            _erreur = "Impossible de charger les RDV restants.";
+        }
+        finally
+        {
+            _chargement = false;
+        }
+    }
+
+    private void BasculerAccordeon(string recruteurId)
+    {
+        _recruteurOuvert = _recruteurOuvert == recruteurId ? null : recruteurId;
+    }
+}

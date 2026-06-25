@@ -1,0 +1,49 @@
+@* === Barre de navigation bas — contexte événement =================
+   Trois onglets de navigation : "Les inscrits", "Les recruteurs"
+   et "Tableau de bord" (US-1.04).
+   Suit le même pattern que MesEvenementsBottomNav.
+   ================================================================ *@
+<nav class="evt-bottom-nav" aria-label="Navigation de l'événement">
+    <a href="/evenements/@EvenementId/inscrits"
+       class="evt-bottom-item @(OngletActif == OngletEvenement.LesInscrits ? "evt-bottom-item--active" : "")"
+       aria-current="@(OngletActif == OngletEvenement.LesInscrits ? "page" : null)">
+        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none"
+             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+            <circle cx="9" cy="7" r="4"></circle>
+            <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+            <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+        </svg>
+        <span>Les inscrits</span>
+    </a>
+    <a href="/evenements/@EvenementId/recruteurs"
+       class="evt-bottom-item @(OngletActif == OngletEvenement.LesRecruteurs ? "evt-bottom-item--active" : "")"
+       aria-current="@(OngletActif == OngletEvenement.LesRecruteurs ? "page" : null)">
+        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none"
+             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
+            <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+        </svg>
+        <span>Les recruteurs</span>
+    </a>
+    <a href="/evenements/@EvenementId/tableau-de-bord"
+       class="evt-bottom-item @(OngletActif == OngletEvenement.TableauDeBord ? "evt-bottom-item--active" : "")"
+       aria-current="@(OngletActif == OngletEvenement.TableauDeBord ? "page" : null)">
+        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none"
+             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <rect x="3" y="3" width="7" height="7"></rect>
+            <rect x="14" y="3" width="7" height="7"></rect>
+            <rect x="14" y="14" width="7" height="7"></rect>
+            <rect x="3" y="14" width="7" height="7"></rect>
+        </svg>
+        <span>Tableau de bord</span>
+    </a>
+</nav>
+
+@code {
+    [Parameter, EditorRequired]
+    public OngletEvenement OngletActif { get; set; }
+
+    [Parameter, EditorRequired]
+    public string EvenementId { get; set; } = "";
+}

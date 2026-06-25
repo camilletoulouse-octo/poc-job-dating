@@ -1,0 +1,44 @@
+/* === Onglets pilule ============================================ */
+.me-tabs {
+    display: flex;
+    gap: 12px;
+    padding: 0 25px;
+    margin-bottom: 16px;
+}
+
+.me-tab {
+    flex: 1;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 8px 10px;
+    min-height: 36px;
+    border: none;
+    border-radius: 8px;
+    background: #EFEFF5;
+    color: #343643;
+    font-size: 0.78rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.me-tab > span {
+    line-height: 1.1;
+    text-align: center;
+}
+
+.me-tab:hover:not(:disabled):not(.me-tab--active) {
+    background: #e6e7f0;
+}
+
+.me-tab:disabled {
+    opacity: 0.55;
+    cursor: not-allowed;
+}
+
+.me-tab--active {
+    background: rgba(72, 51, 227, 0.10);
+    color: #4833E3;
+}

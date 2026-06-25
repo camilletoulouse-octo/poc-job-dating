@@ -1,0 +1,98 @@
+/* === En-tête du contexte événement ============================= */
+.evt-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 18px 20px 16px;
+    background: #FFFFFF;
+    border-bottom: 1px solid #E6E7EC;
+    margin-bottom: 16px;
+}
+
+.evt-header-back {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: none;
+    padding: 6px;
+    border-radius: 999px;
+    color: #4833E3;
+    text-decoration: none;
+    cursor: pointer;
+    flex-shrink: 0;
+    margin-top: 2px;
+}
+
+.evt-header-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.evt-header-title {
+    margin: 0;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #20202C;
+    line-height: 1.25;
+}
+
+.evt-header-org {
+    margin: 4px 0 0;
+    font-size: 0.85rem;
+    color: #343643;
+    font-weight: 500;
+}
+
+.evt-header-lieu {
+    margin: 2px 0 0;
+    font-size: 0.8rem;
+    color: #5b6b80;
+}
+
+.evt-header-horaire {
+    margin: 4px 0 0;
+    font-size: 0.8rem;
+    color: #5b6b80;
+    font-weight: 600;
+}
+
+/* === Bouton « Générer le planning » (US-5.01) =================== */
+.evt-header-btn-planning {
+    flex-shrink: 0;
+    align-self: center;
+    padding: 8px 12px;
+    background: #4833E3;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 8px;
+    font-size: 0.78rem;
+    font-weight: 600;
+    cursor: pointer;
+    white-space: nowrap;
+    line-height: 1.2;
+    transition: background 0.15s ease, opacity 0.15s ease;
+}
+
+.evt-header-btn-planning:hover:not(:disabled) {
+    background: #3a28c0;
+}
+
+.evt-header-btn-planning:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.evt-header-btn-planning-spinner {
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    border: 2px solid rgba(255, 255, 255, 0.4);
+    border-top-color: #FFFFFF;
+    border-radius: 50%;
+    animation: evt-spin 0.7s linear infinite;
+}
+
+@keyframes evt-spin {
+    to { transform: rotate(360deg); }
+}

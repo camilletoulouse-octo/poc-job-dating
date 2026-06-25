@@ -1,0 +1,127 @@
+@page "/evenements/{EvenementId}/recruteurs"
+@inject EvenementService EvenementService
+@inject IRecruteurService RecruteurService
+@inject HttpClient HttpClient
+
+<PageTitle>@(_evenement?.Titre ?? "Événement") — Les recruteurs</PageTitle>
+
+<div class="evt-page">
+
+    @if (_evenement is not null)
+    {
+        <EvenementHeader Titre="@_evenement.Titre"
+                         Organisme="@_evenement.Organisme"
+                         Ville="@_evenement.Ville"
+                         Departement="@_evenement.Departement"
+                         HeureDebut="@_evenement.HeureDebut"
+                         HeureFin="@_evenement.HeureFin"
+                         EvenementId="@EvenementId"
+                         AfficherBoutonPlanning="true"
+                         OnGenererPlanning="GenererPlanning" />
+    }
+    else if (_chargementEvenement)
+    {
+        <EvenementHeader Titre=" "
+                         Organisme=" "
+                         Ville=" "
+                         Departement=" "
+                         HeureDebut=" "
+                         HeureFin=" " />
+    }
+    else
+    {
+        <div class="evt-not-found" role="alert">
+            <p>Événement introuvable.</p>
+            <a class="evt-back-link" href="/mes-evenements">Retour à mes événements</a>
+        </div>
+    }
+
+    <RecruteursContent Chargement="@_chargementRecruteurs"
+                       Erreur="@_erreurRecruteurs"
+                       Recruteurs="@_recruteurs"
+                       Reessayer="ChargerRecruteurs"
+                       StatutModifie="ModifierStatutRecruteur" />
+
+    <EvenementBottomNav OngletActif="OngletEvenement.LesRecruteurs" EvenementId="@EvenementId" />
+</div>
+
+@code {
+    [Parameter] public string EvenementId { get; set; } = "";
+
+    private Models.Evenement? _evenement;
+    private bool _chargementEvenement = true;
+
+    private IReadOnlyList<Recruteur> _recruteurs = Array.Empty<Recruteur>();
+    private bool _chargementRecruteurs = true;
+    private string? _erreurRecruteurs;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await Task.WhenAll(ChargerEvenement(), ChargerRecruteurs());
+    }
+
+    private async Task ChargerEvenement()
+    {
+        _chargementEvenement = true;
+        try
+        {
+            _evenement = await EvenementService.GetEvenementByIdAsync(EvenementId);
+        }
+        catch
+        {
+            _evenement = null;
+        }
+        finally
+        {
+            _chargementEvenement = false;
+        }
+    }
+
+    private async Task ChargerRecruteurs()
+    {
+        _chargementRecruteurs = true;
+        _erreurRecruteurs = null;
+        StateHasChanged();
+
+        try
+        {
+            _recruteurs = await RecruteurService.GetRecruteursAsync(EvenementId);
+        }
+        catch (Exception ex)
+        {
+            _erreurRecruteurs = "Impossible de charger les recruteurs. " + ex.Message;
+            _recruteurs = Array.Empty<Recruteur>();
+        }
+        finally
+        {
+            _chargementRecruteurs = false;
+        }
+    }
+
+    private async Task GenererPlanning()
+    {
+        try
+        {
+            var url = $"api/evenements/{Uri.EscapeDataString(EvenementId)}/planning";
+            await HttpClient.PostAsync(url, null);
+        }
+        catch
+        {
+            // La redirection vers le tableau de bord est gérée par EvenementHeader
+        }
+    }
+
+    /// <summary>
+    /// Appelé par l'action sheet quand l'utilisateur choisit un nouveau statut (US-3.04).
+    /// Met à jour le statut via l'API puis rafraîchit la liste localement.
+    /// </summary>
+    private async Task ModifierStatutRecruteur((string RecruteurId, StatutRecruteur NouveauStatut) args)
+    {
+        var recruteurMisAJour = await RecruteurService.UpdateStatutAsync(args.RecruteurId, args.NouveauStatut);
+        if (recruteurMisAJour is null) return;
+
+        _recruteurs = _recruteurs
+            .Select(r => r.Id == recruteurMisAJour.Id ? recruteurMisAJour : r)
+            .ToArray();
+    }
+}

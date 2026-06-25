@@ -1,0 +1,55 @@
+/* === En-tête mobile ============================================ */
+.me-topbar[b-ejtddlzk81] {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 18px 20px 16px;
+    background: #FFFFFF;
+    border-bottom: 1px solid #E6E7EC;
+    margin-bottom: 16px;
+}
+
+.me-topbar-info[b-ejtddlzk81] {
+    flex: 1;
+    min-width: 0;
+}
+
+.me-topbar-title[b-ejtddlzk81] {
+    margin: 0;
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: #20202C;
+    line-height: 1.2;
+}
+
+.me-topbar-conseiller[b-ejtddlzk81] {
+    margin: 2px 0 0;
+    font-size: 0.85rem;
+    color: #5b6b80;
+    font-weight: 500;
+}
+
+.me-topbar-actions[b-ejtddlzk81] {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    flex-shrink: 0;
+}
+
+.me-topbar-settings[b-ejtddlzk81] {
+    background: transparent;
+    border: none;
+    padding: 8px;
+    border-radius: 999px;
+    color: #4833E3;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.me-topbar-settings:disabled[b-ejtddlzk81] {
+    opacity: 0.45;
+    cursor: not-allowed;
+}

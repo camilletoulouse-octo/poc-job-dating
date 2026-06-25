@@ -1,0 +1,38 @@
+/* === Barre de navigation bas — contexte événement ============== */
+.evt-bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    max-width: 480px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    background: #FFFFFF;
+    border-top: 1px solid #E6E7EC;
+    padding: 8px 4px calc(8px + env(safe-area-inset-bottom, 0px));
+    z-index: 10;
+    text-decoration: none;
+}
+
+.evt-bottom-item {
+    background: transparent;
+    border: none;
+    color: #5b6b80;
+    font-size: 0.7rem;
+    font-weight: 500;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    padding: 4px 6px;
+    text-align: center;
+    line-height: 1.1;
+    text-decoration: none;
+}
+
+.evt-bottom-item--active {
+    color: #4833E3;
+    font-weight: 700;
+}

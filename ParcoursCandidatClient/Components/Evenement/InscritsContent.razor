@@ -1,0 +1,295 @@
+@* === Liste des inscrits (US-2.01 + US-2.02 + US-2.03 + US-2.04) ============
+   Affiche, pour l'événement courant :
+   - Titre "Liste des inscrits (N/Total)" où N = pointés (Présent + Absent)
+   - Barre de progression proportionnelle (N/Total)
+   - Barre de recherche par nom/prénom + bouton QR scanner (US-2.03)
+   - Chips de filtre : Tous / Présent / Absent / Inconnu (US-2.02)
+   - Liste filtrée : nom, prénom, badge statut coloré pour chacun.
+   - Action sheet de modification du statut au tap sur une ligne (US-2.04).
+   Le tri vient de l'API (par nom puis prénom).
+   Affiche skeleton / erreur / état vide le cas échéant.
+   ================================================================ *@
+<section class="ins-content" aria-live="polite">
+    @if (Chargement)
+    {
+        <div class="ins-header">
+            <div class="ins-skeleton ins-skeleton--title"></div>
+            <div class="ins-skeleton ins-skeleton--bar"></div>
+        </div>
+        <div class="ins-segmented ins-segmented--skeleton" aria-hidden="true">
+            <div class="ins-skeleton ins-skeleton--chip"></div>
+            <div class="ins-skeleton ins-skeleton--chip"></div>
+            <div class="ins-skeleton ins-skeleton--chip"></div>
+            <div class="ins-skeleton ins-skeleton--chip"></div>
+        </div>
+        <ul class="ins-list" aria-busy="true" aria-label="Chargement des inscrits">
+            @for (var i = 0; i < 5; i++)
+            {
+                <li class="ins-row ins-row--skeleton">
+                    <div class="ins-skeleton ins-skeleton--text"></div>
+                    <div class="ins-skeleton ins-skeleton--badge"></div>
+                </li>
+            }
+        </ul>
+    }
+    else if (Erreur is not null)
+    {
+        <div class="ins-error" role="alert">
+            <p>@Erreur</p>
+            <button type="button" class="ins-btn" @onclick="OnReessayer">Réessayer</button>
+        </div>
+    }
+    else
+    {
+        <div class="ins-header">
+            <h2 class="ins-title">
+                Liste des inscrits (<span class="ins-counter">@NombrePointes</span>/<span class="ins-total">@Inscrits.Count</span>)
+            </h2>
+            <div class="ins-progress"
+                 role="progressbar"
+                 aria-valuenow="@NombrePointes"
+                 aria-valuemin="0"
+                 aria-valuemax="@Inscrits.Count">
+                <div class="ins-progress-bar" style="width: @PourcentagePointes%"></div>
+            </div>
+        </div>
+
+        <div class="ins-recherche-row">
+            <div class="ins-recherche-wrapper">
+                <svg class="ins-recherche-icone" xmlns="http://www.w3.org/2000/svg" width="18" height="18"
+                     viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                     stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                </svg>
+                <input type="search"
+                       class="ins-recherche-input"
+                       placeholder="Rechercher un inscrit"
+                       aria-label="Rechercher un inscrit par nom ou prénom"
+                       @bind="_recherche"
+                       @bind:event="oninput" />
+            </div>
+            <a href="/evenements/@EvenementId/scanner"
+               class="ins-btn-scanner"
+               aria-label="Scanner un QR code">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                     fill="none" stroke="currentColor" stroke-width="2.5"
+                     stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <rect x="3" y="3" width="5" height="5" rx="1"></rect>
+                    <rect x="16" y="3" width="5" height="5" rx="1"></rect>
+                    <rect x="3" y="16" width="5" height="5" rx="1"></rect>
+                    <line x1="21" y1="16" x2="21" y2="21"></line>
+                    <line x1="16" y1="21" x2="21" y2="21"></line>
+                    <line x1="16" y1="16" x2="16" y2="16"></line>
+                    <line x1="11" y1="3" x2="11" y2="8"></line>
+                    <line x1="8" y1="11" x2="3" y2="11"></line>
+                    <line x1="11" y1="11" x2="11" y2="11"></line>
+                    <line x1="16" y1="11" x2="21" y2="11"></line>
+                    <line x1="11" y1="16" x2="11" y2="21"></line>
+                </svg>
+            </a>
+        </div>
+
+        <div class="ins-segmented" role="group" aria-label="Filtrer par statut">
+            @foreach (var (filtre, index) in Filtres.Select((FiltreStatutInscrit f, int i) => (f, i)))
+            {
+                @if (index > 0)
+                {
+                    <span class="ins-segmented-sep" aria-hidden="true">|</span>
+                }
+                <button type="button"
+                        class="ins-segmented-tab @(filtre == _filtreActif ? "ins-segmented-tab--actif" : "")"
+                        aria-pressed="@(filtre == _filtreActif ? "true" : "false")"
+                        @onclick="() => AppliquerFiltre(filtre)">
+                    @LibelleFiltre(filtre)
+                </button>
+            }
+        </div>
+
+        @if (InscritsFiltres.Count == 0)
+        {
+            <div class="ins-empty">
+                <p class="ins-empty-text">
+                    @(Inscrits.Count == 0
+                        ? "Aucun inscrit pour le moment."
+                        : "Aucun inscrit ne correspond à ce filtre.")
+                </p>
+            </div>
+        }
+        else
+        {
+            <ul class="ins-list" role="list">
+                @foreach (var inscrit in InscritsFiltres)
+                {
+                    <li class="ins-row ins-row--cliquable"
+                        role="button"
+                        tabindex="0"
+                        aria-label="Modifier le statut de @inscrit.Nom @inscrit.Prenom"
+                        @onclick="() => OuvrirActionSheet(inscrit)"
+                        @onkeydown="(e) => OnKeyDownLigne(e, inscrit)">
+                        <span class="ins-nom">@inscrit.Nom @inscrit.Prenom</span>
+                        <div class="ins-row-right">
+                            <span class="ins-badge @ClasseBadge(inscrit.Statut)">
+                                @LibelleStatut(inscrit.Statut)
+                            </span>
+                            <span class="ins-chevron" aria-hidden="true">›</span>
+                        </div>
+                    </li>
+                }
+            </ul>
+        }
+    }
+</section>
+
+@* === Action sheet US-2.04 ======================================= *@
+@if (_inscritSelectionne is not null)
+{
+    <div class="ins-overlay" role="dialog" aria-modal="true" aria-label="Sélectionne l'état de présence"
+         @onclick="FermerActionSheet">
+        <div class="ins-action-sheet" @onclick:stopPropagation="true">
+            <p class="ins-action-sheet-title">Sélectionne l'état de présence</p>
+            <p class="ins-action-sheet-nom">@_inscritSelectionne.Nom @_inscritSelectionne.Prenom</p>
+
+            <button type="button"
+                    class="ins-action-btn ins-action-btn--present"
+                    @onclick="() => ChoisirStatut(StatutInscrit.PRESENT)">
+                Présent
+            </button>
+            <button type="button"
+                    class="ins-action-btn ins-action-btn--absent"
+                    @onclick="() => ChoisirStatut(StatutInscrit.ABSENT)">
+                Absent
+            </button>
+            <button type="button"
+                    class="ins-action-btn ins-action-btn--inconnu"
+                    @onclick="() => ChoisirStatut(StatutInscrit.INCONNU)">
+                Participation inconnue
+            </button>
+
+            <button type="button"
+                    class="ins-action-btn ins-action-btn--annuler"
+                    @onclick="FermerActionSheet">
+                Annuler
+            </button>
+        </div>
+    </div>
+}
+
+@code {
+    [Parameter] public bool Chargement { get; set; }
+    [Parameter] public string? Erreur { get; set; }
+    [Parameter] public IReadOnlyList<Inscrit> Inscrits { get; set; } = Array.Empty<Inscrit>();
+    [Parameter] public EventCallback Reessayer { get; set; }
+    [Parameter] public string EvenementId { get; set; } = "";
+
+    /// <summary>
+    /// Déclenché quand l'utilisateur choisit un nouveau statut dans l'action sheet (US-2.04).
+    /// Paramètre : (inscritId, nouveauStatut).
+    /// </summary>
+    [Parameter] public EventCallback<(string InscritId, StatutInscrit NouveauStatut)> StatutModifie { get; set; }
+
+    private FiltreStatutInscrit _filtreActif = FiltreStatutInscrit.TOUS;
+    private Inscrit? _inscritSelectionne;
+    private string _recherche = "";
+
+    private static readonly FiltreStatutInscrit[] Filtres =
+    [
+        FiltreStatutInscrit.TOUS,
+        FiltreStatutInscrit.PRESENT,
+        FiltreStatutInscrit.ABSENT,
+        FiltreStatutInscrit.INCONNU
+    ];
+
+    private IReadOnlyList<Inscrit> InscritsFiltres
+    {
+        get
+        {
+            var inscrits = _filtreActif switch
+            {
+                FiltreStatutInscrit.PRESENT => Inscrits.Where(i => i.Statut == StatutInscrit.PRESENT),
+                FiltreStatutInscrit.ABSENT  => Inscrits.Where(i => i.Statut == StatutInscrit.ABSENT),
+                FiltreStatutInscrit.INCONNU => Inscrits.Where(i => i.Statut == StatutInscrit.INCONNU),
+                _                           => Inscrits.AsEnumerable()
+            };
+
+            if (!string.IsNullOrWhiteSpace(_recherche))
+            {
+                var terme = NormaliserTexte(_recherche);
+                inscrits = inscrits.Where(i =>
+                    NormaliserTexte(i.Nom).Contains(terme) ||
+                    NormaliserTexte(i.Prenom).Contains(terme));
+            }
+
+            return inscrits.ToList();
+        }
+    }
+
+    private int NombrePointes => Inscrits.Count(i => i.Statut != StatutInscrit.INCONNU);
+
+    private int PourcentagePointes =>
+        Inscrits.Count == 0 ? 0 : (int)Math.Round((double)NombrePointes / Inscrits.Count * 100);
+
+    private void AppliquerFiltre(FiltreStatutInscrit filtre) => _filtreActif = filtre;
+
+    private Task OnReessayer() => Reessayer.InvokeAsync();
+
+    private void OuvrirActionSheet(Inscrit inscrit) => _inscritSelectionne = inscrit;
+
+    private void FermerActionSheet() => _inscritSelectionne = null;
+
+    private void OnKeyDownLigne(KeyboardEventArgs e, Inscrit inscrit)
+    {
+        if (e.Key is "Enter" or " ")
+        {
+            OuvrirActionSheet(inscrit);
+        }
+    }
+
+    private async Task ChoisirStatut(StatutInscrit statut)
+    {
+        if (_inscritSelectionne is null) return;
+
+        var inscritId = _inscritSelectionne.Id;
+        FermerActionSheet();
+        await StatutModifie.InvokeAsync((inscritId, statut));
+    }
+
+    private static string ClasseBadge(StatutInscrit statut) => statut switch
+    {
+        StatutInscrit.PRESENT => "ins-badge--present",
+        StatutInscrit.ABSENT  => "ins-badge--absent",
+        _                     => "ins-badge--inconnu"
+    };
+
+    private static string LibelleStatut(StatutInscrit statut) => statut switch
+    {
+        StatutInscrit.PRESENT => "Présent",
+        StatutInscrit.ABSENT  => "Absent",
+        _                     => "Inconnu"
+    };
+
+    private static string LibelleFiltre(FiltreStatutInscrit filtre) => filtre switch
+    {
+        FiltreStatutInscrit.PRESENT => "Présent",
+        FiltreStatutInscrit.ABSENT  => "Absent",
+        FiltreStatutInscrit.INCONNU => "Inconnu",
+        _                           => "Tous"
+    };
+
+    /// <summary>
+    /// Normalise un texte pour la recherche : minuscules + suppression des diacritiques (accents).
+    /// </summary>
+    private static string NormaliserTexte(string texte)
+    {
+        var normalise = texte.Normalize(System.Text.NormalizationForm.FormD);
+        var sb = new System.Text.StringBuilder();
+        foreach (var c in normalise)
+        {
+            if (System.Globalization.CharUnicodeInfo.GetUnicodeCategory(c) != System.Globalization.UnicodeCategory.NonSpacingMark)
+            {
+                sb.Append(c);
+            }
+        }
+        return sb.ToString().ToLowerInvariant();
+    }
+}

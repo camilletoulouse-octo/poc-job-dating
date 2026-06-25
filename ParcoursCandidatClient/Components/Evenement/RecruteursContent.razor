@@ -1,0 +1,235 @@
+@* === Liste des recruteurs (US-3.01 + US-3.02 + US-3.04) =======================
+   Affiche, pour l'événement courant :
+   - Titre "Liste des recruteurs (N/Total)" où N = présents
+   - Barre de progression proportionnelle (N/Total), verte si 100 %
+   - Chips de filtre : Tous / Présent / Absent / Inconnu (US-3.02)
+   - Liste filtrée : raison sociale, contact (nom prénom), badge statut, flèche.
+   - Action sheet de modification du statut au tap sur la zone principale (US-3.04).
+   Le compteur (N/Total) et la barre conservent les valeurs globales quel que soit le filtre.
+   Affiche skeleton / erreur / état vide le cas échéant.
+   ================================================================ *@
+<section class="rec-content" aria-live="polite">
+    @if (Chargement)
+    {
+        <div class="rec-header">
+            <div class="rec-skeleton rec-skeleton--title"></div>
+            <div class="rec-skeleton rec-skeleton--bar"></div>
+        </div>
+        <div class="rec-segmented rec-segmented--skeleton" aria-hidden="true">
+            <div class="rec-skeleton rec-skeleton--chip"></div>
+            <div class="rec-skeleton rec-skeleton--chip"></div>
+            <div class="rec-skeleton rec-skeleton--chip"></div>
+            <div class="rec-skeleton rec-skeleton--chip"></div>
+        </div>
+        <ul class="rec-list" aria-busy="true" aria-label="Chargement des recruteurs">
+            @for (var i = 0; i < 5; i++)
+            {
+                <li class="rec-row rec-row--skeleton">
+                    <div class="rec-skeleton rec-skeleton--text"></div>
+                    <div class="rec-skeleton rec-skeleton--badge"></div>
+                </li>
+            }
+        </ul>
+    }
+    else if (Erreur is not null)
+    {
+        <div class="rec-error" role="alert">
+            <p>@Erreur</p>
+            <button type="button" class="rec-btn" @onclick="OnReessayer">Réessayer</button>
+        </div>
+    }
+    else
+    {
+        <div class="rec-header">
+            <h2 class="rec-title">
+                Liste des recruteurs (<span class="rec-counter">@NombrePresents</span>/<span class="rec-total">@Recruteurs.Count</span>)
+            </h2>
+            <div class="rec-progress @(PourcentagePresents == 100 ? "rec-progress--complet" : "")"
+                 role="progressbar"
+                 aria-valuenow="@NombrePresents"
+                 aria-valuemin="0"
+                 aria-valuemax="@Recruteurs.Count">
+                <div class="rec-progress-bar" style="width: @PourcentagePresents%"></div>
+            </div>
+        </div>
+
+        <div class="rec-segmented" role="group" aria-label="Filtrer par statut">
+            @foreach (var (filtre, index) in Filtres.Select((FiltreStatutRecruteur f, int i) => (f, i)))
+            {
+                @if (index > 0)
+                {
+                    <span class="rec-segmented-sep" aria-hidden="true">|</span>
+                }
+                <button type="button"
+                        class="rec-segmented-tab @(filtre == _filtreActif ? "rec-segmented-tab--actif" : "")"
+                        aria-pressed="@(filtre == _filtreActif ? "true" : "false")"
+                        @onclick="() => AppliquerFiltre(filtre)">
+                    @LibelleFiltre(filtre)
+                </button>
+            }
+        </div>
+
+        @if (RecruteursFiltres.Count == 0)
+        {
+            <div class="rec-empty">
+                <p class="rec-empty-text">
+                    @(Recruteurs.Count == 0
+                        ? "Aucun recruteur enregistré pour cet événement."
+                        : $"Aucun recruteur {LibelleStatutVide(_filtreActif)}.")
+                </p>
+            </div>
+        }
+        else
+        {
+            <ul class="rec-list" role="list">
+                @foreach (var recruteur in RecruteursFiltres)
+                {
+                    <li class="rec-row rec-row--cliquable"
+                        role="button"
+                        tabindex="0"
+                        aria-label="Modifier le statut de @recruteur.RaisonSociale"
+                        @onclick="() => OuvrirActionSheet(recruteur)"
+                        @onkeydown="(e) => OnKeyDownLigne(e, recruteur)">
+                        <div class="rec-row-main">
+                            <span class="rec-raison-sociale">@recruteur.RaisonSociale</span>
+                            <span class="rec-contact">@recruteur.Nom @recruteur.Prenom</span>
+                            <span class="rec-offres">@recruteur.NombreOffres offre@(recruteur.NombreOffres > 1 ? "s" : "")</span>
+                        </div>
+                        <div class="rec-row-right" @onclick:stopPropagation="true">
+                            <span class="rec-badge @ClasseBadge(recruteur.Statut)">
+                                @LibelleStatut(recruteur.Statut)
+                            </span>
+                            <span class="rec-chevron" aria-hidden="true">›</span>
+                        </div>
+                    </li>
+                }
+            </ul>
+        }
+    }
+</section>
+
+@* === Action sheet US-3.04 ======================================= *@
+@if (_recruteurSelectionne is not null)
+{
+    <div class="rec-overlay" role="dialog" aria-modal="true" aria-label="Sélectionne l'état de présence"
+         @onclick="FermerActionSheet">
+        <div class="rec-action-sheet" @onclick:stopPropagation="true">
+            <p class="rec-action-sheet-title">Sélectionne l'état de présence</p>
+            <p class="rec-action-sheet-nom">@_recruteurSelectionne.RaisonSociale — @_recruteurSelectionne.Nom @_recruteurSelectionne.Prenom</p>
+
+            <button type="button"
+                    class="rec-action-btn rec-action-btn--present"
+                    @onclick="() => ChoisirStatut(StatutRecruteur.PRESENT)">
+                Présent
+            </button>
+            <button type="button"
+                    class="rec-action-btn rec-action-btn--absent"
+                    @onclick="() => ChoisirStatut(StatutRecruteur.ABSENT)">
+                Absent
+            </button>
+            <button type="button"
+                    class="rec-action-btn rec-action-btn--inconnu"
+                    @onclick="() => ChoisirStatut(StatutRecruteur.INCONNU)">
+                Participation inconnue
+            </button>
+
+            <button type="button"
+                    class="rec-action-btn rec-action-btn--annuler"
+                    @onclick="FermerActionSheet">
+                Annuler
+            </button>
+        </div>
+    </div>
+}
+
+@code {
+    [Parameter] public bool Chargement { get; set; }
+    [Parameter] public string? Erreur { get; set; }
+    [Parameter] public IReadOnlyList<Recruteur> Recruteurs { get; set; } = Array.Empty<Recruteur>();
+    [Parameter] public EventCallback Reessayer { get; set; }
+
+    /// <summary>
+    /// Déclenché quand l'utilisateur choisit un nouveau statut dans l'action sheet (US-3.04).
+    /// Paramètre : (recruteurId, nouveauStatut).
+    /// </summary>
+    [Parameter] public EventCallback<(string RecruteurId, StatutRecruteur NouveauStatut)> StatutModifie { get; set; }
+
+    private FiltreStatutRecruteur _filtreActif = FiltreStatutRecruteur.TOUS;
+    private Recruteur? _recruteurSelectionne;
+
+    private static readonly FiltreStatutRecruteur[] Filtres =
+    [
+        FiltreStatutRecruteur.TOUS,
+        FiltreStatutRecruteur.PRESENT,
+        FiltreStatutRecruteur.ABSENT,
+        FiltreStatutRecruteur.INCONNU
+    ];
+
+    private IReadOnlyList<Recruteur> RecruteursFiltres => _filtreActif switch
+    {
+        FiltreStatutRecruteur.PRESENT => Recruteurs.Where(r => r.Statut == StatutRecruteur.PRESENT).ToList(),
+        FiltreStatutRecruteur.ABSENT  => Recruteurs.Where(r => r.Statut == StatutRecruteur.ABSENT).ToList(),
+        FiltreStatutRecruteur.INCONNU => Recruteurs.Where(r => r.Statut == StatutRecruteur.INCONNU).ToList(),
+        _                             => Recruteurs
+    };
+
+    private int NombrePresents => Recruteurs.Count(r => r.Statut == StatutRecruteur.PRESENT);
+
+    private int PourcentagePresents =>
+        Recruteurs.Count == 0 ? 0 : (int)Math.Round((double)NombrePresents / Recruteurs.Count * 100);
+
+    private void AppliquerFiltre(FiltreStatutRecruteur filtre) => _filtreActif = filtre;
+
+    private Task OnReessayer() => Reessayer.InvokeAsync();
+
+    private void OuvrirActionSheet(Recruteur recruteur) => _recruteurSelectionne = recruteur;
+
+    private void FermerActionSheet() => _recruteurSelectionne = null;
+
+    private void OnKeyDownLigne(KeyboardEventArgs e, Recruteur recruteur)
+    {
+        if (e.Key is "Enter" or " ")
+        {
+            OuvrirActionSheet(recruteur);
+        }
+    }
+
+    private async Task ChoisirStatut(StatutRecruteur statut)
+    {
+        if (_recruteurSelectionne is null) return;
+
+        var recruteurId = _recruteurSelectionne.Id;
+        FermerActionSheet();
+        await StatutModifie.InvokeAsync((recruteurId, statut));
+    }
+
+    private static string ClasseBadge(StatutRecruteur statut) => statut switch
+    {
+        StatutRecruteur.PRESENT => "rec-badge--present",
+        StatutRecruteur.ABSENT  => "rec-badge--absent",
+        _                       => "rec-badge--inconnu"
+    };
+
+    private static string LibelleStatut(StatutRecruteur statut) => statut switch
+    {
+        StatutRecruteur.PRESENT => "Présent",
+        StatutRecruteur.ABSENT  => "Absent",
+        _                       => "Inconnu"
+    };
+
+    private static string LibelleFiltre(FiltreStatutRecruteur filtre) => filtre switch
+    {
+        FiltreStatutRecruteur.PRESENT => "Présent",
+        FiltreStatutRecruteur.ABSENT  => "Absent",
+        FiltreStatutRecruteur.INCONNU => "Inconnu",
+        _                             => "Tous"
+    };
+
+    private static string LibelleStatutVide(FiltreStatutRecruteur filtre) => filtre switch
+    {
+        FiltreStatutRecruteur.PRESENT => "présent",
+        FiltreStatutRecruteur.ABSENT  => "absent",
+        FiltreStatutRecruteur.INCONNU => "au statut inconnu",
+        _                             => "correspondant à ce filtre"
+    };
+}

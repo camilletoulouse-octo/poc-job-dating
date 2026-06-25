@@ -1,0 +1,88 @@
+[
+  {
+    "evenementId": "evt-001",
+    "recruteurs": [
+      {
+        "recruteurId": "rec-001",
+        "nom": "Dupont",
+        "prenom": "Marie",
+        "raisonSociale": "Brasserie du Vieux Lyon",
+        "creneaux": [
+          { "heure": "10:00", "candidatNom": "ROBERT", "candidatPrenom": "Antoine" },
+          { "heure": "10:15", "candidatNom": "PETIT", "candidatPrenom": "Emma" }
+        ]
+      },
+      {
+        "recruteurId": "rec-002",
+        "nom": "Lefebvre",
+        "prenom": "Pierre",
+        "raisonSociale": "Hôtel Bellecour",
+        "creneaux": [
+          { "heure": "10:30", "candidatNom": "LEROY", "candidatPrenom": "Camille" }
+        ]
+      },
+      {
+        "recruteurId": "rec-004",
+        "nom": "Fontaine",
+        "prenom": "Julien",
+        "raisonSociale": "Café de la Paix",
+        "creneaux": [
+          { "heure": "11:00", "candidatNom": "ROBERT", "candidatPrenom": "Antoine" },
+          { "heure": "11:15", "candidatNom": "PETIT", "candidatPrenom": "Emma" },
+          { "heure": "11:30", "candidatNom": "LEROY", "candidatPrenom": "Camille" }
+        ]
+      },
+      {
+        "recruteurId": "rec-005",
+        "nom": "Girard",
+        "prenom": "Isabelle",
+        "raisonSociale": "Traiteur Prestige",
+        "creneaux": [
+          { "heure": "14:00", "candidatNom": "ROBERT", "candidatPrenom": "Antoine" }
+        ]
+      }
+    ]
+  },
+  {
+    "evenementId": "evt-002",
+    "recruteurs": [
+      {
+        "recruteurId": "rec-006",
+        "nom": "Bonnet",
+        "prenom": "Luc",
+        "raisonSociale": "TechCorp Solutions",
+        "creneaux": [
+          { "heure": "09:00", "candidatNom": "MOREAU", "candidatPrenom": "Sarah" },
+          { "heure": "09:15", "candidatNom": "SIMON", "candidatPrenom": "Maxime" }
+        ]
+      },
+      {
+        "recruteurId": "rec-007",
+        "nom": "Chevalier",
+        "prenom": "Nathalie",
+        "raisonSociale": "Startup Innov",
+        "creneaux": [
+          { "heure": "10:00", "candidatNom": "MOREAU", "candidatPrenom": "Sarah" },
+          { "heure": "10:15", "candidatNom": "SIMON", "candidatPrenom": "Maxime" },
+          { "heure": "10:30", "candidatNom": "LAURENT", "candidatPrenom": "Chloé" }
+        ]
+      }
+    ]
+  },
+  {
+    "evenementId": "evt-003",
+    "recruteurs": [
+      {
+        "recruteurId": "rec-008",
+        "nom": "Renard",
+        "prenom": "François",
+        "raisonSociale": "BTP Construction",
+        "creneaux": [
+          { "heure": "09:00", "candidatNom": "MICHEL", "candidatPrenom": "Julien" },
+          { "heure": "09:15", "candidatNom": "GARCIA", "candidatPrenom": "Léa" },
+          { "heure": "09:30", "candidatNom": "DAVID", "candidatPrenom": "Paul" }
+        ]
+      }
+    ]
+  }
+]

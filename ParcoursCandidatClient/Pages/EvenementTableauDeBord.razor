@@ -1,0 +1,316 @@
+@page "/evenements/{EvenementId}/tableau-de-bord"
+@inject EvenementService EvenementService
+@inject ITableauDeBordService TableauDeBordService
+@inject HttpClient HttpClient
+
+<PageTitle>@(_evenement?.Titre ?? "Événement") — Tableau de bord</PageTitle>
+
+<div class="evt-page">
+
+    @if (_evenement is not null)
+    {
+        <EvenementHeader Titre="@_evenement.Titre"
+                         Organisme="@_evenement.Organisme"
+                         Ville="@_evenement.Ville"
+                         Departement="@_evenement.Departement"
+                         HeureDebut="@_evenement.HeureDebut"
+                         HeureFin="@_evenement.HeureFin"
+                         EvenementId="@EvenementId"
+                         AfficherBoutonPlanning="true"
+                         OnGenererPlanning="GenererPlanning" />
+    }
+    else if (_chargementEvenement)
+    {
+        <EvenementHeader Titre=" "
+                         Organisme=" "
+                         Ville=" "
+                         Departement=" "
+                         HeureDebut=" "
+                         HeureFin=" " />
+    }
+    else
+    {
+        <div class="evt-not-found" role="alert">
+            <p>Événement introuvable.</p>
+            <a class="evt-back-link" href="/mes-evenements">Retour à mes événements</a>
+        </div>
+    }
+
+    @if (_planningGenere && _tableauDeBord is not null)
+    {
+        <div class="tdb-contenu">
+            @* === Carte Vision globale (US-5.01) === *@
+            <section class="tdb-carte" aria-label="Vision globale des entretiens">
+                <h2 class="tdb-carte-titre">Vision globale</h2>
+                <div class="tdb-vision-globale">
+                    <div class="tdb-vision-stat">
+                        <span class="tdb-vision-stat-valeur">@_tableauDeBord.VisionGlobale.TotalEntretiens</span>
+                        <span class="tdb-vision-stat-libelle">Entretiens planifiés</span>
+                    </div>
+                    <div class="tdb-vision-separateur" aria-hidden="true"></div>
+                    <div class="tdb-vision-stat">
+                        <a class="tdb-vision-stat-lien"
+                           href="/evenements/@EvenementId/rdv-restants"
+                           aria-label="@_tableauDeBord.VisionGlobale.EntretiensRestants entretiens restants — voir le détail">
+                            <span class="tdb-vision-stat-valeur tdb-vision-stat-valeur--restants">
+                                @_tableauDeBord.VisionGlobale.EntretiensRestants
+                            </span>
+                            <span class="tdb-vision-stat-libelle">
+                                Restants
+                                <svg class="tdb-vision-chevron" xmlns="http://www.w3.org/2000/svg"
+                                     width="16" height="16" viewBox="0 0 24 24" fill="none"
+                                     stroke="currentColor" stroke-width="2.5"
+                                     stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                    <polyline points="9 18 15 12 9 6"></polyline>
+                                </svg>
+                            </span>
+                        </a>
+                    </div>
+                </div>
+            </section>
+
+            @* === Carte Statut candidats (US-5.02) === *@
+            <section class="tdb-carte" aria-label="Statut candidats">
+                <h2 class="tdb-carte-titre">Statut candidats</h2>
+                <div class="tdb-statut-candidats">
+                    <div class="tdb-statut-sans-entretien">
+                        <a class="tdb-statut-sans-entretien-lien"
+                           href="/evenements/@EvenementId/candidats-sans-rdv"
+                           aria-label="@_tableauDeBord.StatutCandidats.SansEntretien candidats sans entretien — voir la liste">
+                            <span class="tdb-statut-sans-entretien-valeur">@_tableauDeBord.StatutCandidats.SansEntretien</span>
+                            <span class="tdb-statut-sans-entretien-libelle">
+                                Sans entretien
+                                <svg class="tdb-statut-chevron" xmlns="http://www.w3.org/2000/svg"
+                                     width="14" height="14" viewBox="0 0 24 24" fill="none"
+                                     stroke="currentColor" stroke-width="2.5"
+                                     stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                    <polyline points="9 18 15 12 9 6"></polyline>
+                                </svg>
+                            </span>
+                        </a>
+                    </div>
+                    <div class="tdb-statut-separateur" aria-hidden="true"></div>
+                    <div class="tdb-statut-colonnes">
+                        <div class="tdb-statut-colonne">
+                            <span class="tdb-statut-colonne-valeur tdb-statut-colonne-valeur--presents">@_tableauDeBord.StatutCandidats.Presents</span>
+                            <span class="tdb-statut-colonne-libelle">Présents</span>
+                        </div>
+                        <div class="tdb-statut-colonne">
+                            <span class="tdb-statut-colonne-valeur tdb-statut-colonne-valeur--absents">@_tableauDeBord.StatutCandidats.Absents</span>
+                            <span class="tdb-statut-colonne-libelle">Absents</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            @* === Carte Statut recruteurs (US-5.03) === *@
+            <section class="tdb-carte" aria-label="Statut recruteurs">
+                <h2 class="tdb-carte-titre">Statut recruteurs</h2>
+                <div class="tdb-statut-recruteurs">
+                    <div class="tdb-statut-colonnes">
+                        <div class="tdb-statut-colonne">
+                            <span class="tdb-statut-colonne-valeur tdb-statut-colonne-valeur--presents">@_tableauDeBord.StatutRecruteurs.Presents</span>
+                            <span class="tdb-statut-colonne-libelle">Présents</span>
+                        </div>
+                        <div class="tdb-statut-colonne">
+                            <span class="tdb-statut-colonne-valeur tdb-statut-colonne-valeur--absents">@_tableauDeBord.StatutRecruteurs.Absents</span>
+                            <span class="tdb-statut-colonne-libelle">Absents</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            @* === Carte Suites & recrutements (US-5.04) === *@
+            @if (_tableauDeBord.SuitesRecrutements is not null)
+            {
+                var suites = _tableauDeBord.SuitesRecrutements;
+
+                <section class="tdb-carte" aria-label="Suites et recrutements">
+                    <h2 class="tdb-carte-titre">Suites &amp; recrutements</h2>
+
+                    <div class="tdb-suites-liste">
+                        <div class="tdb-suites-ligne">
+                            <span class="tdb-suites-ligne-libelle">Nombre de recrutements</span>
+                            <span class="tdb-suites-ligne-valeur tdb-suites-stat-valeur--recrutements">@suites.Recrutements</span>
+                            <svg class="tdb-suites-ligne-chevron" xmlns="http://www.w3.org/2000/svg"
+                                 width="16" height="16" viewBox="0 0 24 24" fill="none"
+                                 stroke="currentColor" stroke-width="2.5"
+                                 stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <polyline points="9 18 15 12 9 6"></polyline>
+                            </svg>
+                        </div>
+
+                        <div class="tdb-suites-separateur" aria-hidden="true"></div>
+
+                        <div class="tdb-suites-entretiens-bloc">
+                            <span class="tdb-suites-entretiens-titre">Nombre de 2nd entretiens</span>
+                            <div class="tdb-suites-entretiens-blocs">
+                                <div class="tdb-suites-entretien-bloc tdb-suites-entretien-bloc--oui">
+                                    <span class="tdb-suites-entretien-label">OUI</span>
+                                    <span class="tdb-suites-entretien-valeur tdb-suites-legende-item--oui">@suites.DeuxiemesEntretiens.Oui</span>
+                                </div>
+                                <div class="tdb-suites-entretien-bloc tdb-suites-entretien-bloc--peut-etre">
+                                    <span class="tdb-suites-entretien-label">PEUT-ÊTRE</span>
+                                    <span class="tdb-suites-entretien-valeur tdb-suites-legende-item--peut-etre">@suites.DeuxiemesEntretiens.PeutEtre</span>
+                                </div>
+                                <div class="tdb-suites-entretien-bloc tdb-suites-entretien-bloc--non">
+                                    <span class="tdb-suites-entretien-label">NON</span>
+                                    <span class="tdb-suites-entretien-valeur tdb-suites-legende-item--non">@suites.DeuxiemesEntretiens.Non</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="tdb-suites-separateur" aria-hidden="true"></div>
+
+                        <div class="tdb-suites-ligne">
+                            <span class="tdb-suites-ligne-libelle">Nombre d'immersion</span>
+                            <span class="tdb-suites-ligne-valeur tdb-suites-stat-valeur--immersions">@suites.Immersions</span>
+                            <svg class="tdb-suites-ligne-chevron" xmlns="http://www.w3.org/2000/svg"
+                                 width="16" height="16" viewBox="0 0 24 24" fill="none"
+                                 stroke="currentColor" stroke-width="2.5"
+                                 stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <polyline points="9 18 15 12 9 6"></polyline>
+                            </svg>
+                        </div>
+
+                        <div class="tdb-suites-separateur" aria-hidden="true"></div>
+
+                        <div class="tdb-suites-ligne">
+                            <span class="tdb-suites-ligne-libelle">Nombre de POEI</span>
+                            <span class="tdb-suites-ligne-valeur tdb-suites-stat-valeur--poei">@suites.Poei</span>
+                            <svg class="tdb-suites-ligne-chevron" xmlns="http://www.w3.org/2000/svg"
+                                 width="16" height="16" viewBox="0 0 24 24" fill="none"
+                                 stroke="currentColor" stroke-width="2.5"
+                                 stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <polyline points="9 18 15 12 9 6"></polyline>
+                            </svg>
+                        </div>
+                    </div>
+                </section>
+            }
+
+            @* === Carte Enquêtes de satisfaction (US-5.05) === *@
+            @if (_tableauDeBord.EnquetesSatisfaction is not null)
+            {
+                var satisfaction = _tableauDeBord.EnquetesSatisfaction;
+
+                <section class="tdb-carte" aria-label="Enquêtes de satisfaction">
+                    <h2 class="tdb-carte-titre">Enquêtes de satisfaction</h2>
+                    <div class="tdb-satisfaction-colonnes">
+                        <div class="tdb-satisfaction-colonne">
+                            <span class="tdb-satisfaction-libelle">CANDIDATS</span>
+                            <div class="tdb-satisfaction-etoile" aria-label="Note candidats : @(satisfaction.NoteCandidats.HasValue ? satisfaction.NoteCandidats.Value.ToString("0.#") : "N/A")">
+                                <svg class="tdb-satisfaction-etoile-svg" viewBox="0 0 100 95" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                    <polygon points="50,5 61,35 95,35 68,57 79,91 50,70 21,91 32,57 5,35 39,35" fill="#F5C842" />
+                                </svg>
+                                <span class="tdb-satisfaction-note">
+                                    @(satisfaction.NoteCandidats.HasValue
+                                        ? satisfaction.NoteCandidats.Value.ToString("0.#", System.Globalization.CultureInfo.GetCultureInfo("fr-FR"))
+                                        : "—")
+                                </span>
+                            </div>
+                        </div>
+                        <div class="tdb-satisfaction-colonne">
+                            <span class="tdb-satisfaction-libelle">RECRUTEURS</span>
+                            <div class="tdb-satisfaction-etoile" aria-label="Note recruteurs : @(satisfaction.NoteRecruteurs.HasValue ? satisfaction.NoteRecruteurs.Value.ToString("0.#") : "N/A")">
+                                <svg class="tdb-satisfaction-etoile-svg" viewBox="0 0 100 95" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                    <polygon points="50,5 61,35 95,35 68,57 79,91 50,70 21,91 32,57 5,35 39,35" fill="#F5C842" />
+                                </svg>
+                                <span class="tdb-satisfaction-note">
+                                    @(satisfaction.NoteRecruteurs.HasValue
+                                        ? satisfaction.NoteRecruteurs.Value.ToString("0.#", System.Globalization.CultureInfo.GetCultureInfo("fr-FR"))
+                                        : "—")
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            }
+        </div>
+    }
+    else if (_erreurTableauDeBord is not null)
+    {
+        <div class="tdb-erreur" role="alert">
+            <p class="tdb-erreur-message">Impossible de charger le tableau de bord.</p>
+            <button class="tdb-erreur-reessayer" @onclick="ChargerTableauDeBord">Réessayer</button>
+        </div>
+    }
+    else if (!_planningGenere)
+    {
+        <div class="tdb-attente" role="status" aria-label="Tableau de bord non disponible">
+            <img class="tdb-attente-illustration"
+                 src="images/cactus.png"
+                 alt=""
+                 aria-hidden="true" />
+            <p class="tdb-attente-titre">Planning non généré</p>
+            <p class="tdb-attente-description">
+                Le tableau de bord sera disponible une fois le planning des entretiens généré.
+            </p>
+        </div>
+    }
+
+    <EvenementBottomNav OngletActif="OngletEvenement.TableauDeBord" EvenementId="@EvenementId" />
+</div>
+
+@code {
+    [Parameter] public string EvenementId { get; set; } = "";
+
+    private Models.Evenement? _evenement;
+    private bool _chargementEvenement = true;
+
+    private Models.TableauDeBord? _tableauDeBord;
+    private bool _planningGenere;
+    private string? _erreurTableauDeBord;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await Task.WhenAll(ChargerEvenement(), ChargerTableauDeBord());
+    }
+
+    private async Task ChargerEvenement()
+    {
+        _chargementEvenement = true;
+        try
+        {
+            _evenement = await EvenementService.GetEvenementByIdAsync(EvenementId);
+        }
+        catch
+        {
+            _evenement = null;
+        }
+        finally
+        {
+            _chargementEvenement = false;
+        }
+    }
+
+    private async Task ChargerTableauDeBord()
+    {
+        _erreurTableauDeBord = null;
+        try
+        {
+            _tableauDeBord = await TableauDeBordService.GetTableauDeBordAsync(EvenementId);
+            _planningGenere = _tableauDeBord is not null;
+        }
+        catch
+        {
+            _tableauDeBord = null;
+            _planningGenere = false;
+            _erreurTableauDeBord = "Impossible de charger le tableau de bord.";
+        }
+    }
+
+    private async Task GenererPlanning()
+    {
+        try
+        {
+            var url = $"api/evenements/{Uri.EscapeDataString(EvenementId)}/planning";
+            await HttpClient.PostAsync(url, null);
+            await ChargerTableauDeBord();
+        }
+        catch
+        {
+            // La redirection vers le tableau de bord est gérée par EvenementHeader
+        }
+    }
+}

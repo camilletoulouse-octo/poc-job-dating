@@ -1,0 +1,74 @@
+[
+  {
+    "id": "rec-001",
+    "evenementId": "evt-001",
+    "nom": "Dupont",
+    "prenom": "Marie",
+    "raisonSociale": "Brasserie du Vieux Lyon",
+    "nombreOffres": 3,
+    "statut": "PRESENT"
+  },
+  {
+    "id": "rec-002",
+    "evenementId": "evt-001",
+    "nom": "Lefebvre",
+    "prenom": "Pierre",
+    "raisonSociale": "Hôtel Bellecour",
+    "nombreOffres": 5,
+    "statut": "PRESENT"
+  },
+  {
+    "id": "rec-003",
+    "evenementId": "evt-001",
+    "nom": "Morel",
+    "prenom": "Claire",
+    "raisonSociale": "Groupe Sodexo",
+    "nombreOffres": 8,
+    "statut": "ABSENT"
+  },
+  {
+    "id": "rec-004",
+    "evenementId": "evt-001",
+    "nom": "Fontaine",
+    "prenom": "Julien",
+    "raisonSociale": "Café de la Paix",
+    "nombreOffres": 2,
+    "statut": "INCONNU"
+  },
+  {
+    "id": "rec-005",
+    "evenementId": "evt-001",
+    "nom": "Girard",
+    "prenom": "Isabelle",
+    "raisonSociale": "Traiteur Prestige",
+    "nombreOffres": 4,
+    "statut": "INCONNU"
+  },
+  {
+    "id": "rec-006",
+    "evenementId": "evt-002",
+    "nom": "Bonnet",
+    "prenom": "Luc",
+    "raisonSociale": "TechCorp Solutions",
+    "nombreOffres": 10,
+    "statut": "PRESENT"
+  },
+  {
+    "id": "rec-007",
+    "evenementId": "evt-002",
+    "nom": "Chevalier",
+    "prenom": "Nathalie",
+    "raisonSociale": "Startup Innov",
+    "nombreOffres": 6,
+    "statut": "INCONNU"
+  },
+  {
+    "id": "rec-008",
+    "evenementId": "evt-003",
+    "nom": "Renard",
+    "prenom": "François",
+    "raisonSociale": "BTP Construction",
+    "nombreOffres": 7,
+    "statut": "INCONNU"
+  }
+]

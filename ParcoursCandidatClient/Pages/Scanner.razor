@@ -1,0 +1,171 @@
+@page "/evenements/{EvenementId}/scanner"
+@inject IScannerService ScannerService
+@inject IInscritService InscritService
+@inject NavigationManager Navigation
+@implements IAsyncDisposable
+
+<PageTitle>Scanner mon événement</PageTitle>
+
+<div class="sc-page">
+
+    <header class="sc-header">
+        <button type="button" class="sc-header-back" aria-label="Retour" @onclick="Retour">
+            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none"
+                 stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <polyline points="15 18 9 12 15 6"></polyline>
+            </svg>
+        </button>
+        <h1 class="sc-header-titre">Scanner mon événement</h1>
+    </header>
+
+    <main class="sc-main">
+        @if (_cameraIndisponible)
+        {
+            <div class="sc-erreur" role="alert">
+                <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none"
+                     stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <line x1="12" y1="8" x2="12" y2="12"></line>
+                    <line x1="12" y1="16" x2="12.01" y2="16"></line>
+                </svg>
+                <p>La caméra n'est pas disponible sur cet appareil ou l'accès a été refusé.</p>
+            </div>
+        }
+        else
+        {
+            <div class="sc-viewfinder">
+                <video id="sc-video" class="sc-video @(_inscritDetecte != null ? "sc-video--floue" : "")" autoplay playsinline muted></video>
+                <canvas id="sc-canvas" class="sc-canvas" aria-hidden="true"></canvas>
+
+                @if (_inscritDetecte == null && _erreurScan == null)
+                {
+                    <div class="sc-cadre" aria-hidden="true">
+                        <span class="sc-cadre-coin sc-cadre-coin--tl"></span>
+                        <span class="sc-cadre-coin sc-cadre-coin--tr"></span>
+                        <span class="sc-cadre-coin sc-cadre-coin--bl"></span>
+                        <span class="sc-cadre-coin sc-cadre-coin--br"></span>
+                    </div>
+                    <p class="sc-instruction">Pointez la caméra vers un QR code ou un badge</p>
+                }
+                else if (_erreurScan != null)
+                {
+                    <div class="sc-overlay sc-overlay--erreur" role="alert">
+                        <div class="sc-badge-erreur" aria-hidden="true">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none"
+                                 stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                                <line x1="18" y1="6" x2="6" y2="18"></line>
+                                <line x1="6" y1="6" x2="18" y2="18"></line>
+                            </svg>
+                        </div>
+                        <div class="sc-resultat-carte">
+                            <span class="sc-resultat-nom">@_erreurScan</span>
+                        </div>
+                        <button type="button" class="sc-btn-nouveau-scan" @onclick="NouveauScan">
+                            Scan suivant
+                        </button>
+                    </div>
+                }
+                else if (_inscritDetecte != null)
+                {
+                    <div class="sc-overlay" role="status">
+                        <div class="sc-resultat-qr">
+                            <img src="@_qrCodeImageUrl" alt="QR code scanné" class="sc-qr-image" />
+                        </div>
+                        <div class="sc-badge-succes" aria-hidden="true">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none"
+                                 stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="20 6 9 17 4 12"></polyline>
+                            </svg>
+                        </div>
+                        <div class="sc-resultat-carte">
+                            <span class="sc-resultat-nom">@(_inscritDetecte.Nom.ToUpper()) @_inscritDetecte.Prenom</span>
+                        </div>
+                        <button type="button" class="sc-btn-nouveau-scan" @onclick="NouveauScan">
+                            Scan suivant
+                        </button>
+                    </div>
+                }
+            </div>
+        }
+    </main>
+
+</div>
+
+@code {
+    [Parameter] public string EvenementId { get; set; } = "";
+
+    private bool _cameraIndisponible = false;
+    private Inscrit? _inscritDetecte = null;
+    private string? _erreurScan = null;
+    private string _qrCodeImageUrl = string.Empty;
+    private DotNetObjectReference<Scanner>? _dotNetRef;
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (!firstRender) return;
+
+        var disponible = await ScannerService.EstCameraDisponibleAsync();
+        if (!disponible)
+        {
+            _cameraIndisponible = true;
+            StateHasChanged();
+            return;
+        }
+
+        var succes = await ScannerService.OuvrirCameraAsync("sc-video");
+        if (!succes)
+        {
+            _cameraIndisponible = true;
+            StateHasChanged();
+            return;
+        }
+
+        _dotNetRef = DotNetObjectReference.Create(this);
+        await ScannerService.DemarrerScanAsync("sc-video", "sc-canvas", _dotNetRef);
+    }
+
+    [JSInvokable]
+    public void OnQrCodeDetecte(string inscritId)
+    {
+        _qrCodeImageUrl = $"https://api.qrserver.com/v1/create-qr-code/?size=260x260&data={Uri.EscapeDataString(inscritId)}";
+        InvokeAsync(async () =>
+        {
+            var inscrit = await InscritService.UpdateStatutAsync(inscritId, StatutInscrit.PRESENT);
+            if (inscrit is null)
+            {
+                _erreurScan = $"Inscrit introuvable : {inscritId}";
+            }
+            else
+            {
+                _inscritDetecte = inscrit;
+            }
+            StateHasChanged();
+        });
+    }
+
+    private async Task NouveauScan()
+    {
+        _inscritDetecte = null;
+        _erreurScan = null;
+        _qrCodeImageUrl = string.Empty;
+        StateHasChanged();
+
+        await ScannerService.OuvrirCameraAsync("sc-video");
+        if (_dotNetRef != null)
+        {
+            await ScannerService.DemarrerScanAsync("sc-video", "sc-canvas", _dotNetRef);
+        }
+    }
+
+    private async Task Retour()
+    {
+        await ScannerService.FermerCameraAsync("sc-video");
+        Navigation.NavigateTo($"/evenements/{EvenementId}/inscrits");
+    }
+
+    public async ValueTask DisposeAsync()
+    {
+        await ScannerService.FermerCameraAsync("sc-video");
+        _dotNetRef?.Dispose();
+    }
+}

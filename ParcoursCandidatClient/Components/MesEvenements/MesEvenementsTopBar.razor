@@ -1,0 +1,33 @@
+@* === En-tête mobile ============================================
+   Composant réutilisable pour l'en-tête de la page "Mes événements" :
+   titre, sous-titre (nom du conseiller), bouton d'installation PWA
+   et bouton paramètres.
+   ================================================================ *@
+<header class="me-topbar">
+    <div class="me-topbar-info">
+        <h1 class="me-topbar-title">@Titre</h1>
+        <p class="me-topbar-conseiller">@ConseillerNom</p>
+    </div>
+    <div class="me-topbar-actions">
+        <PwaInstallButton />
+        <button type="button"
+                class="me-topbar-settings"
+                aria-label="Paramètres"
+                title="Paramètres"
+                disabled>
+            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none"
+                 stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <circle cx="12" cy="12" r="3"></circle>
+                <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09a1.65 1.65 0 0 0-1-1.51 1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09a1.65 1.65 0 0 0 1.51-1 1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+            </svg>
+        </button>
+    </div>
+</header>
+
+@code {
+    [Parameter, EditorRequired]
+    public string Titre { get; set; } = "";
+
+    [Parameter, EditorRequired]
+    public string ConseillerNom { get; set; } = "";
+}

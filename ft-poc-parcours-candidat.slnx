@@ -1,0 +1,6 @@
+<Solution>
+  <Project Path="ParcoursCandidatApi/ParcoursCandidatApi.csproj" />
+  <Project Path="ParcoursCandidatClient/ParcoursCandidatClient.csproj" />
+  <Project Path="ParcoursCandidatApi.Tests/ParcoursCandidatApi.Tests.csproj" />
+  <Project Path="ParcoursCandidatClient.Tests/ParcoursCandidatClient.Tests.csproj" />
+</Solution>

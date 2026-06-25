@@ -1,0 +1,110 @@
+is_global = true
+build_property.EnableAotAnalyzer = 
+build_property.EnableSingleFileAnalyzer = 
+build_property.EnableTrimAnalyzer = false
+build_property.IncludeAllContentForSelfExtract = 
+build_property.VerifyReferenceTrimCompatibility = 
+build_property.VerifyReferenceAotCompatibility = 
+build_property.TargetFramework = net10.0
+build_property.TargetFrameworkIdentifier = .NETCoreApp
+build_property.TargetFrameworkVersion = v10.0
+build_property.TargetPlatformMinVersion = 
+build_property.UsingMicrosoftNETSdkWeb = 
+build_property.ProjectTypeGuids = 
+build_property.InvariantGlobalization = false
+build_property.PlatformNeutralAssembly = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property.EntryPointFilePath = 
+build_property._SupportedPlatformList = browser
+build_property.RootNamespace = ParcoursCandidatClient
+build_property.RootNamespace = ParcoursCandidatClient
+build_property.ProjectDir = /Users/camille.toulouse/IdeaProjects/ft-poc-parcours-candidat/ParcoursCandidatClient/
+build_property.EnableComHosting = 
+build_property.EnableGeneratedComInterfaceComImportInterop = false
+build_property.RazorLangVersion = 10.0
+build_property.SupportLocalizedComponentNames = 
+build_property.GenerateRazorMetadataSourceChecksumAttributes = 
+build_property.MSBuildProjectDirectory = /Users/camille.toulouse/IdeaProjects/ft-poc-parcours-candidat/ParcoursCandidatClient
+build_property._RazorSourceGeneratorDebug = 
+build_property.EffectiveAnalysisLevelStyle = 10.0
+build_property.EnableCodeStyleSeverity = 
+
+[/Users/camille.toulouse/IdeaProjects/ft-poc-parcours-candidat/ParcoursCandidatClient/App.razor]
+build_metadata.AdditionalFiles.TargetPath = QXBwLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/camille.toulouse/IdeaProjects/ft-poc-parcours-candidat/ParcoursCandidatClient/Layout/MainLayout.razor]
+build_metadata.AdditionalFiles.TargetPath = TGF5b3V0L01haW5MYXlvdXQucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/camille.toulouse/IdeaProjects/ft-poc-parcours-candidat/ParcoursCandidatClient/Pages/NotFound.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvTm90Rm91bmQucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/camille.toulouse/IdeaProjects/ft-poc-parcours-candidat/ParcoursCandidatClient/_Imports.razor]
+build_metadata.AdditionalFiles.TargetPath = X0ltcG9ydHMucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/camille.toulouse/IdeaProjects/ft-poc-parcours-candidat/ParcoursCandidatClient/Components/Evenement/EvenementBottomNav.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9FdmVuZW1lbnQvRXZlbmVtZW50Qm90dG9tTmF2LnJhem9y
+build_metadata.AdditionalFiles.CssScope = b-etnkry86gq
+
+[/Users/camille.toulouse/IdeaProjects/ft-poc-parcours-candidat/ParcoursCandidatClient/Components/Evenement/EvenementHeader.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9FdmVuZW1lbnQvRXZlbmVtZW50SGVhZGVyLnJhem9y
+build_metadata.AdditionalFiles.CssScope = b-kqnc5yrxoi
+
+[/Users/camille.toulouse/IdeaProjects/ft-poc-parcours-candidat/ParcoursCandidatClient/Components/Evenement/InscritsContent.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9FdmVuZW1lbnQvSW5zY3JpdHNDb250ZW50LnJhem9y
+build_metadata.AdditionalFiles.CssScope = b-u284pa9w83
+
+[/Users/camille.toulouse/IdeaProjects/ft-poc-parcours-candidat/ParcoursCandidatClient/Components/Evenement/RecruteursContent.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9FdmVuZW1lbnQvUmVjcnV0ZXVyc0NvbnRlbnQucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = b-z2kd7tme37
+
+[/Users/camille.toulouse/IdeaProjects/ft-poc-parcours-candidat/ParcoursCandidatClient/Components/MesEvenements/MesEvenementsBottomNav.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9NZXNFdmVuZW1lbnRzL01lc0V2ZW5lbWVudHNCb3R0b21OYXYucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = b-k436d6ds3c
+
+[/Users/camille.toulouse/IdeaProjects/ft-poc-parcours-candidat/ParcoursCandidatClient/Components/MesEvenements/MesEvenementsContent.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9NZXNFdmVuZW1lbnRzL01lc0V2ZW5lbWVudHNDb250ZW50LnJhem9y
+build_metadata.AdditionalFiles.CssScope = b-xn3vjhairg
+
+[/Users/camille.toulouse/IdeaProjects/ft-poc-parcours-candidat/ParcoursCandidatClient/Components/MesEvenements/MesEvenementsTabs.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9NZXNFdmVuZW1lbnRzL01lc0V2ZW5lbWVudHNUYWJzLnJhem9y
+build_metadata.AdditionalFiles.CssScope = b-0f29n8my6t
+
+[/Users/camille.toulouse/IdeaProjects/ft-poc-parcours-candidat/ParcoursCandidatClient/Components/MesEvenements/MesEvenementsTopBar.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9NZXNFdmVuZW1lbnRzL01lc0V2ZW5lbWVudHNUb3BCYXIucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = b-ejtddlzk81
+
+[/Users/camille.toulouse/IdeaProjects/ft-poc-parcours-candidat/ParcoursCandidatClient/Components/Pwa/PwaInstallButton.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9Qd2EvUHdhSW5zdGFsbEJ1dHRvbi5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = b-o4caf2ctpd
+
+[/Users/camille.toulouse/IdeaProjects/ft-poc-parcours-candidat/ParcoursCandidatClient/Pages/EvenementCandidatsSansRdv.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvRXZlbmVtZW50Q2FuZGlkYXRzU2Fuc1Jkdi5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = b-s5sre5n9mx
+
+[/Users/camille.toulouse/IdeaProjects/ft-poc-parcours-candidat/ParcoursCandidatClient/Pages/EvenementInscrits.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvRXZlbmVtZW50SW5zY3JpdHMucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = b-uugd2hhwht
+
+[/Users/camille.toulouse/IdeaProjects/ft-poc-parcours-candidat/ParcoursCandidatClient/Pages/EvenementRdvRestants.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvRXZlbmVtZW50UmR2UmVzdGFudHMucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = b-rv4lzo7moi
+
+[/Users/camille.toulouse/IdeaProjects/ft-poc-parcours-candidat/ParcoursCandidatClient/Pages/EvenementRecruteurs.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvRXZlbmVtZW50UmVjcnV0ZXVycy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = b-aye797v1g3
+
+[/Users/camille.toulouse/IdeaProjects/ft-poc-parcours-candidat/ParcoursCandidatClient/Pages/EvenementTableauDeBord.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvRXZlbmVtZW50VGFibGVhdURlQm9yZC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = b-o07mm7y44u
+
+[/Users/camille.toulouse/IdeaProjects/ft-poc-parcours-candidat/ParcoursCandidatClient/Pages/MesEvenements.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvTWVzRXZlbmVtZW50cy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = b-2cqih5hh2f
+
+[/Users/camille.toulouse/IdeaProjects/ft-poc-parcours-candidat/ParcoursCandidatClient/Pages/Scanner.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvU2Nhbm5lci5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = b-hdv18a2ipy

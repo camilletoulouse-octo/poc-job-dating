@@ -1,0 +1,74 @@
+[
+  {
+    "Id": "rec-001",
+    "EvenementId": "evt-001",
+    "Nom": "Dupont",
+    "Prenom": "Marie",
+    "RaisonSociale": "Brasserie du Vieux Lyon",
+    "NombreOffres": 3,
+    "Statut": "PRESENT"
+  },
+  {
+    "Id": "rec-002",
+    "EvenementId": "evt-001",
+    "Nom": "Lefebvre",
+    "Prenom": "Pierre",
+    "RaisonSociale": "H\u00F4tel Bellecour",
+    "NombreOffres": 5,
+    "Statut": "INCONNU"
+  },
+  {
+    "Id": "rec-003",
+    "EvenementId": "evt-001",
+    "Nom": "Morel",
+    "Prenom": "Claire",
+    "RaisonSociale": "Groupe Sodexo",
+    "NombreOffres": 8,
+    "Statut": "PRESENT"
+  },
+  {
+    "Id": "rec-004",
+    "EvenementId": "evt-001",
+    "Nom": "Fontaine",
+    "Prenom": "Julien",
+    "RaisonSociale": "Caf\u00E9 de la Paix",
+    "NombreOffres": 2,
+    "Statut": "ABSENT"
+  },
+  {
+    "Id": "rec-005",
+    "EvenementId": "evt-001",
+    "Nom": "Girard",
+    "Prenom": "Isabelle",
+    "RaisonSociale": "Traiteur Prestige",
+    "NombreOffres": 4,
+    "Statut": "INCONNU"
+  },
+  {
+    "Id": "rec-006",
+    "EvenementId": "evt-002",
+    "Nom": "Bonnet",
+    "Prenom": "Luc",
+    "RaisonSociale": "TechCorp Solutions",
+    "NombreOffres": 10,
+    "Statut": "PRESENT"
+  },
+  {
+    "Id": "rec-007",
+    "EvenementId": "evt-002",
+    "Nom": "Chevalier",
+    "Prenom": "Nathalie",
+    "RaisonSociale": "Startup Innov",
+    "NombreOffres": 6,
+    "Statut": "INCONNU"
+  },
+  {
+    "Id": "rec-008",
+    "EvenementId": "evt-003",
+    "Nom": "Renard",
+    "Prenom": "Fran\u00E7ois",
+    "RaisonSociale": "BTP Construction",
+    "NombreOffres": 7,
+    "Statut": "INCONNU"
+  }
+]

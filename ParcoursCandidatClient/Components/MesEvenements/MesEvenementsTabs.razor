@@ -1,0 +1,51 @@
+@* === Onglets pilule =============================================
+   Composant des onglets de la page "Mes événements" :
+   - "Mes événements du jour" (actif par défaut)
+   - "Rechercher un événement" (désactivé tant qu'US-1.05 non livrée)
+   ================================================================ *@
+<nav class="me-tabs" role="tablist" aria-label="Sections Mes événements">
+    <button type="button"
+            role="tab"
+            class="me-tab @(OngletActif == OngletMesEvenements.MesEvenementsDuJour ? "me-tab--active" : "")"
+            aria-selected="@(OngletActif == OngletMesEvenements.MesEvenementsDuJour)"
+            @onclick="() => OnSelectionnerOnglet(OngletMesEvenements.MesEvenementsDuJour)">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="12" cy="12" r="10"></circle>
+            <polyline points="12 6 12 12 16 14"></polyline>
+        </svg>
+        <span>Mes événements du jour</span>
+    </button>
+    <button type="button"
+            role="tab"
+            class="me-tab @(OngletActif == OngletMesEvenements.Rechercher ? "me-tab--active" : "")"
+            aria-selected="@(OngletActif == OngletMesEvenements.Rechercher)"
+            @onclick="() => OnSelectionnerOnglet(OngletMesEvenements.Rechercher)"
+            disabled>
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="11" cy="11" r="7"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+        <span>Rechercher un événement</span>
+    </button>
+</nav>
+
+@code {
+    [Parameter, EditorRequired]
+    public OngletMesEvenements OngletActif { get; set; }
+
+    [Parameter]
+    public EventCallback<OngletMesEvenements> OngletActifChanged { get; set; }
+
+    private async Task OnSelectionnerOnglet(OngletMesEvenements onglet)
+    {
+        if (OngletActif == onglet)
+        {
+            return;
+        }
+
+        OngletActif = onglet;
+        await OngletActifChanged.InvokeAsync(onglet);
+    }
+}

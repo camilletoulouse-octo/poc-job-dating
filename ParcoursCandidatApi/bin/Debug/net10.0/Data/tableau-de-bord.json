@@ -1,0 +1,65 @@
+[
+  {
+    "evenementId": "evt-001",
+    "visionGlobale": {
+      "totalEntretiens": 24,
+      "entretiensRestants": 9
+    },
+    "suitesRecrutements": {
+      "recrutements": 5,
+      "deuxiemesEntretiens": {
+        "oui": 8,
+        "peutEtre": 4,
+        "non": 3
+      },
+      "immersions": 2,
+      "poei": 1
+    },
+    "enquetesSatisfaction": {
+      "noteCandidats": 3.5,
+      "noteRecruteurs": 3.2
+    }
+  },
+  {
+    "evenementId": "evt-002",
+    "visionGlobale": {
+      "totalEntretiens": 18,
+      "entretiensRestants": 5
+    },
+    "suitesRecrutements": {
+      "recrutements": 3,
+      "deuxiemesEntretiens": {
+        "oui": 5,
+        "peutEtre": 2,
+        "non": 4
+      },
+      "immersions": 1,
+      "poei": 0
+    },
+    "enquetesSatisfaction": {
+      "noteCandidats": null,
+      "noteRecruteurs": null
+    }
+  },
+  {
+    "evenementId": "evt-003",
+    "visionGlobale": {
+      "totalEntretiens": 30,
+      "entretiensRestants": 12
+    },
+    "suitesRecrutements": {
+      "recrutements": 7,
+      "deuxiemesEntretiens": {
+        "oui": 10,
+        "peutEtre": 6,
+        "non": 2
+      },
+      "immersions": 3,
+      "poei": 2
+    },
+    "enquetesSatisfaction": {
+      "noteCandidats": 4.1,
+      "noteRecruteurs": null
+    }
+  }
+]

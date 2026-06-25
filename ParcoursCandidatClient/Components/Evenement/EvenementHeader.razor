@@ -1,0 +1,88 @@
+@* === En-tête persistant du contexte événement ====================
+   Affiché en haut de chaque onglet (US-1.03) : bouton retour, titre,
+   organisme, lieu et horaires de l'événement. Ces infos restent
+   identiques quel que soit l'onglet actif (US-1.04).
+   Le bouton « Générer le planning » (US-5.01) est affiché quand
+   AfficherBoutonPlanning est vrai ; il déclenche la génération puis
+   redirige vers le tableau de bord. Le bouton est toujours visible
+   pour permettre au conseiller de régénérer le planning après
+   modification des paramètres.
+   ================================================================ *@
+@inject NavigationManager NavigationManager
+
+<header class="evt-header">
+    <a class="evt-header-back"
+       href="/mes-evenements"
+       aria-label="Retour à mes événements">
+        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none"
+             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <polyline points="15 18 9 12 15 6"></polyline>
+        </svg>
+    </a>
+
+    <div class="evt-header-info">
+        <h1 class="evt-header-title">@Titre</h1>
+        <p class="evt-header-org">@Organisme</p>
+        <p class="evt-header-lieu">@Ville (@Departement)</p>
+        <p class="evt-header-horaire">@HeureDebut – @HeureFin</p>
+    </div>
+
+    @if (AfficherBoutonPlanning)
+    {
+        <button class="evt-header-btn-planning"
+                aria-label="Générer le planning"
+                disabled="@_generationEnCours"
+                @onclick="GenererPlanning">
+            @if (_generationEnCours)
+            {
+                <span class="evt-header-btn-planning-spinner" aria-hidden="true"></span>
+            }
+            else
+            {
+                <span>Générer le planning</span>
+            }
+        </button>
+    }
+</header>
+
+@code {
+    [Parameter, EditorRequired] public string Titre { get; set; } = "";
+    [Parameter, EditorRequired] public string Organisme { get; set; } = "";
+    [Parameter, EditorRequired] public string Ville { get; set; } = "";
+    [Parameter, EditorRequired] public string Departement { get; set; } = "";
+    [Parameter, EditorRequired] public string HeureDebut { get; set; } = "";
+    [Parameter, EditorRequired] public string HeureFin { get; set; } = "";
+
+    /// <summary>
+    /// Identifiant de l'événement, requis pour la redirection vers le tableau de bord.
+    /// </summary>
+    [Parameter] public string EvenementId { get; set; } = "";
+
+    /// <summary>
+    /// Quand <c>true</c>, affiche le bouton « Générer le planning » (US-5.01).
+    /// Toujours <c>true</c> pour permettre la régénération après modification des paramètres.
+    /// </summary>
+    [Parameter] public bool AfficherBoutonPlanning { get; set; }
+
+    /// <summary>
+    /// Callback appelé lors du clic sur « Générer le planning ».
+    /// Permet à la page parente d'appeler l'API de génération.
+    /// </summary>
+    [Parameter] public EventCallback OnGenererPlanning { get; set; }
+
+    private bool _generationEnCours;
+
+    private async Task GenererPlanning()
+    {
+        _generationEnCours = true;
+        try
+        {
+            await OnGenererPlanning.InvokeAsync();
+            NavigationManager.NavigateTo($"/evenements/{EvenementId}/tableau-de-bord");
+        }
+        finally
+        {
+            _generationEnCours = false;
+        }
+    }
+}

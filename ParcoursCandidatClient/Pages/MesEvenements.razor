@@ -1,0 +1,65 @@
+@page "/mes-evenements"
+@page "/"
+@inject EvenementService EvenementService
+
+<PageTitle>Mes événements</PageTitle>
+
+<div class="me-page">
+
+    <MesEvenementsTopBar Titre="Mes événements"
+                         ConseillerNom="@_conseillerNom" />
+
+    <MesEvenementsTabs OngletActif="@_ongletActif"
+                       OngletActifChanged="SelectionnerOnglet" />
+
+    <MesEvenementsContent OngletActif="@_ongletActif"
+                          Chargement="@_chargement"
+                          Erreur="@_erreur"
+                          Evenements="@_evenements"
+                          Reessayer="ChargerEvenements" />
+
+    <MesEvenementsBottomNav />
+</div>
+
+@code {
+    // Pour le PoC, l'agence et le nom du conseiller sont en dur.
+    // Ils seront alimentés par US-1.02 (sélecteur d'agence) et US-1.08 (identité conseiller).
+    private const string AgenceParDefautId = "lyon-part-dieu";
+    private string _conseillerNom = "Camille Toulouse";
+
+    private OngletMesEvenements _ongletActif = OngletMesEvenements.MesEvenementsDuJour;
+    private bool _chargement = true;
+    private string? _erreur;
+    private IReadOnlyList<Evenement> _evenements = Array.Empty<Evenement>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        await ChargerEvenements();
+    }
+
+    private async Task ChargerEvenements()
+    {
+        _chargement = true;
+        _erreur = null;
+        StateHasChanged();
+
+        try
+        {
+            _evenements = await EvenementService.GetEvenementsDuJourAsync(AgenceParDefautId);
+        }
+        catch (Exception ex)
+        {
+            _erreur = "Impossible de charger les événements. " + ex.Message;
+            _evenements = Array.Empty<Evenement>();
+        }
+        finally
+        {
+            _chargement = false;
+        }
+    }
+
+    private void SelectionnerOnglet(OngletMesEvenements onglet)
+    {
+        _ongletActif = onglet;
+    }
+}
