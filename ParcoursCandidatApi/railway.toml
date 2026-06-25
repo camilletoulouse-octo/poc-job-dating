@@ -6,4 +6,6 @@ buildCommand = "dotnet publish ParcoursCandidatApi.csproj -c Release -o out"
 
 [deploy]
 # Un seul service Railway sert à la fois l'API (`/api/*`) et l'UI Blazor (`/` + fallback SPA).
-startCommand = "ASPNETCORE_URLS=http://0.0.0.0:${PORT:-3000} ./out/ParcoursCandidatApi"
+# Railway expose la variable `$PORT` à l'application. On fallback sur `8080` qui correspond
+# au "Custom port" configuré sur le service Railway si jamais `$PORT` n'est pas défini.
+startCommand = "ASPNETCORE_URLS=http://0.0.0.0:${PORT:-8080} ./out/ParcoursCandidatApi"
