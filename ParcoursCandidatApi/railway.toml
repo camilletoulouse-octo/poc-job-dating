@@ -6,6 +6,7 @@ buildCommand = "dotnet publish ParcoursCandidatApi.csproj -c Release -o out"
 
 [deploy]
 # Un seul service Railway sert à la fois l'API (`/api/*`) et l'UI Blazor (`/` + fallback SPA).
-# Railway expose la variable `$PORT` à l'application. On fallback sur `8080` qui correspond
-# au "Custom port" configuré sur le service Railway si jamais `$PORT` n'est pas défini.
-startCommand = "ASPNETCORE_URLS=http://0.0.0.0:${PORT:-8080} ./out/ParcoursCandidatApi"
+# Le service Railway est configuré avec un "Custom port" = 8080 (Settings → Networking).
+# Le proxy Railway route le trafic public vers le port 8080 du conteneur : on force donc
+# Kestrel à écouter sur ce port en dur, indépendamment de la variable `$PORT`.
+startCommand = "ASPNETCORE_URLS=http://0.0.0.0:8080 ./out/ParcoursCandidatApi"
