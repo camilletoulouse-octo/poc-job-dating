@@ -1,5 +1,8 @@
 [build]
 builder = "railpack"
+# Force la détection .NET (le projet n'est pas à la racine, seul un .slnx y est).
+# Sans ça Railpack n'installe pas le SDK et `dotnet` est introuvable au build.
+providers = ["dotnet"]
 # Publish depuis la racine du repo pour que le `ProjectReference` du client Blazor
 # (chemin relatif `../ParcoursCandidatClient/`) soit accessible et que ses fichiers
 # WebAssembly soient bien copiés dans `out/wwwroot/_framework/`.
