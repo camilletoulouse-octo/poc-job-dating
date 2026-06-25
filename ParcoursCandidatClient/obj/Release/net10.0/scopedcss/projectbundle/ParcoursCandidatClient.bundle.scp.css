@@ -1,0 +1,2478 @@
+/* /Components/Evenement/EvenementBottomNav.razor.rz.scp.css */
+/* === Barre de navigation bas — contexte événement ============== */
+.evt-bottom-nav[b-etnkry86gq] {
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    max-width: 480px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    background: #FFFFFF;
+    border-top: 1px solid #E6E7EC;
+    padding: 8px 4px calc(8px + env(safe-area-inset-bottom, 0px));
+    z-index: 10;
+    text-decoration: none;
+}
+
+.evt-bottom-item[b-etnkry86gq] {
+    background: transparent;
+    border: none;
+    color: #5b6b80;
+    font-size: 0.7rem;
+    font-weight: 500;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    padding: 4px 6px;
+    text-align: center;
+    line-height: 1.1;
+    text-decoration: none;
+}
+
+.evt-bottom-item--active[b-etnkry86gq] {
+    color: #4833E3;
+    font-weight: 700;
+}
+/* /Components/Evenement/EvenementHeader.razor.rz.scp.css */
+/* === En-tête du contexte événement ============================= */
+.evt-header[b-kqnc5yrxoi] {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 18px 20px 16px;
+    background: #FFFFFF;
+    border-bottom: 1px solid #E6E7EC;
+    margin-bottom: 16px;
+}
+
+.evt-header-back[b-kqnc5yrxoi] {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: none;
+    padding: 6px;
+    border-radius: 999px;
+    color: #4833E3;
+    text-decoration: none;
+    cursor: pointer;
+    flex-shrink: 0;
+    margin-top: 2px;
+}
+
+.evt-header-info[b-kqnc5yrxoi] {
+    flex: 1;
+    min-width: 0;
+}
+
+.evt-header-title[b-kqnc5yrxoi] {
+    margin: 0;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #20202C;
+    line-height: 1.25;
+}
+
+.evt-header-org[b-kqnc5yrxoi] {
+    margin: 4px 0 0;
+    font-size: 0.85rem;
+    color: #343643;
+    font-weight: 500;
+}
+
+.evt-header-lieu[b-kqnc5yrxoi] {
+    margin: 2px 0 0;
+    font-size: 0.8rem;
+    color: #5b6b80;
+}
+
+.evt-header-horaire[b-kqnc5yrxoi] {
+    margin: 4px 0 0;
+    font-size: 0.8rem;
+    color: #5b6b80;
+    font-weight: 600;
+}
+
+/* === Bouton « Générer le planning » (US-5.01) =================== */
+.evt-header-btn-planning[b-kqnc5yrxoi] {
+    flex-shrink: 0;
+    align-self: center;
+    padding: 8px 12px;
+    background: #4833E3;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 8px;
+    font-size: 0.78rem;
+    font-weight: 600;
+    cursor: pointer;
+    white-space: nowrap;
+    line-height: 1.2;
+    transition: background 0.15s ease, opacity 0.15s ease;
+}
+
+.evt-header-btn-planning:hover:not(:disabled)[b-kqnc5yrxoi] {
+    background: #3a28c0;
+}
+
+.evt-header-btn-planning:disabled[b-kqnc5yrxoi] {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.evt-header-btn-planning-spinner[b-kqnc5yrxoi] {
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    border: 2px solid rgba(255, 255, 255, 0.4);
+    border-top-color: #FFFFFF;
+    border-radius: 50%;
+    animation: evt-spin-b-kqnc5yrxoi 0.7s linear infinite;
+}
+
+@keyframes evt-spin-b-kqnc5yrxoi {
+    to { transform: rotate(360deg); }
+}
+/* /Components/Evenement/InscritsContent.razor.rz.scp.css */
+/* === Liste des inscrits ======================================== */
+.ins-content[b-u284pa9w83] {
+    padding: 0 25px;
+}
+
+.ins-header[b-u284pa9w83] {
+    margin-bottom: 12px;
+}
+
+.ins-title[b-u284pa9w83] {
+    margin: 0 0 8px;
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: #20202C;
+}
+
+.ins-counter[b-u284pa9w83] {
+    color: #4833E3;
+}
+
+.ins-total[b-u284pa9w83] {
+    color: #5b6b80;
+}
+
+.ins-progress[b-u284pa9w83] {
+    height: 8px;
+    background: #E6E7EC;
+    border-radius: 999px;
+    overflow: hidden;
+}
+
+.ins-progress-bar[b-u284pa9w83] {
+    height: 100%;
+    background: #4833E3;
+    border-radius: 999px;
+    transition: width 0.3s ease;
+}
+
+.ins-list[b-u284pa9w83] {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.ins-row[b-u284pa9w83] {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    background: #FFFFFF;
+    border-radius: 10px;
+    padding: 12px 14px;
+    box-shadow: 0 2px 6px rgba(15, 23, 42, 0.06);
+}
+
+.ins-nom[b-u284pa9w83] {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #20202C;
+}
+
+.ins-row-right[b-u284pa9w83] {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
+}
+
+.ins-chevron[b-u284pa9w83] {
+    font-size: 1.2rem;
+    color: #C7C9D9;
+    line-height: 1;
+}
+
+.ins-badge[b-u284pa9w83] {
+    display: inline-flex;
+    align-items: center;
+    border-radius: 999px;
+    padding: 3px 10px;
+    font-size: 0.75rem;
+    font-weight: 700;
+}
+
+.ins-badge--present[b-u284pa9w83] {
+    background: rgba(34, 145, 73, 0.12);
+    color: #229149;
+}
+
+.ins-badge--absent[b-u284pa9w83] {
+    background: rgba(212, 51, 51, 0.12);
+    color: #C92F2F;
+}
+
+.ins-badge--inconnu[b-u284pa9w83] {
+    background: #EFEFF5;
+    color: #5b6b80;
+}
+
+/* --- Barre de recherche + bouton scanner (US-2.03) ------------ */
+.ins-recherche-row[b-u284pa9w83] {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 12px;
+}
+
+.ins-recherche-wrapper[b-u284pa9w83] {
+    flex: 1;
+    position: relative;
+    display: flex;
+    align-items: center;
+    background: #FFFFFF;
+    border-radius: 12px;
+    padding: 0 14px;
+    box-shadow: 0 2px 6px rgba(15, 23, 42, 0.06);
+}
+
+.ins-recherche-icone[b-u284pa9w83] {
+    flex-shrink: 0;
+    color: #9CA3AF;
+    margin-right: 10px;
+}
+
+.ins-recherche-input[b-u284pa9w83] {
+    flex: 1;
+    border: none;
+    outline: none;
+    background: transparent;
+    font-size: 0.9rem;
+    color: #20202C;
+    padding: 12px 0;
+    -webkit-appearance: none;
+}
+
+.ins-recherche-input[b-u284pa9w83]::placeholder {
+    color: #9CA3AF;
+}
+
+.ins-recherche-input[b-u284pa9w83]::-webkit-search-cancel-button {
+    -webkit-appearance: none;
+}
+
+.ins-btn-scanner[b-u284pa9w83] {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 46px;
+    height: 46px;
+    background: #4833E3;
+    border-radius: 12px;
+    color: #FFFFFF;
+    text-decoration: none;
+    box-shadow: 0 2px 8px rgba(72, 51, 227, 0.35);
+    transition: opacity 0.15s ease;
+}
+
+.ins-btn-scanner:active[b-u284pa9w83] {
+    opacity: 0.8;
+}
+
+/* --- Segmented control de filtre (US-2.02) -------------------- */
+.ins-segmented[b-u284pa9w83] {
+    display: flex;
+    align-items: center;
+    background: #FFFFFF;
+    border-radius: 8px;
+    padding: 3px;
+    margin-bottom: 12px;
+    box-shadow: 0 1px 3px rgba(15, 23, 42, 0.06);
+}
+
+.ins-segmented-tab[b-u284pa9w83] {
+    flex: 1;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 7px;
+    padding: 5px 8px;
+    font-size: 0.78rem;
+    font-weight: 600;
+    cursor: pointer;
+    border: none;
+    background: transparent;
+    color: #343643;
+    transition: background 0.15s ease, color 0.15s ease;
+    white-space: nowrap;
+}
+
+.ins-segmented-tab--actif[b-u284pa9w83] {
+    background: #4833E3;
+    color: #FFFFFF;
+}
+
+.ins-segmented-sep[b-u284pa9w83] {
+    color: #C7C9D9;
+    font-size: 0.75rem;
+    user-select: none;
+    flex-shrink: 0;
+}
+
+/* --- Empty / erreur ------------------------------------------- */
+.ins-empty[b-u284pa9w83],
+.ins-error[b-u284pa9w83] {
+    margin-top: 8px;
+    padding: 24px 16px;
+    text-align: center;
+    color: #5b6b80;
+    background: #FFFFFF;
+    border-radius: 12px;
+    box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
+}
+
+.ins-empty-text[b-u284pa9w83] {
+    margin: 0;
+    font-weight: 500;
+}
+
+.ins-btn[b-u284pa9w83] {
+    margin-top: 12px;
+    background: #4833E3;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 8px;
+    padding: 8px 16px;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+/* --- Skeletons ------------------------------------------------ */
+.ins-row--skeleton[b-u284pa9w83] {
+    pointer-events: none;
+}
+
+.ins-skeleton[b-u284pa9w83] {
+    background: linear-gradient(90deg, #eef0f4 0%, #f7f8fb 50%, #eef0f4 100%);
+    background-size: 200% 100%;
+    animation: ins-shimmer-b-u284pa9w83 1.2s ease-in-out infinite;
+    border-radius: 6px;
+    height: 0.85rem;
+}
+
+.ins-skeleton--title[b-u284pa9w83] {
+    height: 1rem;
+    width: 55%;
+    margin-bottom: 8px;
+}
+
+.ins-skeleton--bar[b-u284pa9w83] {
+    height: 8px;
+    width: 100%;
+    border-radius: 999px;
+}
+
+.ins-skeleton--text[b-u284pa9w83] {
+    width: 50%;
+    height: 0.85rem;
+}
+
+.ins-skeleton--badge[b-u284pa9w83] {
+    width: 4.5rem;
+    height: 1.2rem;
+    border-radius: 999px;
+}
+
+.ins-skeleton--chip[b-u284pa9w83] {
+    width: 4rem;
+    height: 1.8rem;
+    border-radius: 999px;
+}
+
+@keyframes ins-shimmer-b-u284pa9w83 {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+}
+
+/* --- Ligne cliquable (US-2.04) --------------------------------- */
+.ins-row--cliquable[b-u284pa9w83] {
+    cursor: pointer;
+    transition: background 0.15s ease;
+}
+
+.ins-row--cliquable:hover[b-u284pa9w83],
+.ins-row--cliquable:focus-visible[b-u284pa9w83] {
+    background: #F5F5FB;
+    outline: none;
+}
+
+/* --- Overlay + action sheet (US-2.04) -------------------------- */
+.ins-overlay[b-u284pa9w83] {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.45);
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    z-index: 100;
+    animation: ins-overlay-in-b-u284pa9w83 0.2s ease;
+}
+
+@keyframes ins-overlay-in-b-u284pa9w83 {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+.ins-action-sheet[b-u284pa9w83] {
+    width: 100%;
+    max-width: 390px;
+    background: #FFFFFF;
+    border-radius: 16px 16px 0 0;
+    padding: 20px 16px 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    animation: ins-sheet-in-b-u284pa9w83 0.25s ease;
+}
+
+@keyframes ins-sheet-in-b-u284pa9w83 {
+    from { transform: translateY(100%); }
+    to   { transform: translateY(0); }
+}
+
+.ins-action-sheet-title[b-u284pa9w83] {
+    margin: 0 0 2px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #5b6b80;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+.ins-action-sheet-nom[b-u284pa9w83] {
+    margin: 0 0 6px;
+    font-size: 1rem;
+    font-weight: 700;
+    color: #20202C;
+    text-align: center;
+}
+
+.ins-action-btn[b-u284pa9w83] {
+    width: 100%;
+    padding: 14px 16px;
+    border: none;
+    border-radius: 12px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: opacity 0.15s ease;
+}
+
+.ins-action-btn:active[b-u284pa9w83] {
+    opacity: 0.75;
+}
+
+.ins-action-btn--present[b-u284pa9w83] {
+    background: rgba(34, 145, 73, 0.12);
+    color: #229149;
+}
+
+.ins-action-btn--absent[b-u284pa9w83] {
+    background: rgba(212, 51, 51, 0.12);
+    color: #C92F2F;
+}
+
+.ins-action-btn--inconnu[b-u284pa9w83] {
+    background: #EFEFF5;
+    color: #5b6b80;
+}
+
+.ins-action-btn--annuler[b-u284pa9w83] {
+    background: #F5F5FB;
+    color: #343643;
+    margin-top: 4px;
+}
+/* /Components/Evenement/RecruteursContent.razor.rz.scp.css */
+/* === Liste des recruteurs (US-3.01 + US-3.02 + US-3.04) ============ */
+.rec-content[b-z2kd7tme37] {
+    padding: 0 25px;
+}
+
+.rec-header[b-z2kd7tme37] {
+    margin-bottom: 12px;
+}
+
+.rec-title[b-z2kd7tme37] {
+    margin: 0 0 8px;
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: #20202C;
+}
+
+.rec-counter[b-z2kd7tme37] {
+    color: #4833E3;
+}
+
+.rec-total[b-z2kd7tme37] {
+    color: #5b6b80;
+}
+
+.rec-progress[b-z2kd7tme37] {
+    height: 8px;
+    background: #E6E7EC;
+    border-radius: 999px;
+    overflow: hidden;
+}
+
+.rec-progress-bar[b-z2kd7tme37] {
+    height: 100%;
+    background: #4833E3;
+    border-radius: 999px;
+    transition: width 0.3s ease;
+}
+
+/* Barre verte quand tous les recruteurs sont présents (US-3.01) */
+.rec-progress--complet .rec-progress-bar[b-z2kd7tme37] {
+    background: #229149;
+}
+
+.rec-list[b-z2kd7tme37] {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.rec-row[b-z2kd7tme37] {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    background: #FFFFFF;
+    border-radius: 10px;
+    padding: 12px 14px;
+    box-shadow: 0 2px 6px rgba(15, 23, 42, 0.06);
+}
+
+.rec-row-main[b-z2kd7tme37] {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    flex: 1;
+    min-width: 0;
+}
+
+.rec-raison-sociale[b-z2kd7tme37] {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: #20202C;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.rec-contact[b-z2kd7tme37] {
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: #5b6b80;
+}
+
+.rec-offres[b-z2kd7tme37] {
+    font-size: 0.75rem;
+    color: #4833E3;
+    font-weight: 600;
+}
+
+.rec-row-right[b-z2kd7tme37] {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
+}
+
+.rec-badge[b-z2kd7tme37] {
+    display: inline-flex;
+    align-items: center;
+    border-radius: 999px;
+    padding: 3px 10px;
+    font-size: 0.75rem;
+    font-weight: 700;
+}
+
+.rec-badge--present[b-z2kd7tme37] {
+    background: rgba(34, 145, 73, 0.12);
+    color: #229149;
+}
+
+.rec-badge--absent[b-z2kd7tme37] {
+    background: rgba(212, 51, 51, 0.12);
+    color: #C92F2F;
+}
+
+.rec-badge--inconnu[b-z2kd7tme37] {
+    background: #EFEFF5;
+    color: #5b6b80;
+}
+
+.rec-chevron[b-z2kd7tme37] {
+    font-size: 1.2rem;
+    color: #C7C9D9;
+    line-height: 1;
+}
+
+/* --- Segmented control de filtre (US-3.02) -------------------- */
+.rec-segmented[b-z2kd7tme37] {
+    display: flex;
+    align-items: center;
+    background: #FFFFFF;
+    border-radius: 8px;
+    padding: 3px;
+    margin-bottom: 12px;
+    box-shadow: 0 1px 3px rgba(15, 23, 42, 0.06);
+}
+
+.rec-segmented-tab[b-z2kd7tme37] {
+    flex: 1;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 7px;
+    padding: 5px 8px;
+    font-size: 0.78rem;
+    font-weight: 600;
+    cursor: pointer;
+    border: none;
+    background: transparent;
+    color: #343643;
+    transition: background 0.15s ease, color 0.15s ease;
+    white-space: nowrap;
+}
+
+.rec-segmented-tab--actif[b-z2kd7tme37] {
+    background: #4833E3;
+    color: #FFFFFF;
+}
+
+.rec-segmented-sep[b-z2kd7tme37] {
+    color: #C7C9D9;
+    font-size: 0.75rem;
+    user-select: none;
+    flex-shrink: 0;
+}
+
+/* --- Empty / erreur ------------------------------------------- */
+.rec-empty[b-z2kd7tme37],
+.rec-error[b-z2kd7tme37] {
+    margin-top: 8px;
+    padding: 24px 16px;
+    text-align: center;
+    color: #5b6b80;
+    background: #FFFFFF;
+    border-radius: 12px;
+    box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
+}
+
+.rec-empty-text[b-z2kd7tme37] {
+    margin: 0;
+    font-weight: 500;
+}
+
+.rec-btn[b-z2kd7tme37] {
+    margin-top: 12px;
+    background: #4833E3;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 8px;
+    padding: 8px 16px;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+/* --- Skeletons ------------------------------------------------ */
+.rec-row--skeleton[b-z2kd7tme37] {
+    pointer-events: none;
+}
+
+.rec-skeleton[b-z2kd7tme37] {
+    background: linear-gradient(90deg, #eef0f4 0%, #f7f8fb 50%, #eef0f4 100%);
+    background-size: 200% 100%;
+    animation: rec-shimmer-b-z2kd7tme37 1.2s ease-in-out infinite;
+    border-radius: 6px;
+    height: 0.85rem;
+}
+
+.rec-skeleton--title[b-z2kd7tme37] {
+    height: 1rem;
+    width: 60%;
+    margin-bottom: 8px;
+}
+
+.rec-skeleton--bar[b-z2kd7tme37] {
+    height: 8px;
+    width: 100%;
+    border-radius: 999px;
+}
+
+.rec-skeleton--text[b-z2kd7tme37] {
+    width: 55%;
+    height: 0.85rem;
+}
+
+.rec-skeleton--badge[b-z2kd7tme37] {
+    width: 4.5rem;
+    height: 1.2rem;
+    border-radius: 999px;
+}
+
+.rec-skeleton--chip[b-z2kd7tme37] {
+    width: 4rem;
+    height: 1.8rem;
+    border-radius: 999px;
+}
+
+@keyframes rec-shimmer-b-z2kd7tme37 {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+}
+
+/* --- Ligne cliquable (US-3.04) --------------------------------- */
+.rec-row--cliquable[b-z2kd7tme37] {
+    cursor: pointer;
+    transition: background 0.15s ease;
+}
+
+.rec-row--cliquable:hover[b-z2kd7tme37],
+.rec-row--cliquable:focus-visible[b-z2kd7tme37] {
+    background: #F5F5FB;
+    outline: none;
+}
+
+/* --- Overlay + action sheet (US-3.04) -------------------------- */
+.rec-overlay[b-z2kd7tme37] {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.45);
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    z-index: 100;
+    animation: rec-overlay-in-b-z2kd7tme37 0.2s ease;
+}
+
+@keyframes rec-overlay-in-b-z2kd7tme37 {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+.rec-action-sheet[b-z2kd7tme37] {
+    width: 100%;
+    max-width: 390px;
+    background: #FFFFFF;
+    border-radius: 16px 16px 0 0;
+    padding: 20px 16px 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    animation: rec-sheet-in-b-z2kd7tme37 0.25s ease;
+}
+
+@keyframes rec-sheet-in-b-z2kd7tme37 {
+    from { transform: translateY(100%); }
+    to   { transform: translateY(0); }
+}
+
+.rec-action-sheet-title[b-z2kd7tme37] {
+    margin: 0 0 2px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #5b6b80;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+.rec-action-sheet-nom[b-z2kd7tme37] {
+    margin: 0 0 6px;
+    font-size: 1rem;
+    font-weight: 700;
+    color: #20202C;
+    text-align: center;
+}
+
+.rec-action-btn[b-z2kd7tme37] {
+    width: 100%;
+    padding: 14px 16px;
+    border: none;
+    border-radius: 12px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: opacity 0.15s ease;
+}
+
+.rec-action-btn:active[b-z2kd7tme37] {
+    opacity: 0.75;
+}
+
+.rec-action-btn--present[b-z2kd7tme37] {
+    background: rgba(34, 145, 73, 0.12);
+    color: #229149;
+}
+
+.rec-action-btn--absent[b-z2kd7tme37] {
+    background: rgba(212, 51, 51, 0.12);
+    color: #C92F2F;
+}
+
+.rec-action-btn--inconnu[b-z2kd7tme37] {
+    background: #EFEFF5;
+    color: #5b6b80;
+}
+
+.rec-action-btn--annuler[b-z2kd7tme37] {
+    background: #F5F5FB;
+    color: #343643;
+    margin-top: 4px;
+}
+/* /Components/MesEvenements/MesEvenementsBottomNav.razor.rz.scp.css */
+/* === Bottom navigation ========================================= */
+.me-bottom-nav[b-k436d6ds3c] {
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    max-width: 480px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    background: #FFFFFF;
+    border-top: 1px solid #E6E7EC;
+    padding: 8px 4px calc(8px + env(safe-area-inset-bottom, 0px));
+    z-index: 10;
+}
+
+.me-bottom-item[b-k436d6ds3c] {
+    background: transparent;
+    border: none;
+    color: #5b6b80;
+    font-size: 0.7rem;
+    font-weight: 500;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    padding: 4px 6px;
+    text-align: center;
+    line-height: 1.1;
+}
+
+.me-bottom-item:disabled[b-k436d6ds3c] {
+    opacity: 0.55;
+    cursor: not-allowed;
+}
+
+.me-bottom-item--active[b-k436d6ds3c] {
+    color: #4833E3;
+    font-weight: 700;
+}
+/* /Components/MesEvenements/MesEvenementsContent.razor.rz.scp.css */
+/* === Contenu / liste / cartes ================================== */
+.me-content[b-xn3vjhairg] {
+    padding: 0 25px;
+}
+
+.me-list[b-xn3vjhairg] {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.me-card[b-xn3vjhairg] {
+    display: flex;
+    align-items: stretch;
+    gap: 12px;
+    background: #FFFFFF;
+    border-radius: 12px;
+    padding: 16px;
+    box-shadow: 0 2px 6px rgba(15, 23, 42, 0.06);
+}
+
+.me-card-body[b-xn3vjhairg] {
+    flex: 1;
+    min-width: 0;
+}
+
+.me-card-title[b-xn3vjhairg] {
+    margin: 0 0 2px;
+    font-size: 1rem;
+    font-weight: 700;
+    color: #20202C;
+    line-height: 1.25;
+}
+
+.me-card-org[b-xn3vjhairg] {
+    margin: 0;
+    color: #343643;
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+
+.me-card-lieu[b-xn3vjhairg] {
+    margin: 2px 0 12px;
+    color: #5b6b80;
+    font-size: 0.8rem;
+}
+
+.me-card-meta[b-xn3vjhairg] {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+}
+
+.me-chip[b-xn3vjhairg] {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    background: #EFEFF5;
+    color: #343643;
+    border-radius: 4px;
+    padding: 4px 8px;
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+.me-badge[b-xn3vjhairg] {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    background: rgba(72, 51, 227, 0.10);
+    color: #4833E3;
+    border-radius: 4px;
+    padding: 4px 8px;
+    font-size: 0.75rem;
+    font-weight: 700;
+}
+
+.me-card-arrow[b-xn3vjhairg] {
+    align-self: center;
+    background: transparent;
+    border: none;
+    color: #4833E3;
+    cursor: pointer;
+    padding: 2px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+}
+
+.me-card-arrow:disabled[b-xn3vjhairg] {
+    opacity: 0.55;
+    cursor: not-allowed;
+}
+
+/* --- Empty / placeholder / error ------------------------------- */
+.me-empty[b-xn3vjhairg],
+.me-placeholder[b-xn3vjhairg],
+.me-error[b-xn3vjhairg] {
+    margin-top: 8px;
+    padding: 24px 16px;
+    text-align: center;
+    color: #5b6b80;
+    background: #FFFFFF;
+    border-radius: 12px;
+    box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
+}
+
+.me-empty-text[b-xn3vjhairg] {
+    margin: 0;
+    font-weight: 500;
+}
+
+.me-btn[b-xn3vjhairg] {
+    margin-top: 12px;
+    background: #4833E3;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 8px 16px;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+/* --- Skeleton loaders ------------------------------------------ */
+.me-card--skeleton[b-xn3vjhairg] {
+    pointer-events: none;
+}
+
+.me-skeleton[b-xn3vjhairg] {
+    background: linear-gradient(90deg, #eef0f4 0%, #f7f8fb 50%, #eef0f4 100%);
+    background-size: 200% 100%;
+    animation: me-skeleton-shimmer-b-xn3vjhairg 1.2s ease-in-out infinite;
+    border-radius: 6px;
+    height: 0.85rem;
+    margin: 0.35rem 0;
+}
+
+.me-skeleton--title[b-xn3vjhairg] {
+    height: 1rem;
+    width: 70%;
+}
+
+.me-skeleton--text[b-xn3vjhairg] {
+    width: 55%;
+}
+
+.me-skeleton--short[b-xn3vjhairg] {
+    width: 35%;
+}
+
+.me-skeleton-row[b-xn3vjhairg] {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 0.75rem;
+}
+
+.me-skeleton--chip[b-xn3vjhairg] {
+    height: 1.4rem;
+    width: 6rem;
+    border-radius: 4px;
+}
+
+.me-skeleton--badge[b-xn3vjhairg] {
+    height: 1.4rem;
+    width: 4.5rem;
+    border-radius: 4px;
+}
+
+@keyframes me-skeleton-shimmer-b-xn3vjhairg {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+}
+/* /Components/MesEvenements/MesEvenementsTabs.razor.rz.scp.css */
+/* === Onglets pilule ============================================ */
+.me-tabs[b-0f29n8my6t] {
+    display: flex;
+    gap: 12px;
+    padding: 0 25px;
+    margin-bottom: 16px;
+}
+
+.me-tab[b-0f29n8my6t] {
+    flex: 1;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 8px 10px;
+    min-height: 36px;
+    border: none;
+    border-radius: 8px;
+    background: #EFEFF5;
+    color: #343643;
+    font-size: 0.78rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.me-tab > span[b-0f29n8my6t] {
+    line-height: 1.1;
+    text-align: center;
+}
+
+.me-tab:hover:not(:disabled):not(.me-tab--active)[b-0f29n8my6t] {
+    background: #e6e7f0;
+}
+
+.me-tab:disabled[b-0f29n8my6t] {
+    opacity: 0.55;
+    cursor: not-allowed;
+}
+
+.me-tab--active[b-0f29n8my6t] {
+    background: rgba(72, 51, 227, 0.10);
+    color: #4833E3;
+}
+/* /Components/MesEvenements/MesEvenementsTopBar.razor.rz.scp.css */
+/* === En-tête mobile ============================================ */
+.me-topbar[b-ejtddlzk81] {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 18px 20px 16px;
+    background: #FFFFFF;
+    border-bottom: 1px solid #E6E7EC;
+    margin-bottom: 16px;
+}
+
+.me-topbar-info[b-ejtddlzk81] {
+    flex: 1;
+    min-width: 0;
+}
+
+.me-topbar-title[b-ejtddlzk81] {
+    margin: 0;
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: #20202C;
+    line-height: 1.2;
+}
+
+.me-topbar-conseiller[b-ejtddlzk81] {
+    margin: 2px 0 0;
+    font-size: 0.85rem;
+    color: #5b6b80;
+    font-weight: 500;
+}
+
+.me-topbar-actions[b-ejtddlzk81] {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    flex-shrink: 0;
+}
+
+.me-topbar-settings[b-ejtddlzk81] {
+    background: transparent;
+    border: none;
+    padding: 8px;
+    border-radius: 999px;
+    color: #4833E3;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.me-topbar-settings:disabled[b-ejtddlzk81] {
+    opacity: 0.45;
+    cursor: not-allowed;
+}
+/* /Components/Pwa/PwaInstallButton.razor.rz.scp.css */
+/* === Bouton d'installation PWA ================================== */
+.pwa-install-btn[b-o4caf2ctpd] {
+    background: transparent;
+    border: none;
+    padding: 8px;
+    border-radius: 999px;
+    color: #4833E3;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.15s ease;
+}
+
+.pwa-install-btn:hover[b-o4caf2ctpd] {
+    background-color: rgba(72, 51, 227, 0.08);
+}
+
+.pwa-install-btn:active[b-o4caf2ctpd] {
+    background-color: rgba(72, 51, 227, 0.16);
+}
+/* /Pages/EvenementCandidatsSansRdv.razor.rz.scp.css */
+/* === Page "Candidats sans RDV" (US-5.08) ===============================
+   Liste des candidats sans entretien planifié avec bouton d'appel.
+   Réutilise la palette France Travail (fond #EBEDF8, primaire #4833E3).
+   ===================================================================== */
+
+.csr-page[b-s5sre5n9mx] {
+    position: relative;
+    min-height: 100vh;
+    max-width: 480px;
+    margin: 0 auto;
+    background: #EBEDF8;
+    color: #20202C;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    box-shadow: 0 0 0 1px rgba(15, 23, 42, 0.04);
+}
+
+/* === En-tête ========================================================= */
+.csr-header[b-s5sre5n9mx] {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: 20px 20px 16px;
+    background: #FFFFFF;
+}
+
+.csr-header-back[b-s5sre5n9mx] {
+    display: flex;
+    align-items: center;
+    color: #20202C;
+    text-decoration: none;
+    width: fit-content;
+}
+
+.csr-header-back:hover[b-s5sre5n9mx] {
+    color: #4833E3;
+}
+
+.csr-header-titre[b-s5sre5n9mx] {
+    margin: 0;
+    font-size: 1.6rem;
+    font-weight: 800;
+    color: #20202C;
+    line-height: 1.2;
+}
+
+/* === Contenu ========================================================= */
+.csr-contenu[b-s5sre5n9mx] {
+    padding: 16px;
+}
+
+/* === Liste des candidats ============================================= */
+.csr-liste[b-s5sre5n9mx] {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+/* === Carte candidat ================================================== */
+.csr-candidat-carte[b-s5sre5n9mx] {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 20px;
+    background: #FFFFFF;
+    border-radius: 12px;
+    box-shadow: 0 1px 3px rgba(15, 23, 42, 0.06);
+}
+
+/* === Informations candidat =========================================== */
+.csr-candidat-info[b-s5sre5n9mx] {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    flex: 1;
+    min-width: 0;
+}
+
+.csr-candidat-nom[b-s5sre5n9mx] {
+    font-size: 1rem;
+    font-weight: 800;
+    color: #20202C;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.csr-candidat-conseiller[b-s5sre5n9mx] {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: #20202C;
+}
+
+/* === Bouton d'appel ================================================== */
+.csr-candidat-appel[b-s5sre5n9mx] {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 52px;
+    height: 52px;
+    background: #4833E3;
+    border-radius: 50%;
+    color: #FFFFFF;
+    text-decoration: none;
+    flex-shrink: 0;
+    margin-left: 16px;
+    transition: background 0.15s ease;
+}
+
+.csr-candidat-appel:hover[b-s5sre5n9mx] {
+    background: #3a28c0;
+}
+
+/* === État de chargement ============================================== */
+.csr-chargement[b-s5sre5n9mx] {
+    display: flex;
+    justify-content: center;
+    padding: 48px 20px;
+    color: #5b6b80;
+    font-size: 0.9rem;
+}
+
+/* === État vide ======================================================= */
+.csr-vide[b-s5sre5n9mx] {
+    display: flex;
+    justify-content: center;
+    padding: 32px 20px;
+    text-align: center;
+}
+
+.csr-vide-message[b-s5sre5n9mx] {
+    margin: 0;
+    font-size: 0.9rem;
+    color: #5b6b80;
+}
+
+/* === État d'erreur =================================================== */
+.csr-erreur[b-s5sre5n9mx] {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    padding: 32px 20px;
+    text-align: center;
+}
+
+.csr-erreur-message[b-s5sre5n9mx] {
+    margin: 0;
+    font-size: 0.9rem;
+    color: #5b6b80;
+}
+
+.csr-erreur-reessayer[b-s5sre5n9mx] {
+    padding: 10px 20px;
+    background: #4833E3;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 8px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.csr-erreur-reessayer:hover[b-s5sre5n9mx] {
+    background: #3a28c0;
+}
+/* /Pages/EvenementInscrits.razor.rz.scp.css */
+/* === Page "Contexte événement / Les inscrits" (US-1.03 / US-2.01) ====
+   Respecte la palette France Travail (fond #EBEDF8, primaire #4833E3).
+   Comme pour MesEvenements.razor.css, la page agence ses sous-composants
+   (en-tête + onglets + contenu) ; les styles propres vivent dans leurs
+   `.razor.css` respectifs.
+   ===================================================================== */
+.evt-page[b-uugd2hhwht] {
+    position: relative;
+    min-height: 100vh;
+    max-width: 480px;
+    margin: 0 auto;
+    padding: 0 0 80px;
+    background: #EBEDF8;
+    color: #20202C;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    box-shadow: 0 0 0 1px rgba(15, 23, 42, 0.04);
+}
+
+.evt-not-found[b-uugd2hhwht] {
+    margin: 16px 20px;
+    padding: 16px;
+    background: #FFFFFF;
+    border-radius: 12px;
+    text-align: center;
+    color: #5b6b80;
+    box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
+}
+
+.evt-back-link[b-uugd2hhwht] {
+    display: inline-block;
+    margin-top: 8px;
+    color: #4833E3;
+    font-weight: 600;
+    text-decoration: none;
+}
+/* /Pages/EvenementRdvRestants.razor.rz.scp.css */
+/* === Page "RDV restants" (US-5.06) ====================================
+   Liste des recruteurs avec accordéon affichant les créneaux RDV restants.
+   Réutilise la palette France Travail (fond #EBEDF8, primaire #4833E3).
+   ===================================================================== */
+
+.rdv-page[b-rv4lzo7moi] {
+    position: relative;
+    min-height: 100vh;
+    max-width: 480px;
+    margin: 0 auto;
+    background: #EBEDF8;
+    color: #20202C;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    box-shadow: 0 0 0 1px rgba(15, 23, 42, 0.04);
+}
+
+/* === En-tête ========================================================= */
+.rdv-header[b-rv4lzo7moi] {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 20px 20px 16px;
+    background: #FFFFFF;
+}
+
+.rdv-header-back[b-rv4lzo7moi] {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #20202C;
+    text-decoration: none;
+    flex-shrink: 0;
+}
+
+.rdv-header-back:hover[b-rv4lzo7moi] {
+    color: #4833E3;
+}
+
+.rdv-header-titre[b-rv4lzo7moi] {
+    margin: 0;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #20202C;
+    line-height: 1.3;
+}
+
+/* === Contenu ========================================================= */
+.rdv-contenu[b-rv4lzo7moi] {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 16px;
+}
+
+/* === Barre de recherche ============================================== */
+.rdv-recherche-bloc[b-rv4lzo7moi] {
+    position: relative;
+    background: #FFFFFF;
+    border-radius: 12px;
+    box-shadow: 0 1px 3px rgba(15, 23, 42, 0.06);
+}
+
+.rdv-recherche-input[b-rv4lzo7moi] {
+    width: 100%;
+    padding: 14px 44px 14px 16px;
+    border: none;
+    border-radius: 12px;
+    font-size: 0.95rem;
+    color: #4833E3;
+    background: transparent;
+    outline: none;
+    box-sizing: border-box;
+}
+
+.rdv-recherche-input[b-rv4lzo7moi]::placeholder {
+    color: #4833E3;
+    opacity: 1;
+}
+
+.rdv-recherche-icone[b-rv4lzo7moi] {
+    position: absolute;
+    right: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #5b6b80;
+    pointer-events: none;
+}
+
+/* === Liste des recruteurs ============================================ */
+.rdv-liste[b-rv4lzo7moi] {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    background: #FFFFFF;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 1px 3px rgba(15, 23, 42, 0.06);
+}
+
+/* === Bloc recruteur ================================================== */
+.rdv-recruteur-bloc[b-rv4lzo7moi] {
+    border-bottom: 1px solid #EFEFF5;
+}
+
+.rdv-recruteur-bloc:last-child[b-rv4lzo7moi] {
+    border-bottom: none;
+}
+
+/* === En-tête recruteur (bouton accordéon) ============================ */
+.rdv-recruteur-entete[b-rv4lzo7moi] {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    padding: 16px;
+    background: #FFFFFF;
+    border: none;
+    cursor: pointer;
+    text-align: left;
+}
+
+.rdv-recruteur-entete:hover[b-rv4lzo7moi] {
+    background: #F8F8FC;
+}
+
+.rdv-recruteur-icone[b-rv4lzo7moi] {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    background: #F3F3F5;
+    border-radius: 12px;
+    color: #343643;
+    flex-shrink: 0;
+}
+
+.rdv-recruteur-info[b-rv4lzo7moi] {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    min-width: 0;
+}
+
+.rdv-recruteur-nom[b-rv4lzo7moi] {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: #20202C;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.rdv-recruteur-societe[b-rv4lzo7moi] {
+    font-size: 0.8rem;
+    font-weight: 400;
+    color: #5b6b80;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.rdv-recruteur-chevron[b-rv4lzo7moi] {
+    color: #20202C;
+    flex-shrink: 0;
+    transition: transform 0.2s ease;
+}
+
+.rdv-recruteur-chevron--ouvert[b-rv4lzo7moi] {
+    transform: rotate(180deg);
+}
+
+/* === Liste des créneaux (accordéon ouvert) =========================== */
+.rdv-creneaux-liste[b-rv4lzo7moi] {
+    background: #F8F8FC;
+    border-top: 1px solid #EFEFF5;
+}
+
+/* === Créneau individuel ============================================== */
+.rdv-creneau[b-rv4lzo7moi] {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    border-bottom: 1px solid #EFEFF5;
+}
+
+.rdv-creneau:last-child[b-rv4lzo7moi] {
+    border-bottom: none;
+}
+
+.rdv-creneau-heure[b-rv4lzo7moi] {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 14px 16px;
+    min-width: 100px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: #5b6b80;
+    background: #EBEDF8;
+    border-right: 1px solid #EFEFF5;
+    flex-shrink: 0;
+}
+
+.rdv-creneau-candidat[b-rv4lzo7moi] {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    padding: 14px 16px;
+    flex: 1;
+    background: #FFFFFF;
+}
+
+.rdv-creneau-candidat-nom[b-rv4lzo7moi] {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: #20202C;
+}
+
+.rdv-creneau-candidat-prenom[b-rv4lzo7moi] {
+    font-size: 0.85rem;
+    font-weight: 400;
+    color: #20202C;
+}
+
+/* === État de chargement ============================================== */
+.rdv-chargement[b-rv4lzo7moi] {
+    display: flex;
+    justify-content: center;
+    padding: 48px 20px;
+    color: #5b6b80;
+    font-size: 0.9rem;
+}
+
+/* === État vide ======================================================= */
+.rdv-vide[b-rv4lzo7moi] {
+    display: flex;
+    justify-content: center;
+    padding: 32px 20px;
+    text-align: center;
+}
+
+.rdv-vide-message[b-rv4lzo7moi] {
+    margin: 0;
+    font-size: 0.9rem;
+    color: #5b6b80;
+}
+
+/* === État d'erreur =================================================== */
+.rdv-erreur[b-rv4lzo7moi] {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    padding: 32px 20px;
+    text-align: center;
+}
+
+.rdv-erreur-message[b-rv4lzo7moi] {
+    margin: 0;
+    font-size: 0.9rem;
+    color: #5b6b80;
+}
+
+.rdv-erreur-reessayer[b-rv4lzo7moi] {
+    padding: 10px 20px;
+    background: #4833E3;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 8px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.rdv-erreur-reessayer:hover[b-rv4lzo7moi] {
+    background: #3a28c0;
+}
+/* /Pages/EvenementRecruteurs.razor.rz.scp.css */
+/* === Page "Contexte événement / Les recruteurs" (US-3.01) ============
+   Réutilise les mêmes variables de palette que EvenementInscrits.
+   ===================================================================== */
+.evt-page[b-aye797v1g3] {
+    position: relative;
+    min-height: 100vh;
+    max-width: 480px;
+    margin: 0 auto;
+    padding: 0 0 80px;
+    background: #EBEDF8;
+    color: #20202C;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    box-shadow: 0 0 0 1px rgba(15, 23, 42, 0.04);
+}
+
+.evt-not-found[b-aye797v1g3] {
+    margin: 16px 20px;
+    padding: 16px;
+    background: #FFFFFF;
+    border-radius: 12px;
+    text-align: center;
+    color: #5b6b80;
+    box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
+}
+
+.evt-back-link[b-aye797v1g3] {
+    display: inline-block;
+    margin-top: 8px;
+    color: #4833E3;
+    font-weight: 600;
+    text-decoration: none;
+}
+/* /Pages/EvenementTableauDeBord.razor.rz.scp.css */
+/* === Page "Contexte événement / Tableau de bord" (US-1.04) ============
+   Affiche l'état d'attente (cactus) avant génération du planning.
+   Réutilise la palette France Travail (fond #EBEDF8, primaire #4833E3).
+   ===================================================================== */
+.evt-page[b-o07mm7y44u] {
+    position: relative;
+    min-height: 100vh;
+    max-width: 480px;
+    margin: 0 auto;
+    padding: 0 0 80px;
+    background: #EBEDF8;
+    color: #20202C;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    box-shadow: 0 0 0 1px rgba(15, 23, 42, 0.04);
+}
+
+.evt-not-found[b-o07mm7y44u] {
+    margin: 16px 20px;
+    padding: 16px;
+    background: #FFFFFF;
+    border-radius: 12px;
+    text-align: center;
+    color: #5b6b80;
+    box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
+}
+
+.evt-back-link[b-o07mm7y44u] {
+    display: inline-block;
+    margin-top: 8px;
+    color: #4833E3;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+/* === État d'attente cactus ========================================== */
+.tdb-attente[b-o07mm7y44u] {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    padding: 48px 32px;
+    text-align: center;
+}
+
+.tdb-attente-illustration[b-o07mm7y44u] {
+    width: 192px;
+    height: 192px;
+    object-fit: contain;
+}
+
+.tdb-attente-titre[b-o07mm7y44u] {
+    margin: 0;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #20202C;
+}
+
+.tdb-attente-description[b-o07mm7y44u] {
+    margin: 0;
+    font-size: 0.875rem;
+    color: #5b6b80;
+    line-height: 1.5;
+    max-width: 280px;
+}
+
+/* === Contenu du tableau de bord (planning généré) =============== */
+.tdb-contenu[b-o07mm7y44u] {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 0 16px;
+}
+
+/* === Carte générique ============================================ */
+.tdb-carte[b-o07mm7y44u] {
+    background: #FFFFFF;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 1px 3px rgba(15, 23, 42, 0.06);
+}
+
+.tdb-carte-titre[b-o07mm7y44u] {
+    margin: 0 0 16px;
+    font-size: 1rem;
+    font-weight: 700;
+    color: #20202C;
+}
+
+/* === Carte Vision globale (US-5.01) ============================= */
+.tdb-vision-globale[b-o07mm7y44u] {
+    display: flex;
+    align-items: stretch;
+    gap: 0;
+}
+
+.tdb-vision-stat[b-o07mm7y44u] {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    padding: 8px 0;
+}
+
+.tdb-vision-separateur[b-o07mm7y44u] {
+    width: 1px;
+    background: #E6E7EC;
+    margin: 4px 0;
+}
+
+.tdb-vision-stat-valeur[b-o07mm7y44u] {
+    font-size: 2.25rem;
+    font-weight: 800;
+    color: #20202C;
+    line-height: 1;
+}
+
+.tdb-vision-stat-valeur--restants[b-o07mm7y44u] {
+    color: #4833E3;
+}
+
+.tdb-vision-stat-libelle[b-o07mm7y44u] {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    font-size: 0.8rem;
+    color: #5b6b80;
+    font-weight: 500;
+}
+
+.tdb-vision-stat-lien[b-o07mm7y44u] {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    text-decoration: none;
+    color: inherit;
+}
+
+.tdb-vision-stat-lien:hover .tdb-vision-stat-valeur--restants[b-o07mm7y44u] {
+    text-decoration: underline;
+}
+
+.tdb-vision-chevron[b-o07mm7y44u] {
+    color: #4833E3;
+    flex-shrink: 0;
+}
+
+/* === Carte Statut recruteurs (US-5.03) ========================== */
+.tdb-statut-recruteurs[b-o07mm7y44u] {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}
+
+/* === Carte Statut candidats (US-5.02) =========================== */
+.tdb-statut-candidats[b-o07mm7y44u] {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.tdb-statut-sans-entretien[b-o07mm7y44u] {
+    display: flex;
+    align-items: center;
+}
+
+.tdb-statut-sans-entretien-lien[b-o07mm7y44u] {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    text-decoration: none;
+    color: inherit;
+}
+
+.tdb-statut-sans-entretien-lien:hover .tdb-statut-sans-entretien-valeur[b-o07mm7y44u] {
+    text-decoration: underline;
+}
+
+.tdb-statut-sans-entretien-valeur[b-o07mm7y44u] {
+    font-size: 1.75rem;
+    font-weight: 800;
+    color: #4833E3;
+    line-height: 1;
+}
+
+.tdb-statut-sans-entretien-libelle[b-o07mm7y44u] {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    font-size: 0.8rem;
+    color: #5b6b80;
+    font-weight: 500;
+}
+
+.tdb-statut-chevron[b-o07mm7y44u] {
+    color: #4833E3;
+    flex-shrink: 0;
+}
+
+.tdb-statut-separateur[b-o07mm7y44u] {
+    height: 1px;
+    background: #E6E7EC;
+    margin: 0;
+}
+
+.tdb-statut-colonnes[b-o07mm7y44u] {
+    display: flex;
+    gap: 0;
+}
+
+.tdb-statut-colonne[b-o07mm7y44u] {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    padding: 8px 0;
+}
+
+.tdb-statut-colonne:first-child[b-o07mm7y44u] {
+    border-right: 1px solid #E6E7EC;
+}
+
+.tdb-statut-colonne-valeur[b-o07mm7y44u] {
+    font-size: 2rem;
+    font-weight: 800;
+    line-height: 1;
+}
+
+.tdb-statut-colonne-valeur--presents[b-o07mm7y44u] {
+    color: #006F46;
+}
+
+.tdb-statut-colonne-valeur--absents[b-o07mm7y44u] {
+    color: #E01F1F;
+}
+
+.tdb-statut-colonne-libelle[b-o07mm7y44u] {
+    font-size: 0.8rem;
+    color: #5b6b80;
+    font-weight: 500;
+}
+
+/* === Carte Suites & recrutements (US-5.04) ===================== */
+.tdb-suites-liste[b-o07mm7y44u] {
+    display: flex;
+    flex-direction: column;
+}
+
+.tdb-suites-separateur[b-o07mm7y44u] {
+    height: 1px;
+    background: #E6E7EC;
+    margin: 0;
+}
+
+/* Ligne : libellé + valeur + chevron */
+.tdb-suites-ligne[b-o07mm7y44u] {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 14px 0;
+}
+
+.tdb-suites-ligne-libelle[b-o07mm7y44u] {
+    flex: 1;
+    font-size: 0.9rem;
+    color: #20202C;
+}
+
+.tdb-suites-ligne-valeur[b-o07mm7y44u] {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: #20202C;
+}
+
+.tdb-suites-stat-valeur--recrutements[b-o07mm7y44u] {
+    color: #20202C;
+}
+
+.tdb-suites-stat-valeur--immersions[b-o07mm7y44u] {
+    color: #20202C;
+}
+
+.tdb-suites-stat-valeur--poei[b-o07mm7y44u] {
+    color: #20202C;
+}
+
+.tdb-suites-ligne-chevron[b-o07mm7y44u] {
+    color: #5b6b80;
+    flex-shrink: 0;
+}
+
+/* Bloc 2e entretiens */
+.tdb-suites-entretiens-bloc[b-o07mm7y44u] {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 14px 0;
+}
+
+.tdb-suites-entretiens-titre[b-o07mm7y44u] {
+    font-size: 0.9rem;
+    color: #20202C;
+}
+
+.tdb-suites-entretiens-blocs[b-o07mm7y44u] {
+    display: flex;
+    gap: 8px;
+}
+
+.tdb-suites-entretien-bloc[b-o07mm7y44u] {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    padding: 12px 8px;
+    border-radius: 10px;
+}
+
+.tdb-suites-entretien-bloc--oui[b-o07mm7y44u] {
+    background: #D1FAE5;
+}
+
+.tdb-suites-entretien-bloc--peut-etre[b-o07mm7y44u] {
+    background: #DBEAFE;
+}
+
+.tdb-suites-entretien-bloc--non[b-o07mm7y44u] {
+    background: #FEE2E2;
+}
+
+.tdb-suites-entretien-label[b-o07mm7y44u] {
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+}
+
+.tdb-suites-entretien-bloc--oui .tdb-suites-entretien-label[b-o07mm7y44u] {
+    color: #006F46;
+}
+
+.tdb-suites-entretien-bloc--peut-etre .tdb-suites-entretien-label[b-o07mm7y44u] {
+    color: #1D4ED8;
+}
+
+.tdb-suites-entretien-bloc--non .tdb-suites-entretien-label[b-o07mm7y44u] {
+    color: #DC2626;
+}
+
+.tdb-suites-entretien-valeur[b-o07mm7y44u] {
+    font-size: 1.5rem;
+    font-weight: 800;
+    line-height: 1;
+}
+
+.tdb-suites-legende-item--oui[b-o07mm7y44u] {
+    color: #006F46;
+}
+
+.tdb-suites-legende-item--peut-etre[b-o07mm7y44u] {
+    color: #20202C;
+}
+
+.tdb-suites-legende-item--non[b-o07mm7y44u] {
+    color: #DC2626;
+}
+
+/* === Carte Enquêtes de satisfaction (US-5.05) =================== */
+.tdb-satisfaction-colonnes[b-o07mm7y44u] {
+    display: flex;
+    gap: 0;
+}
+
+.tdb-satisfaction-colonne[b-o07mm7y44u] {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    padding: 8px 0;
+}
+
+.tdb-satisfaction-colonne:first-child[b-o07mm7y44u] {
+    border-right: 1px solid #E6E7EC;
+}
+
+.tdb-satisfaction-libelle[b-o07mm7y44u] {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: #20202C;
+    letter-spacing: 0.03em;
+}
+
+.tdb-satisfaction-etoile[b-o07mm7y44u] {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 80px;
+    height: 76px;
+}
+
+.tdb-satisfaction-etoile-svg[b-o07mm7y44u] {
+    width: 80px;
+    height: 76px;
+    display: block;
+}
+
+.tdb-satisfaction-note[b-o07mm7y44u] {
+    position: absolute;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #20202C;
+    line-height: 1;
+    pointer-events: none;
+}
+
+/* === État d'erreur ============================================== */
+.tdb-erreur[b-o07mm7y44u] {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    padding: 32px 20px;
+    text-align: center;
+}
+
+.tdb-erreur-message[b-o07mm7y44u] {
+    margin: 0;
+    font-size: 0.9rem;
+    color: #5b6b80;
+}
+
+.tdb-erreur-reessayer[b-o07mm7y44u] {
+    padding: 10px 20px;
+    background: #4833E3;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 8px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.tdb-erreur-reessayer:hover[b-o07mm7y44u] {
+    background: #3a28c0;
+}
+/* /Pages/MesEvenements.razor.rz.scp.css */
+/* === Page "Mes événements" (US-1.01) =================================
+   Respecte la maquette assets/EcransSVG/6-Liste-evenements.svg :
+   - fond #EBEDF8
+   - couleur primaire France Travail #4833E3
+   La page se contente d'agencer les composants extraits dans
+   Components/MesEvenements/ (en-tête, onglets, contenu, bottom nav) ;
+   les styles propres à chaque composant vivent dans son `.razor.css`.
+   ===================================================================== */
+
+[b-2cqih5hh2f] .page,
+[b-2cqih5hh2f] main,
+[b-2cqih5hh2f] .top-row,
+[b-2cqih5hh2f] .sidebar,
+[b-2cqih5hh2f] .content {
+    /* Cette page définit elle-même son layout : on neutralise les styles
+       hérités du MainLayout Bootstrap par défaut. */
+}
+
+.me-page[b-2cqih5hh2f] {
+    position: relative;
+    min-height: 100vh;
+    max-width: 480px;
+    margin: 0 auto;
+    padding: 0 0 80px;
+    background: #EBEDF8;
+    color: #20202C;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    box-shadow: 0 0 0 1px rgba(15, 23, 42, 0.04);
+}
+/* /Pages/Scanner.razor.rz.scp.css */
+/* === Page "Scanner mon événement" ======================================
+   Affiche le flux vidéo de la caméra en plein écran avec un cadre de
+   visée centré. Après détection, affiche le QR code + nom du candidat
+   par-dessus le flux vidéo flouté.
+   ======================================================================= */
+
+.sc-page[b-hdv18a2ipy] {
+    position: relative;
+    min-height: 100vh;
+    max-width: 480px;
+    margin: 0 auto;
+    background: #000000;
+    color: #FFFFFF;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+}
+
+/* === En-tête ============================================================ */
+
+.sc-header[b-hdv18a2ipy] {
+    position: fixed;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    max-width: 480px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 10;
+}
+
+.sc-header-back[b-hdv18a2ipy] {
+    background: transparent;
+    border: none;
+    color: #FFFFFF;
+    cursor: pointer;
+    padding: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.sc-header-back:hover[b-hdv18a2ipy] {
+    background: rgba(255, 255, 255, 0.15);
+}
+
+.sc-header-titre[b-hdv18a2ipy] {
+    font-size: 1rem;
+    font-weight: 700;
+    margin: 0;
+    color: #FFFFFF;
+}
+
+/* === Contenu principal ================================================== */
+
+.sc-main[b-hdv18a2ipy] {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* === Viewfinder ========================================================= */
+
+.sc-viewfinder[b-hdv18a2ipy] {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.sc-video[b-hdv18a2ipy] {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: filter 0.3s ease;
+}
+
+.sc-video--floue[b-hdv18a2ipy] {
+    filter: blur(4px) brightness(0.6);
+}
+
+/* === Canvas (caché, utilisé pour la capture des frames) ================ */
+
+.sc-canvas[b-hdv18a2ipy] {
+    display: none;
+}
+
+/* === Cadre de visée ===================================================== */
+
+.sc-cadre[b-hdv18a2ipy] {
+    position: relative;
+    width: 220px;
+    height: 220px;
+    z-index: 2;
+}
+
+.sc-cadre-coin[b-hdv18a2ipy] {
+    position: absolute;
+    width: 28px;
+    height: 28px;
+    border-color: #FFFFFF;
+    border-style: solid;
+}
+
+.sc-cadre-coin--tl[b-hdv18a2ipy] {
+    top: 0;
+    left: 0;
+    border-width: 3px 0 0 3px;
+    border-radius: 4px 0 0 0;
+}
+
+.sc-cadre-coin--tr[b-hdv18a2ipy] {
+    top: 0;
+    right: 0;
+    border-width: 3px 3px 0 0;
+    border-radius: 0 4px 0 0;
+}
+
+.sc-cadre-coin--bl[b-hdv18a2ipy] {
+    bottom: 0;
+    left: 0;
+    border-width: 0 0 3px 3px;
+    border-radius: 0 0 0 4px;
+}
+
+.sc-cadre-coin--br[b-hdv18a2ipy] {
+    bottom: 0;
+    right: 0;
+    border-width: 0 3px 3px 0;
+    border-radius: 0 0 4px 0;
+}
+
+/* === Instruction ======================================================== */
+
+.sc-instruction[b-hdv18a2ipy] {
+    position: absolute;
+    bottom: 100px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80%;
+    text-align: center;
+    font-size: 0.85rem;
+    color: #FFFFFF;
+    background: rgba(0, 0, 0, 0.5);
+    padding: 8px 16px;
+    border-radius: 20px;
+    z-index: 2;
+    white-space: nowrap;
+}
+
+/* === Overlay résultat (par-dessus le flux vidéo flouté) ================ */
+
+.sc-overlay[b-hdv18a2ipy] {
+    position: absolute;
+    inset: 0;
+    z-index: 3;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0;
+    padding: 80px 24px 32px;
+}
+
+/* === Image QR code détecté ============================================== */
+
+.sc-resultat-qr[b-hdv18a2ipy] {
+    background: #FFFFFF;
+    border-radius: 12px;
+    padding: 12px;
+    margin-bottom: 20px;
+}
+
+.sc-qr-image[b-hdv18a2ipy] {
+    width: 220px;
+    height: 220px;
+    display: block;
+    border-radius: 4px;
+}
+
+/* === Badge succès vert ================================================== */
+
+.sc-badge-succes[b-hdv18a2ipy] {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    background: #22c55e;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 16px;
+    box-shadow: 0 4px 12px rgba(34, 197, 94, 0.4);
+}
+
+/* === Badge erreur rouge ================================================= */
+
+.sc-badge-erreur[b-hdv18a2ipy] {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    background: #ef4444;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 16px;
+    box-shadow: 0 4px 12px rgba(239, 68, 68, 0.4);
+}
+
+/* === Carte nom candidat ================================================= */
+
+.sc-resultat-carte[b-hdv18a2ipy] {
+    background: #FFFFFF;
+    border-radius: 16px;
+    padding: 18px 24px;
+    width: 100%;
+    max-width: 340px;
+    margin-bottom: 24px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
+}
+
+.sc-resultat-nom[b-hdv18a2ipy] {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #20202C;
+    display: block;
+}
+
+/* === Bouton scan suivant ================================================ */
+
+.sc-btn-nouveau-scan[b-hdv18a2ipy] {
+    width: 100%;
+    max-width: 340px;
+    background: #4833E3;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 32px;
+    padding: 16px 28px;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    letter-spacing: 0.01em;
+}
+
+.sc-btn-nouveau-scan:hover[b-hdv18a2ipy] {
+    background: #3a28c0;
+}
+
+/* === État d'erreur ====================================================== */
+
+.sc-erreur[b-hdv18a2ipy] {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    padding: 32px 24px;
+    text-align: center;
+    color: #FFFFFF;
+}
+
+.sc-erreur p[b-hdv18a2ipy] {
+    font-size: 0.95rem;
+    line-height: 1.5;
+    max-width: 280px;
+    margin: 0;
+    opacity: 0.85;
+}

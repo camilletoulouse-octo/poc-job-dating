@@ -1,6 +1,9 @@
 [build]
 builder = "railpack"
-buildCommand = "dotnet publish -c Release -o out"
+# La référence projet sur `ParcoursCandidatClient` (Blazor WebAssembly) embarque
+# automatiquement les fichiers statiques du WASM dans `out/wwwroot` lors du publish.
+buildCommand = "dotnet publish ParcoursCandidatApi.csproj -c Release -o out"
 
 [deploy]
+# Un seul service Railway sert à la fois l'API (`/api/*`) et l'UI Blazor (`/` + fallback SPA).
 startCommand = "ASPNETCORE_URLS=http://0.0.0.0:${PORT:-3000} ./out/ParcoursCandidatApi"

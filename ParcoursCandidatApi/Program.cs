@@ -30,12 +30,15 @@ if (app.Environment.IsDevelopment())
     app.MapOpenApi();
 }
 
-app.UseHttpsRedirection();
 app.UseCors();
 
-// Redirige la racine vers la liste des événements (pratique pour la santé du déploiement).
-app.MapGet("/", () => Results.Redirect("/api/evenements"))
-   .WithName("RedirectToEvenements");
+// Sert les fichiers du client Blazor WebAssembly (déploiement Railway mono-service).
+// `UseBlazorFrameworkFiles` expose les fichiers `_framework/*` du runtime WASM,
+// `UseStaticFiles` sert le contenu de `wwwroot` et `MapFallbackToFile` renvoie
+// `index.html` pour toute route inconnue afin que le routing Blazor fonctionne.
+app.UseBlazorFrameworkFiles();
+app.UseStaticFiles();
+
 
 var summaries = new[]
 {
@@ -359,6 +362,10 @@ app.MapPost("/api/evenements/{id}/planning", (string id) =>
     return evenement is null ? Results.NotFound() : Results.Ok(new { evenementId = id, statut = "GENERE" });
 })
 .WithName("GenererPlanning");
+
+// Fallback SPA : toute requête non gérée par l'API renvoie `index.html` pour
+// laisser le router Blazor (côté client) afficher la page demandée.
+app.MapFallbackToFile("index.html");
 
 app.Run();
 

@@ -147,33 +147,43 @@ Ouvre ensuite `http://localhost:5209` dans le navigateur de l'émulateur.
 
 ## 🚂 Déploiement Railway
 
-Le projet est déployé sur [Railway](https://railway.app/) en deux services distincts. Chaque service possède son propre fichier `railway.toml` dans son répertoire :
+Le projet est déployé sur [Railway](https://railway.app/) avec **un seul service** qui sert
+à la fois l'API REST et le client Blazor WebAssembly sur le même domaine. Le fichier de
+configuration est [`ParcoursCandidatApi/railway.toml`](ParcoursCandidatApi/railway.toml).
 
-| Service | Fichier de config | Commande de build | Commande de démarrage |
-|---|---|---|---|
-| API | [`ParcoursCandidatApi/railway.toml`](ParcoursCandidatApi/railway.toml) | `dotnet publish ParcoursCandidatApi.csproj -c Release -o out` | `dotnet out/ParcoursCandidatApi.dll --urls http://0.0.0.0:$PORT` |
-| Client Blazor | [`ParcoursCandidatClient/railway.toml`](ParcoursCandidatClient/railway.toml) | `dotnet publish ParcoursCandidatClient.csproj -c Release -o out && dotnet tool install --tool-path tools dotnet-serve` | `./tools/dotnet-serve --directory out/wwwroot --address 0.0.0.0 --port $PORT --fallback-file index.html` |
+| Chemin | Servi par |
+|---|---|
+| `/` et toute route Blazor (`/evenements/...`, `/scanner`, ...) | Fichiers statiques du client Blazor WebAssembly (fallback SPA sur `index.html`) |
+| `/api/*` | API ASP.NET Core Minimal API |
+| `/_framework/*`, `/css/*`, `/js/*`, ... | Fichiers statiques du client (`wwwroot`) |
 
-> ⚠️ Le format `[[services]]` (tableau TOML) n'est pas supporté par Railway et est ignoré.
-> Chaque service Railway doit pointer sur le sous-répertoire correspondant (`rootDirectory`) et
-> disposer de son propre `railway.toml`.
+**Fonctionnement**
+
+- `ParcoursCandidatApi.csproj` référence `ParcoursCandidatClient.csproj` (`ProjectReference`).
+  Le `dotnet publish` du projet API publie donc aussi le client Blazor WebAssembly et copie
+  son `wwwroot` (avec `index.html` et `_framework/*.wasm`) dans le `wwwroot` de l'API.
+- `Program.cs` de l'API active `app.UseBlazorFrameworkFiles()` + `app.UseStaticFiles()` pour
+  servir ces fichiers, et `app.MapFallbackToFile("index.html")` pour que toute route inconnue
+  renvoie l'application Blazor (routing côté client).
+- Côté client (`ParcoursCandidatClient/Program.cs`), `HttpClient.BaseAddress` est configuré
+  sur `builder.HostEnvironment.BaseAddress` par défaut, donc les appels `/api/*` partent
+  vers la même origine en production. En développement local, `wwwroot/appsettings.Development.json`
+  redirige vers `http://localhost:5197/` (l'API démarrée séparément par `make run`).
+
+| Étape | Commande |
+|---|---|
+| Build | `dotnet publish ParcoursCandidatApi.csproj -c Release -o out` |
+| Démarrage | `ASPNETCORE_URLS=http://0.0.0.0:${PORT:-3000} ./out/ParcoursCandidatApi` |
+
+> ⚠️ Le service Railway doit pointer sur le sous-répertoire `ParcoursCandidatApi/` (`rootDirectory`).
+> Le précédent service dédié au client Blazor n'est **plus nécessaire** et peut être supprimé.
 >
-> La commande de build `dotnet publish -c Release -o out` est nécessaire à la place de la commande
-> auto-générée par Railpack (`--no-restore`) qui échoue avec **NETSDK1064** car le cache NuGet
-> de l'étape de restore n'est pas disponible dans la couche de build suivante.
+> ⚠️ La commande de build `dotnet publish -c Release -o out` est nécessaire à la place de la
+> commande auto-générée par Railpack (`--no-restore`) qui échoue avec **NETSDK1064** car le
+> cache NuGet de l'étape de restore n'est pas disponible dans la couche de build suivante.
 >
-> ⚠️ **Ne pas coder en dur** le chemin `/usr/share/dotnet/dotnet` dans la `startCommand` :
-> ce chemin n'existe pas dans l'image Railpack (l'erreur est `No such file or directory`).
-> Il faut utiliser simplement `dotnet`, qui est résolu via le `PATH`.
->
-> ⚠️ Le client est une application **Blazor WebAssembly** : `dotnet publish` produit des
-> fichiers statiques dans `out/wwwroot/` et **aucun `.dll` exécutable côté serveur**. On les
-> sert avec l'outil .NET global [`dotnet-serve`](https://github.com/natemcmaster/dotnet-serve)
-> installé pendant la phase de build. Le flag `--fallback-file index.html` est nécessaire
-> pour que les routes Blazor côté client fonctionnent (SPA fallback).
->
-> ⚠️ Railway expose dynamiquement la variable d'environnement `$PORT` ; il faut donc que les
-> deux services écoutent sur `0.0.0.0:$PORT` et non sur leur port de dev local.
+> ⚠️ Railway expose dynamiquement la variable d'environnement `$PORT` ; le service écoute donc
+> sur `0.0.0.0:$PORT` et non sur le port de dev local.
 
 
 ## 🧪 Tests

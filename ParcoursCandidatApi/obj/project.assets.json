@@ -2,7 +2,48 @@
   "version": 4,
   "targets": {
     "net10.0": {
-      "Microsoft.AspNetCore.OpenApi/10.0.9": {
+      "Microsoft.AspNetCore.Components.WebAssembly/10.0.9": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.JSInterop.WebAssembly": "10.0.9"
+        },
+        "compile": {
+          "lib/net10.0/Microsoft.AspNetCore.Components.WebAssembly.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net10.0/Microsoft.AspNetCore.Components.WebAssembly.dll": {
+            "related": ".xml"
+          }
+        },
+        "build": {
+          "build/net10.0/_._": {}
+        }
+      },
+      "Microsoft.AspNetCore.Components.WebAssembly.Server/10.0.0": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.AspNetCore.Components.WebAssembly": "10.0.0"
+        },
+        "compile": {
+          "lib/net10.0/Microsoft.AspNetCore.Components.WebAssembly.Server.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net10.0/Microsoft.AspNetCore.Components.WebAssembly.Server.dll": {
+            "related": ".xml"
+          }
+        },
+        "frameworkReferences": [
+          "Microsoft.AspNetCore.App"
+        ],
+        "build": {
+          "build/Microsoft.AspNetCore.Components.WebAssembly.Server.targets": {}
+        }
+      },
+      "Microsoft.AspNetCore.OpenApi/10.0.0": {
         "type": "package",
         "dependencies": {
           "Microsoft.OpenApi": "2.0.0"
@@ -24,6 +65,19 @@
           "build/Microsoft.AspNetCore.OpenApi.targets": {}
         }
       },
+      "Microsoft.JSInterop.WebAssembly/10.0.9": {
+        "type": "package",
+        "compile": {
+          "lib/net10.0/Microsoft.JSInterop.WebAssembly.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net10.0/Microsoft.JSInterop.WebAssembly.dll": {
+            "related": ".xml"
+          }
+        }
+      },
       "Microsoft.OpenApi/2.0.0": {
         "type": "package",
         "compile": {
@@ -36,14 +90,74 @@
             "related": ".pdb;.xml"
           }
         }
+      },
+      "ParcoursCandidatClient/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v10.0",
+        "dependencies": {
+          "Microsoft.AspNetCore.Components.WebAssembly": "10.0.9"
+        },
+        "compile": {
+          "bin/placeholder/ParcoursCandidatClient.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/ParcoursCandidatClient.dll": {}
+        }
       }
     }
   },
   "libraries": {
-    "Microsoft.AspNetCore.OpenApi/10.0.9": {
-      "sha512": "1ihb8FO9cGgEK1/m3CTtT/SfnynwmiZib0W2pcDVj3KSWk/Sca4VOXEtaptKQc582zpFrzTFiwkGRCglt6H+WQ==",
+    "Microsoft.AspNetCore.Components.WebAssembly/10.0.9": {
+      "sha512": "tBv68AsZ3r6z2QdV2m3cSSKUCbvEscN8REpHxcUs22vlR6UjTz6IKdInKNREkJ/3G1AQrBKrRTdrfrHVffE8Iw==",
       "type": "package",
-      "path": "microsoft.aspnetcore.openapi/10.0.9",
+      "path": "microsoft.aspnetcore.components.webassembly/10.0.9",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Icon.png",
+        "PACKAGE.md",
+        "THIRD-PARTY-NOTICES.txt",
+        "build/net10.0/Microsoft.AspNetCore.Components.WebAssembly.props",
+        "build/net10.0/blazor.webassembly.js",
+        "lib/net10.0/Microsoft.AspNetCore.Components.WebAssembly.dll",
+        "lib/net10.0/Microsoft.AspNetCore.Components.WebAssembly.xml",
+        "microsoft.aspnetcore.components.webassembly.10.0.9.nupkg.sha512",
+        "microsoft.aspnetcore.components.webassembly.nuspec"
+      ]
+    },
+    "Microsoft.AspNetCore.Components.WebAssembly.Server/10.0.0": {
+      "sha512": "GwJrz6ZyXS5WvHLS//Xaf7iU/kYlE19GT1lD1RtDm7aZG+iQPi4Qxfmxm15+4224OeNi7RAiS+8n3jG9ti7/YA==",
+      "type": "package",
+      "path": "microsoft.aspnetcore.components.webassembly.server/10.0.0",
+      "hasTools": true,
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Icon.png",
+        "PACKAGE.md",
+        "THIRD-PARTY-NOTICES.txt",
+        "build/Microsoft.AspNetCore.Components.WebAssembly.Server.targets",
+        "lib/net10.0/Microsoft.AspNetCore.Components.WebAssembly.Server.dll",
+        "lib/net10.0/Microsoft.AspNetCore.Components.WebAssembly.Server.xml",
+        "microsoft.aspnetcore.components.webassembly.server.10.0.0.nupkg.sha512",
+        "microsoft.aspnetcore.components.webassembly.server.nuspec",
+        "tools/BlazorDebugProxy/BrowserDebugHost.dll",
+        "tools/BlazorDebugProxy/BrowserDebugHost.runtimeconfig.json",
+        "tools/BlazorDebugProxy/BrowserDebugProxy.dll",
+        "tools/BlazorDebugProxy/Microsoft.CodeAnalysis.CSharp.Scripting.dll",
+        "tools/BlazorDebugProxy/Microsoft.CodeAnalysis.CSharp.dll",
+        "tools/BlazorDebugProxy/Microsoft.CodeAnalysis.Scripting.dll",
+        "tools/BlazorDebugProxy/Microsoft.CodeAnalysis.dll",
+        "tools/BlazorDebugProxy/Microsoft.FileFormats.dll",
+        "tools/BlazorDebugProxy/Microsoft.NET.WebAssembly.Webcil.dll",
+        "tools/BlazorDebugProxy/Microsoft.SymbolStore.dll",
+        "tools/BlazorDebugProxy/Newtonsoft.Json.dll"
+      ]
+    },
+    "Microsoft.AspNetCore.OpenApi/10.0.0": {
+      "sha512": "0aqIF1t+sA2T62LIeMtXGSiaV7keGQaJnvwwmu+htQdjCaKYARfXAeqp4nHH9y2etpilyZ/tnQzZg4Ilmo/c4Q==",
+      "type": "package",
+      "path": "microsoft.aspnetcore.openapi/10.0.0",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -54,8 +168,23 @@
         "build/Microsoft.AspNetCore.OpenApi.targets",
         "lib/net10.0/Microsoft.AspNetCore.OpenApi.dll",
         "lib/net10.0/Microsoft.AspNetCore.OpenApi.xml",
-        "microsoft.aspnetcore.openapi.10.0.9.nupkg.sha512",
+        "microsoft.aspnetcore.openapi.10.0.0.nupkg.sha512",
         "microsoft.aspnetcore.openapi.nuspec"
+      ]
+    },
+    "Microsoft.JSInterop.WebAssembly/10.0.9": {
+      "sha512": "4G0A7GuQrtCAes8PuJPTDUcy+lCrxHWjr8ZlkDOa4h8a2Txj1XdhbXKLnld2vMY5EyZNC5jZXxa1xTD/AOCUlw==",
+      "type": "package",
+      "path": "microsoft.jsinterop.webassembly/10.0.9",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Icon.png",
+        "THIRD-PARTY-NOTICES.txt",
+        "lib/net10.0/Microsoft.JSInterop.WebAssembly.dll",
+        "lib/net10.0/Microsoft.JSInterop.WebAssembly.xml",
+        "microsoft.jsinterop.webassembly.10.0.9.nupkg.sha512",
+        "microsoft.jsinterop.webassembly.nuspec"
       ]
     },
     "Microsoft.OpenApi/2.0.0": {
@@ -75,11 +204,18 @@
         "microsoft.openapi.2.0.0.nupkg.sha512",
         "microsoft.openapi.nuspec"
       ]
+    },
+    "ParcoursCandidatClient/1.0.0": {
+      "type": "project",
+      "path": "../ParcoursCandidatClient/ParcoursCandidatClient.csproj",
+      "msbuildProject": "../ParcoursCandidatClient/ParcoursCandidatClient.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net10.0": [
-      "Microsoft.AspNetCore.OpenApi >= 10.0.9"
+      "Microsoft.AspNetCore.Components.WebAssembly.Server >= 10.0.0",
+      "Microsoft.AspNetCore.OpenApi >= 10.0.0",
+      "ParcoursCandidatClient >= 1.0.0"
     ]
   },
   "packageFolders": {
@@ -88,11 +224,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/camille.toulouse/IdeaProjects/ft-poc-parcours-candidat/ParcoursCandidatApi/ParcoursCandidatApi.csproj",
+      "projectUniqueName": "/Users/camille.toulouse/Desktop/poc-job-dating/ParcoursCandidatApi/ParcoursCandidatApi.csproj",
       "projectName": "ParcoursCandidatApi",
-      "projectPath": "/Users/camille.toulouse/IdeaProjects/ft-poc-parcours-candidat/ParcoursCandidatApi/ParcoursCandidatApi.csproj",
+      "projectPath": "/Users/camille.toulouse/Desktop/poc-job-dating/ParcoursCandidatApi/ParcoursCandidatApi.csproj",
       "packagesPath": "/Users/camille.toulouse/.nuget/packages/",
-      "outputPath": "/Users/camille.toulouse/IdeaProjects/ft-poc-parcours-candidat/ParcoursCandidatApi/obj/",
+      "outputPath": "/Users/camille.toulouse/Desktop/poc-job-dating/ParcoursCandidatApi/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/Users/camille.toulouse/.nuget/NuGet/NuGet.Config"
@@ -108,7 +244,11 @@
         "net10.0": {
           "framework": "net10.0",
           "targetAlias": "net10.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "/Users/camille.toulouse/Desktop/poc-job-dating/ParcoursCandidatClient/ParcoursCandidatClient.csproj": {
+              "projectPath": "/Users/camille.toulouse/Desktop/poc-job-dating/ParcoursCandidatClient/ParcoursCandidatClient.csproj"
+            }
+          }
         }
       },
       "warningProperties": {
@@ -128,9 +268,13 @@
         "framework": "net10.0",
         "targetAlias": "net10.0",
         "dependencies": {
+          "Microsoft.AspNetCore.Components.WebAssembly.Server": {
+            "target": "Package",
+            "version": "[10.0.0, )"
+          },
           "Microsoft.AspNetCore.OpenApi": {
             "target": "Package",
-            "version": "[10.0.9, )"
+            "version": "[10.0.0, )"
           }
         },
         "imports": [

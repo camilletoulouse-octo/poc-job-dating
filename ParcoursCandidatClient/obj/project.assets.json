@@ -2074,11 +2074,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/camille.toulouse/IdeaProjects/ft-poc-parcours-candidat/ParcoursCandidatClient/ParcoursCandidatClient.csproj",
+      "projectUniqueName": "/Users/camille.toulouse/Desktop/poc-job-dating/ParcoursCandidatClient/ParcoursCandidatClient.csproj",
       "projectName": "ParcoursCandidatClient",
-      "projectPath": "/Users/camille.toulouse/IdeaProjects/ft-poc-parcours-candidat/ParcoursCandidatClient/ParcoursCandidatClient.csproj",
+      "projectPath": "/Users/camille.toulouse/Desktop/poc-job-dating/ParcoursCandidatClient/ParcoursCandidatClient.csproj",
       "packagesPath": "/Users/camille.toulouse/.nuget/packages/",
-      "outputPath": "/Users/camille.toulouse/IdeaProjects/ft-poc-parcours-candidat/ParcoursCandidatClient/obj/",
+      "outputPath": "/Users/camille.toulouse/Desktop/poc-job-dating/ParcoursCandidatClient/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/Users/camille.toulouse/.nuget/NuGet/NuGet.Config"

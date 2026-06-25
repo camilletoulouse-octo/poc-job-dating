@@ -2743,11 +2743,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/camille.toulouse/IdeaProjects/ft-poc-parcours-candidat/ParcoursCandidatClient.Tests/ParcoursCandidatClient.Tests.csproj",
+      "projectUniqueName": "/Users/camille.toulouse/Desktop/poc-job-dating/ParcoursCandidatClient.Tests/ParcoursCandidatClient.Tests.csproj",
       "projectName": "ParcoursCandidatClient.Tests",
-      "projectPath": "/Users/camille.toulouse/IdeaProjects/ft-poc-parcours-candidat/ParcoursCandidatClient.Tests/ParcoursCandidatClient.Tests.csproj",
+      "projectPath": "/Users/camille.toulouse/Desktop/poc-job-dating/ParcoursCandidatClient.Tests/ParcoursCandidatClient.Tests.csproj",
       "packagesPath": "/Users/camille.toulouse/.nuget/packages/",
-      "outputPath": "/Users/camille.toulouse/IdeaProjects/ft-poc-parcours-candidat/ParcoursCandidatClient.Tests/obj/",
+      "outputPath": "/Users/camille.toulouse/Desktop/poc-job-dating/ParcoursCandidatClient.Tests/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/Users/camille.toulouse/.nuget/NuGet/NuGet.Config"
@@ -2764,8 +2764,8 @@
           "framework": "net10.0",
           "targetAlias": "net10.0",
           "projectReferences": {
-            "/Users/camille.toulouse/IdeaProjects/ft-poc-parcours-candidat/ParcoursCandidatClient/ParcoursCandidatClient.csproj": {
-              "projectPath": "/Users/camille.toulouse/IdeaProjects/ft-poc-parcours-candidat/ParcoursCandidatClient/ParcoursCandidatClient.csproj"
+            "/Users/camille.toulouse/Desktop/poc-job-dating/ParcoursCandidatClient/ParcoursCandidatClient.csproj": {
+              "projectPath": "/Users/camille.toulouse/Desktop/poc-job-dating/ParcoursCandidatClient/ParcoursCandidatClient.csproj"
             }
           }
         }

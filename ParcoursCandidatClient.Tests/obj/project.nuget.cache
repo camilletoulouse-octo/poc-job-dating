@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "1CuyaGAL7Og=",
+  "dgSpecHash": "pfBuKi1iEzE=",
   "success": true,
-  "projectFilePath": "/Users/camille.toulouse/IdeaProjects/ft-poc-parcours-candidat/ParcoursCandidatClient.Tests/ParcoursCandidatClient.Tests.csproj",
+  "projectFilePath": "/Users/camille.toulouse/Desktop/poc-job-dating/ParcoursCandidatClient.Tests/ParcoursCandidatClient.Tests.csproj",
   "expectedPackageFiles": [
     "/Users/camille.toulouse/.nuget/packages/anglesharp/1.1.2/anglesharp.1.1.2.nupkg.sha512",
     "/Users/camille.toulouse/.nuget/packages/anglesharp.css/1.0.0-beta.144/anglesharp.css.1.0.0-beta.144.nupkg.sha512",

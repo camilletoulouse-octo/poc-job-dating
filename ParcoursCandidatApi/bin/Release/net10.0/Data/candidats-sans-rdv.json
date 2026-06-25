@@ -1,0 +1,53 @@
+[
+  {
+    "evenementId": "evt-001",
+    "candidats": [
+      {
+        "id": "ins-004",
+        "nom": "Robert",
+        "prenom": "Antoine",
+        "conseiller": "Alice"
+      },
+      {
+        "id": "ins-005",
+        "nom": "Petit",
+        "prenom": "Emma",
+        "conseiller": "Alice"
+      },
+      {
+        "id": "ins-007",
+        "nom": "Leroy",
+        "prenom": "Camille",
+        "conseiller": "Alice"
+      }
+    ]
+  },
+  {
+    "evenementId": "evt-002",
+    "candidats": [
+      {
+        "id": "ins-008",
+        "nom": "Moreau",
+        "prenom": "Sarah",
+        "conseiller": "Alice"
+      }
+    ]
+  },
+  {
+    "evenementId": "evt-003",
+    "candidats": [
+      {
+        "id": "ins-011",
+        "nom": "Michel",
+        "prenom": "Julien",
+        "conseiller": "Alice"
+      },
+      {
+        "id": "ins-012",
+        "nom": "Garcia",
+        "prenom": "Léa",
+        "conseiller": "Alice"
+      }
+    ]
+  }
+]

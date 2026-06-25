@@ -8,18 +8,50 @@
     ".NETCoreApp,Version=v10.0": {
       "ParcoursCandidatApi/1.0.0": {
         "dependencies": {
-          "Microsoft.AspNetCore.OpenApi": "10.0.9"
+          "Microsoft.AspNetCore.Components.WebAssembly.Server": "10.0.0",
+          "Microsoft.AspNetCore.OpenApi": "10.0.0",
+          "ParcoursCandidatClient": "1.0.0"
         },
         "runtime": {
           "ParcoursCandidatApi.dll": {}
         }
       },
-      "Microsoft.AspNetCore.OpenApi/10.0.9": {
+      "Microsoft.AspNetCore.Components.WebAssembly/10.0.9": {
+        "dependencies": {
+          "Microsoft.JSInterop.WebAssembly": "10.0.9"
+        },
+        "runtime": {
+          "lib/net10.0/Microsoft.AspNetCore.Components.WebAssembly.dll": {
+            "assemblyVersion": "10.0.9.0",
+            "fileVersion": "10.0.926.27113"
+          }
+        }
+      },
+      "Microsoft.AspNetCore.Components.WebAssembly.Server/10.0.0": {
+        "dependencies": {
+          "Microsoft.AspNetCore.Components.WebAssembly": "10.0.9"
+        },
+        "runtime": {
+          "lib/net10.0/Microsoft.AspNetCore.Components.WebAssembly.Server.dll": {
+            "assemblyVersion": "10.0.0.0",
+            "fileVersion": "10.0.25.52411"
+          }
+        }
+      },
+      "Microsoft.AspNetCore.OpenApi/10.0.0": {
         "dependencies": {
           "Microsoft.OpenApi": "2.0.0"
         },
         "runtime": {
           "lib/net10.0/Microsoft.AspNetCore.OpenApi.dll": {
+            "assemblyVersion": "10.0.0.0",
+            "fileVersion": "10.0.25.52411"
+          }
+        }
+      },
+      "Microsoft.JSInterop.WebAssembly/10.0.9": {
+        "runtime": {
+          "lib/net10.0/Microsoft.JSInterop.WebAssembly.dll": {
             "assemblyVersion": "10.0.9.0",
             "fileVersion": "10.0.926.27113"
           }
@@ -32,6 +64,17 @@
             "fileVersion": "2.0.0.0"
           }
         }
+      },
+      "ParcoursCandidatClient/1.0.0": {
+        "dependencies": {
+          "Microsoft.AspNetCore.Components.WebAssembly": "10.0.9"
+        },
+        "runtime": {
+          "ParcoursCandidatClient.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
       }
     }
   },
@@ -41,12 +84,33 @@
       "serviceable": false,
       "sha512": ""
     },
-    "Microsoft.AspNetCore.OpenApi/10.0.9": {
+    "Microsoft.AspNetCore.Components.WebAssembly/10.0.9": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-1ihb8FO9cGgEK1/m3CTtT/SfnynwmiZib0W2pcDVj3KSWk/Sca4VOXEtaptKQc582zpFrzTFiwkGRCglt6H+WQ==",
-      "path": "microsoft.aspnetcore.openapi/10.0.9",
-      "hashPath": "microsoft.aspnetcore.openapi.10.0.9.nupkg.sha512"
+      "sha512": "sha512-tBv68AsZ3r6z2QdV2m3cSSKUCbvEscN8REpHxcUs22vlR6UjTz6IKdInKNREkJ/3G1AQrBKrRTdrfrHVffE8Iw==",
+      "path": "microsoft.aspnetcore.components.webassembly/10.0.9",
+      "hashPath": "microsoft.aspnetcore.components.webassembly.10.0.9.nupkg.sha512"
+    },
+    "Microsoft.AspNetCore.Components.WebAssembly.Server/10.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-GwJrz6ZyXS5WvHLS//Xaf7iU/kYlE19GT1lD1RtDm7aZG+iQPi4Qxfmxm15+4224OeNi7RAiS+8n3jG9ti7/YA==",
+      "path": "microsoft.aspnetcore.components.webassembly.server/10.0.0",
+      "hashPath": "microsoft.aspnetcore.components.webassembly.server.10.0.0.nupkg.sha512"
+    },
+    "Microsoft.AspNetCore.OpenApi/10.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-0aqIF1t+sA2T62LIeMtXGSiaV7keGQaJnvwwmu+htQdjCaKYARfXAeqp4nHH9y2etpilyZ/tnQzZg4Ilmo/c4Q==",
+      "path": "microsoft.aspnetcore.openapi/10.0.0",
+      "hashPath": "microsoft.aspnetcore.openapi.10.0.0.nupkg.sha512"
+    },
+    "Microsoft.JSInterop.WebAssembly/10.0.9": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-4G0A7GuQrtCAes8PuJPTDUcy+lCrxHWjr8ZlkDOa4h8a2Txj1XdhbXKLnld2vMY5EyZNC5jZXxa1xTD/AOCUlw==",
+      "path": "microsoft.jsinterop.webassembly/10.0.9",
+      "hashPath": "microsoft.jsinterop.webassembly.10.0.9.nupkg.sha512"
     },
     "Microsoft.OpenApi/2.0.0": {
       "type": "package",
@@ -54,6 +118,11 @@
       "sha512": "sha512-GGYLfzV/G/ct80OZ45JxnWP7NvMX1BCugn/lX7TH5o0lcVaviavsLMTxmFV2AybXWjbi3h6FF1vgZiTK6PXndw==",
       "path": "microsoft.openapi/2.0.0",
       "hashPath": "microsoft.openapi.2.0.0.nupkg.sha512"
+    },
+    "ParcoursCandidatClient/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
     }
   }
 }

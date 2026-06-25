@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "7+VRtRAtwzc=",
+  "dgSpecHash": "zk5CF1OUtoA=",
   "success": true,
-  "projectFilePath": "/Users/camille.toulouse/IdeaProjects/ft-poc-parcours-candidat/ParcoursCandidatClient/ParcoursCandidatClient.csproj",
+  "projectFilePath": "/Users/camille.toulouse/Desktop/poc-job-dating/ParcoursCandidatClient/ParcoursCandidatClient.csproj",
   "expectedPackageFiles": [
     "/Users/camille.toulouse/.nuget/packages/microsoft.aspnetcore.app.internal.assets/10.0.9/microsoft.aspnetcore.app.internal.assets.10.0.9.nupkg.sha512",
     "/Users/camille.toulouse/.nuget/packages/microsoft.aspnetcore.authorization/10.0.9/microsoft.aspnetcore.authorization.10.0.9.nupkg.sha512",

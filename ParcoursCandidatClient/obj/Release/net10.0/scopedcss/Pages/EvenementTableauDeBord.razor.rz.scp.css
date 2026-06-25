@@ -1,0 +1,450 @@
+/* === Page "Contexte événement / Tableau de bord" (US-1.04) ============
+   Affiche l'état d'attente (cactus) avant génération du planning.
+   Réutilise la palette France Travail (fond #EBEDF8, primaire #4833E3).
+   ===================================================================== */
+.evt-page[b-o07mm7y44u] {
+    position: relative;
+    min-height: 100vh;
+    max-width: 480px;
+    margin: 0 auto;
+    padding: 0 0 80px;
+    background: #EBEDF8;
+    color: #20202C;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    box-shadow: 0 0 0 1px rgba(15, 23, 42, 0.04);
+}
+
+.evt-not-found[b-o07mm7y44u] {
+    margin: 16px 20px;
+    padding: 16px;
+    background: #FFFFFF;
+    border-radius: 12px;
+    text-align: center;
+    color: #5b6b80;
+    box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
+}
+
+.evt-back-link[b-o07mm7y44u] {
+    display: inline-block;
+    margin-top: 8px;
+    color: #4833E3;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+/* === État d'attente cactus ========================================== */
+.tdb-attente[b-o07mm7y44u] {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    padding: 48px 32px;
+    text-align: center;
+}
+
+.tdb-attente-illustration[b-o07mm7y44u] {
+    width: 192px;
+    height: 192px;
+    object-fit: contain;
+}
+
+.tdb-attente-titre[b-o07mm7y44u] {
+    margin: 0;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #20202C;
+}
+
+.tdb-attente-description[b-o07mm7y44u] {
+    margin: 0;
+    font-size: 0.875rem;
+    color: #5b6b80;
+    line-height: 1.5;
+    max-width: 280px;
+}
+
+/* === Contenu du tableau de bord (planning généré) =============== */
+.tdb-contenu[b-o07mm7y44u] {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 0 16px;
+}
+
+/* === Carte générique ============================================ */
+.tdb-carte[b-o07mm7y44u] {
+    background: #FFFFFF;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 1px 3px rgba(15, 23, 42, 0.06);
+}
+
+.tdb-carte-titre[b-o07mm7y44u] {
+    margin: 0 0 16px;
+    font-size: 1rem;
+    font-weight: 700;
+    color: #20202C;
+}
+
+/* === Carte Vision globale (US-5.01) ============================= */
+.tdb-vision-globale[b-o07mm7y44u] {
+    display: flex;
+    align-items: stretch;
+    gap: 0;
+}
+
+.tdb-vision-stat[b-o07mm7y44u] {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    padding: 8px 0;
+}
+
+.tdb-vision-separateur[b-o07mm7y44u] {
+    width: 1px;
+    background: #E6E7EC;
+    margin: 4px 0;
+}
+
+.tdb-vision-stat-valeur[b-o07mm7y44u] {
+    font-size: 2.25rem;
+    font-weight: 800;
+    color: #20202C;
+    line-height: 1;
+}
+
+.tdb-vision-stat-valeur--restants[b-o07mm7y44u] {
+    color: #4833E3;
+}
+
+.tdb-vision-stat-libelle[b-o07mm7y44u] {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    font-size: 0.8rem;
+    color: #5b6b80;
+    font-weight: 500;
+}
+
+.tdb-vision-stat-lien[b-o07mm7y44u] {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    text-decoration: none;
+    color: inherit;
+}
+
+.tdb-vision-stat-lien:hover .tdb-vision-stat-valeur--restants[b-o07mm7y44u] {
+    text-decoration: underline;
+}
+
+.tdb-vision-chevron[b-o07mm7y44u] {
+    color: #4833E3;
+    flex-shrink: 0;
+}
+
+/* === Carte Statut recruteurs (US-5.03) ========================== */
+.tdb-statut-recruteurs[b-o07mm7y44u] {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}
+
+/* === Carte Statut candidats (US-5.02) =========================== */
+.tdb-statut-candidats[b-o07mm7y44u] {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.tdb-statut-sans-entretien[b-o07mm7y44u] {
+    display: flex;
+    align-items: center;
+}
+
+.tdb-statut-sans-entretien-lien[b-o07mm7y44u] {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    text-decoration: none;
+    color: inherit;
+}
+
+.tdb-statut-sans-entretien-lien:hover .tdb-statut-sans-entretien-valeur[b-o07mm7y44u] {
+    text-decoration: underline;
+}
+
+.tdb-statut-sans-entretien-valeur[b-o07mm7y44u] {
+    font-size: 1.75rem;
+    font-weight: 800;
+    color: #4833E3;
+    line-height: 1;
+}
+
+.tdb-statut-sans-entretien-libelle[b-o07mm7y44u] {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    font-size: 0.8rem;
+    color: #5b6b80;
+    font-weight: 500;
+}
+
+.tdb-statut-chevron[b-o07mm7y44u] {
+    color: #4833E3;
+    flex-shrink: 0;
+}
+
+.tdb-statut-separateur[b-o07mm7y44u] {
+    height: 1px;
+    background: #E6E7EC;
+    margin: 0;
+}
+
+.tdb-statut-colonnes[b-o07mm7y44u] {
+    display: flex;
+    gap: 0;
+}
+
+.tdb-statut-colonne[b-o07mm7y44u] {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    padding: 8px 0;
+}
+
+.tdb-statut-colonne:first-child[b-o07mm7y44u] {
+    border-right: 1px solid #E6E7EC;
+}
+
+.tdb-statut-colonne-valeur[b-o07mm7y44u] {
+    font-size: 2rem;
+    font-weight: 800;
+    line-height: 1;
+}
+
+.tdb-statut-colonne-valeur--presents[b-o07mm7y44u] {
+    color: #006F46;
+}
+
+.tdb-statut-colonne-valeur--absents[b-o07mm7y44u] {
+    color: #E01F1F;
+}
+
+.tdb-statut-colonne-libelle[b-o07mm7y44u] {
+    font-size: 0.8rem;
+    color: #5b6b80;
+    font-weight: 500;
+}
+
+/* === Carte Suites & recrutements (US-5.04) ===================== */
+.tdb-suites-liste[b-o07mm7y44u] {
+    display: flex;
+    flex-direction: column;
+}
+
+.tdb-suites-separateur[b-o07mm7y44u] {
+    height: 1px;
+    background: #E6E7EC;
+    margin: 0;
+}
+
+/* Ligne : libellé + valeur + chevron */
+.tdb-suites-ligne[b-o07mm7y44u] {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 14px 0;
+}
+
+.tdb-suites-ligne-libelle[b-o07mm7y44u] {
+    flex: 1;
+    font-size: 0.9rem;
+    color: #20202C;
+}
+
+.tdb-suites-ligne-valeur[b-o07mm7y44u] {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: #20202C;
+}
+
+.tdb-suites-stat-valeur--recrutements[b-o07mm7y44u] {
+    color: #20202C;
+}
+
+.tdb-suites-stat-valeur--immersions[b-o07mm7y44u] {
+    color: #20202C;
+}
+
+.tdb-suites-stat-valeur--poei[b-o07mm7y44u] {
+    color: #20202C;
+}
+
+.tdb-suites-ligne-chevron[b-o07mm7y44u] {
+    color: #5b6b80;
+    flex-shrink: 0;
+}
+
+/* Bloc 2e entretiens */
+.tdb-suites-entretiens-bloc[b-o07mm7y44u] {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 14px 0;
+}
+
+.tdb-suites-entretiens-titre[b-o07mm7y44u] {
+    font-size: 0.9rem;
+    color: #20202C;
+}
+
+.tdb-suites-entretiens-blocs[b-o07mm7y44u] {
+    display: flex;
+    gap: 8px;
+}
+
+.tdb-suites-entretien-bloc[b-o07mm7y44u] {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    padding: 12px 8px;
+    border-radius: 10px;
+}
+
+.tdb-suites-entretien-bloc--oui[b-o07mm7y44u] {
+    background: #D1FAE5;
+}
+
+.tdb-suites-entretien-bloc--peut-etre[b-o07mm7y44u] {
+    background: #DBEAFE;
+}
+
+.tdb-suites-entretien-bloc--non[b-o07mm7y44u] {
+    background: #FEE2E2;
+}
+
+.tdb-suites-entretien-label[b-o07mm7y44u] {
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+}
+
+.tdb-suites-entretien-bloc--oui .tdb-suites-entretien-label[b-o07mm7y44u] {
+    color: #006F46;
+}
+
+.tdb-suites-entretien-bloc--peut-etre .tdb-suites-entretien-label[b-o07mm7y44u] {
+    color: #1D4ED8;
+}
+
+.tdb-suites-entretien-bloc--non .tdb-suites-entretien-label[b-o07mm7y44u] {
+    color: #DC2626;
+}
+
+.tdb-suites-entretien-valeur[b-o07mm7y44u] {
+    font-size: 1.5rem;
+    font-weight: 800;
+    line-height: 1;
+}
+
+.tdb-suites-legende-item--oui[b-o07mm7y44u] {
+    color: #006F46;
+}
+
+.tdb-suites-legende-item--peut-etre[b-o07mm7y44u] {
+    color: #20202C;
+}
+
+.tdb-suites-legende-item--non[b-o07mm7y44u] {
+    color: #DC2626;
+}
+
+/* === Carte Enquêtes de satisfaction (US-5.05) =================== */
+.tdb-satisfaction-colonnes[b-o07mm7y44u] {
+    display: flex;
+    gap: 0;
+}
+
+.tdb-satisfaction-colonne[b-o07mm7y44u] {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    padding: 8px 0;
+}
+
+.tdb-satisfaction-colonne:first-child[b-o07mm7y44u] {
+    border-right: 1px solid #E6E7EC;
+}
+
+.tdb-satisfaction-libelle[b-o07mm7y44u] {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: #20202C;
+    letter-spacing: 0.03em;
+}
+
+.tdb-satisfaction-etoile[b-o07mm7y44u] {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 80px;
+    height: 76px;
+}
+
+.tdb-satisfaction-etoile-svg[b-o07mm7y44u] {
+    width: 80px;
+    height: 76px;
+    display: block;
+}
+
+.tdb-satisfaction-note[b-o07mm7y44u] {
+    position: absolute;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #20202C;
+    line-height: 1;
+    pointer-events: none;
+}
+
+/* === État d'erreur ============================================== */
+.tdb-erreur[b-o07mm7y44u] {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    padding: 32px 20px;
+    text-align: center;
+}
+
+.tdb-erreur-message[b-o07mm7y44u] {
+    margin: 0;
+    font-size: 0.9rem;
+    color: #5b6b80;
+}
+
+.tdb-erreur-reessayer[b-o07mm7y44u] {
+    padding: 10px 20px;
+    background: #4833E3;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 8px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.tdb-erreur-reessayer:hover[b-o07mm7y44u] {
+    background: #3a28c0;
+}

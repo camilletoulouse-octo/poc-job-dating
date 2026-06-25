@@ -8,6 +8,14 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="10.0.0" />
+    <!-- Fournit `UseBlazorFrameworkFiles` pour héberger le client Blazor WebAssembly. -->
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="10.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- Permet de servir les fichiers statiques du client Blazor WebAssembly
+         depuis le même service web que l'API (déploiement Railway mono-service). -->
+    <ProjectReference Include="..\ParcoursCandidatClient\ParcoursCandidatClient.csproj" />
   </ItemGroup>
 
   <ItemGroup>

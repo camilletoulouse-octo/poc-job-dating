@@ -1,0 +1,21 @@
+/* === Bouton d'installation PWA ================================== */
+.pwa-install-btn[b-o4caf2ctpd] {
+    background: transparent;
+    border: none;
+    padding: 8px;
+    border-radius: 999px;
+    color: #4833E3;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.15s ease;
+}
+
+.pwa-install-btn:hover[b-o4caf2ctpd] {
+    background-color: rgba(72, 51, 227, 0.08);
+}
+
+.pwa-install-btn:active[b-o4caf2ctpd] {
+    background-color: rgba(72, 51, 227, 0.16);
+}

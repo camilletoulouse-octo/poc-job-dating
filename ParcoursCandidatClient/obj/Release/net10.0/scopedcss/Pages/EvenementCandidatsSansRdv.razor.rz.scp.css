@@ -1,0 +1,165 @@
+/* === Page "Candidats sans RDV" (US-5.08) ===============================
+   Liste des candidats sans entretien planifié avec bouton d'appel.
+   Réutilise la palette France Travail (fond #EBEDF8, primaire #4833E3).
+   ===================================================================== */
+
+.csr-page[b-s5sre5n9mx] {
+    position: relative;
+    min-height: 100vh;
+    max-width: 480px;
+    margin: 0 auto;
+    background: #EBEDF8;
+    color: #20202C;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    box-shadow: 0 0 0 1px rgba(15, 23, 42, 0.04);
+}
+
+/* === En-tête ========================================================= */
+.csr-header[b-s5sre5n9mx] {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: 20px 20px 16px;
+    background: #FFFFFF;
+}
+
+.csr-header-back[b-s5sre5n9mx] {
+    display: flex;
+    align-items: center;
+    color: #20202C;
+    text-decoration: none;
+    width: fit-content;
+}
+
+.csr-header-back:hover[b-s5sre5n9mx] {
+    color: #4833E3;
+}
+
+.csr-header-titre[b-s5sre5n9mx] {
+    margin: 0;
+    font-size: 1.6rem;
+    font-weight: 800;
+    color: #20202C;
+    line-height: 1.2;
+}
+
+/* === Contenu ========================================================= */
+.csr-contenu[b-s5sre5n9mx] {
+    padding: 16px;
+}
+
+/* === Liste des candidats ============================================= */
+.csr-liste[b-s5sre5n9mx] {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+/* === Carte candidat ================================================== */
+.csr-candidat-carte[b-s5sre5n9mx] {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 20px;
+    background: #FFFFFF;
+    border-radius: 12px;
+    box-shadow: 0 1px 3px rgba(15, 23, 42, 0.06);
+}
+
+/* === Informations candidat =========================================== */
+.csr-candidat-info[b-s5sre5n9mx] {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    flex: 1;
+    min-width: 0;
+}
+
+.csr-candidat-nom[b-s5sre5n9mx] {
+    font-size: 1rem;
+    font-weight: 800;
+    color: #20202C;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.csr-candidat-conseiller[b-s5sre5n9mx] {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: #20202C;
+}
+
+/* === Bouton d'appel ================================================== */
+.csr-candidat-appel[b-s5sre5n9mx] {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 52px;
+    height: 52px;
+    background: #4833E3;
+    border-radius: 50%;
+    color: #FFFFFF;
+    text-decoration: none;
+    flex-shrink: 0;
+    margin-left: 16px;
+    transition: background 0.15s ease;
+}
+
+.csr-candidat-appel:hover[b-s5sre5n9mx] {
+    background: #3a28c0;
+}
+
+/* === État de chargement ============================================== */
+.csr-chargement[b-s5sre5n9mx] {
+    display: flex;
+    justify-content: center;
+    padding: 48px 20px;
+    color: #5b6b80;
+    font-size: 0.9rem;
+}
+
+/* === État vide ======================================================= */
+.csr-vide[b-s5sre5n9mx] {
+    display: flex;
+    justify-content: center;
+    padding: 32px 20px;
+    text-align: center;
+}
+
+.csr-vide-message[b-s5sre5n9mx] {
+    margin: 0;
+    font-size: 0.9rem;
+    color: #5b6b80;
+}
+
+/* === État d'erreur =================================================== */
+.csr-erreur[b-s5sre5n9mx] {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    padding: 32px 20px;
+    text-align: center;
+}
+
+.csr-erreur-message[b-s5sre5n9mx] {
+    margin: 0;
+    font-size: 0.9rem;
+    color: #5b6b80;
+}
+
+.csr-erreur-reessayer[b-s5sre5n9mx] {
+    padding: 10px 20px;
+    background: #4833E3;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 8px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.csr-erreur-reessayer:hover[b-s5sre5n9mx] {
+    background: #3a28c0;
+}
