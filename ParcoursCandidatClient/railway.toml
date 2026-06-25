@@ -1,0 +1,6 @@
+[build]
+builder = "railpack"
+buildCommand = "dotnet publish ParcoursCandidatClient.csproj -c Release -o out && dotnet tool install --tool-path tools dotnet-serve"
+
+[deploy]
+startCommand = "./tools/dotnet-serve --directory out/wwwroot --address 0.0.0.0 --port $PORT --fallback-file index.html"

@@ -1,0 +1,11 @@
+# Railway configuration for the ParcoursCandidatApi service (monorepo root).
+# Each service has its own railway.toml in its subdirectory:
+#   - ParcoursCandidatApi/railway.toml
+#   - ParcoursCandidatClient/railway.toml
+
+[build]
+builder = "railpack"
+buildCommand = "dotnet publish ParcoursCandidatApi/ParcoursCandidatApi.csproj -c Release -o out"
+
+[deploy]
+startCommand = "dotnet out/ParcoursCandidatApi.dll --urls http://0.0.0.0:$PORT"
